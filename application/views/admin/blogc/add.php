@@ -1,7 +1,5 @@
-<!-- /top -->
 <?php $this->load->view('admin/top'); ?>
 <div class="container clearfix">
-    <!-- /menu -->
     <?php $this->load->view('admin/menu'); ?>
     <!--/sidebar-->
     <div class="main-wrap">
@@ -15,14 +13,20 @@
                     <table class="insert-tab" width="100%">
                         <tbody>
                             <tr>
-                                <th><i class="require-red">*</i>标题：</th>
+                                <th width="100"><i class="require-red">*</i>标题：</th>
                                 <td>
-                                    <input class="common-text required" id="title" name="title" size="50" value="" type="text">
+                                    <?php $error = form_error('title'); ?>
+                                    <input <?php if($error) echo 'style="border-color:#F00;"'; ?> class="common-text required" id="title" name="title" size="50" value="<?=set_value('title')?>" type="text">
+                                    <span style="color:#F00;font-weight:bold;"><?=$error?></span>
                                 </td>
                             </tr>
                             <tr>
-                                <th>内容：</th>
-                                <td><textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;" rows="10"></textarea></td>
+                                <th><i class="require-red">*</i>内容：</th>
+                                <td>
+                                    <?php $error = form_error('content'); ?>
+                                    <textarea name="content" class="common-textarea" id="content" cols="30" style="width: 98%;<?php if($error) echo 'border-color:#F00;'; ?>" rows="10"><?=set_value('content')?></textarea>
+                                    <span style="color:#F00;font-weight:bold;"><?=$error?></span>
+                                </td>
                             </tr>
                             <tr>
                                 <th>是否显示：</th>
