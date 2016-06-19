@@ -58,7 +58,7 @@
                             <td><?=$v->is_show?></td>
                             <td><?=$v->addtime?></td>
                             <td>
-                                <a class="link-update" href="<?=site_url('admin/blogc/save/'.$v->id)?>">修改</a>
+                                <a class="link-update" href="<?=site_url('admin/blogc/update/'.$v->id)?>">修改</a>
                                 <a onclick="return confirm('确定要删除吗？');" class="link-del" href="<?=site_url('admin/blogc/delete/'.$v->id)?>">删除</a>
                             </td>
                         </tr>

@@ -15,6 +15,14 @@ class BlogM extends CI_Model{
 		$this->db->insert('bt_blog',$data);
 	}
 
+	public function find($id) {
+		// $this->db->from($this->tableName);
+		$this->db->where('id', $id);
+		$data = $this->db->get($this->tableName);
+		$data = $data->result('array');
+		return $data[0];
+	}
+
 	//显示日志
 	public function search($perpage = 5) {
 		//搜索->设置where条件到$this->db上
@@ -63,7 +71,23 @@ class BlogM extends CI_Model{
 	}
 
 	public function delete($id) {
-		$this->db->delete($this->tableName,array('id' => $id));
+		$this->db->delete($this->tableName,array('id' => $id)); 
+	}
+
+	public function update()
+	{
+		// 接收表单中的隐藏域id来修改
+		$this->db->where('id', $this->input->post('id'));
+		$data = array(
+			'title' => $this->input->post('title'),
+			'content' => $this->input->post('content', TRUE),
+			'is_show' => $this->input->post('is_show'),
+			'addtime' => date('Y-m-d H:i:s'),
+			);
+		// 更新数据库
+		$ret = $this->db->update($this->tableName, $data);
+
+		return $ret;
 	}
 }
 
