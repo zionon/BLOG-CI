@@ -1,6 +1,7 @@
 <?php
 //日志控制器
 class BlogC extends CI_Controller{
+	//添加日志
 	public function add(){
 		//导入表单验证类
 		$this->load->library('form_validation');
@@ -20,7 +21,11 @@ class BlogC extends CI_Controller{
 		}
 	}
 
+	//显示日志
 	public function lst() {
-		echo "插入成功";
+		//生成模型
+		$this->load->model('BlogM', 'bm');
+		$data = $this->bm->search();
+		$this->load->view('admin/blogc/lst',$data);
 	}
 }
