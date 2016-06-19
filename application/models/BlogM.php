@@ -1,6 +1,7 @@
 <?php
 //日志模型
 class BlogM extends CI_Model{
+	protected $tableName = 'bt_blog';
 	//添加日志
 	public function add() {
 		//构造数据
@@ -16,7 +17,6 @@ class BlogM extends CI_Model{
 
 	//显示日志
 	public function search($perpage = 5) {
-		$tableName = 'bt_blog';
 		//搜索->设置where条件到$this->db上
 		//标题
 		$title = $this->input->get('title');
@@ -30,7 +30,7 @@ class BlogM extends CI_Model{
 		}
 
 		//先设置将要操作的表名
-		$this->db->from('bt_blog');
+		$this->db->from($this->tableName);
 		//翻页
 		$count = $this->db->count_all_results('', FALSE);
 		$this->load->library('pagination');		//加载分页类
@@ -59,7 +59,11 @@ class BlogM extends CI_Model{
 		return array(
 			'data' => $data,
 			'page' => $pageString,
-			);
+		);
+	}
+
+	public function delete($id) {
+		$this->db->delete($this->tableName,array('id' => $id));
 	}
 }
 

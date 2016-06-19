@@ -28,4 +28,12 @@ class BlogC extends CI_Controller{
 		$data = $this->bm->search();
 		$this->load->view('admin/blogc/lst',$data);
 	}
+
+	//删除日志
+	public function delete($id) {
+		//生成模型
+		$this->load->model('BlogM', 'bm');
+		$data = $this->bm->delete($id);
+		redirect(site_url('admin/blogc/lst'));
+	}
 }
