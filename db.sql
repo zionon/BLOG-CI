@@ -3,8 +3,6 @@ create database blog_ci;
 use blog_ci;
 set names utf8;
 
-
-
 drop table if exists bt_blog;
 create table bt_blog
 (
