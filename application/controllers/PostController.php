@@ -28,7 +28,8 @@ class PostController extends CI_Controller
 			$data = $this->pm->find($id);
 			$this->load->view('postUpdate', $data);
 		} else {
-			echo "修改成功";
+			$this->pm->save();
+			redirect(site_url('PostController/postList'));
 		}
 	}
 }

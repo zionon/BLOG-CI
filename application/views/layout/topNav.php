@@ -38,7 +38,7 @@
 			</div>
 			<div id="w1-collapse" class="collapse navbar-collapse">
 				<ul id="w2" class="navbar-nav navbar-right nav">
-					<li><a href="/blog2/web/index.php?r=post%2Fhome">首页</a></li>
+					<li><a href="<?=site_url('PostController/postList')?>">首页</a></li>
 					<li class="active"><a href="/blog2/web/index.php?r=post%2Findex">文章管理</a></li>
 					<li><a href="/blog2/web/index.php?r=comment%2Findex">评论管理</a></li>
 					<li><span class="badge badge-inverse">1</span></li>

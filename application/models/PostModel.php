@@ -26,4 +26,21 @@ class PostModel extends CI_Model
 		$data = $data->result('array');
 		return $data[0];
 	}
+
+	public function save() {
+		$this->db->where('id', $this->input->post('Post[id]'));
+		$data = array(
+			'title' => $this->input->post('Post[title]',TRUE),
+			'content' => $this->input->post('Post[content]', TRUE),
+			);
+		$ret = $this->db->update('ci_post', $data);
+		return $ret;
+	}
 }
+
+
+
+
+
+
+
