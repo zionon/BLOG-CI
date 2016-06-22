@@ -40,6 +40,9 @@ class PostController extends CI_Controller
 	}
 
 	public function postDetail($id) {
-		$this->load->view('postDetail');
+		$this->load->model('PostModel','pm');
+		$data = $this->pm->find($id);
+		// var_dump($data);die;
+		$this->load->view('postDetail', $data);
 	}
 }
