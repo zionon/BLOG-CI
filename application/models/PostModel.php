@@ -1,5 +1,5 @@
 <?php
-class PostModel extends CI_Model
+class PostModel extends MY_Model
 {
 	public function create() {
 		//接收表单

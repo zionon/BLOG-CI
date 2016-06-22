@@ -39,8 +39,8 @@
 								<td><?=$value->id?></td>
 								<td><?=$value->title?></td>
 								<td><?=$value->content?></td>
-								<td><?=$value->create_time?></td>
-								<td><?=$value->update_time?></td>
+								<td><?=date('Y-m-d H:i:s',$value->create_time)?></td>
+								<td><?=date('Y-m-d H:i:s',$value->update_time)?></td>
 								<td>
 								<a href="" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
 								<a href="<?=site_url('PostController/postUpdate/'.$value->id)?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
