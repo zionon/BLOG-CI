@@ -5,7 +5,7 @@
     		<h1>文章管理</h1>
     
 	    	<p>
-	        <a class="btn btn-success" href="/blog2/web/index.php?r=post%2Fcreate">新建文章</a>
+	        <a class="btn btn-success" href="<?=site_url('postController/postCreate')?>">新建文章</a>
 	        </p>
 
 	    	<div id="w0" class="grid-view">

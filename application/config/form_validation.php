@@ -1,19 +1,15 @@
 <?php
 $config = array(
-    'country' => array(
+    'post' => array(
     array(
-        'field' => 'code',
-        'label' => 'code',
+        'field' => 'Post[title]',
+        'label' => 'Post[title]',
         'rules' => 'required'
     ),
     array(
-        'field' => 'name',
-        'label' => 'name',
+        'field' => 'Post[content]',
+        'label' => 'Post[content]',
         'rules' => 'required'
     ),
-    array(
-        'field' => 'population',
-        'label' => 'population',
-        'rules' => 'required'
-    )),
+    ),
 );
