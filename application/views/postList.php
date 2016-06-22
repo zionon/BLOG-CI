@@ -16,9 +16,11 @@
 							<th><a href="" data-sort="id">ID</a></th>
 							<th><a href="" data-sort="title">标题</a></th>
 							<th><a href="" data-sort="content">内容</a></th>
-							<th><a href="" data-sort="tags">标签</a></th>
-							<th><a href="" data-sort="status">状态</a></th>
-							<th>作者</th>
+			<!-- 				<th><a href="" data-sort="tags">标签</a></th>
+							<th><a href="" data-sort="status">状态</a></th> -->
+							<th>添加时间</th>
+							<th>修改时间</th>
+							<!-- <th>作者</th> -->
 							<th class="action-column">操作</th>
 						</tr>
 
@@ -26,25 +28,27 @@
 							<td><input type="text" class="form-control" name="PostSearch[id]"></td>
 							<td><input type="text" class="form-control" name="PostSearch[title]"></td>
 							<td><input type="text" class="form-control" name="PostSearch[content]"></td>
-							<td><input type="text" class="form-control" name="PostSearch[tags]"></td>
-							<td><input type="text" class="form-control" name="PostSearch[status]"></td>
-							<td>&nbsp;</td><td>&nbsp;</td>
+						<!-- 	<td><input type="text" class="form-control" name="PostSearch[tags]"></td>
+							<td><input type="text" class="form-control" name="PostSearch[status]"></td> -->
+							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><!-- <td>&nbsp;</td> -->
 						</tr>
 					</thead>
 					<tbody>
-						<tr data-key="42">
-							<td>42</td>
-							<td>Yii2.0视频教程</td>
-							<td>这是内容</td>
-							<td>Yii2,视频教程</td>
-							<td>已发布</td>
-							<td>魏曦</td>
-							<td>
+						<?php foreach ($data->result() as $key => $value): ?>
+							<tr data-key="<?=$value->id?>">
+								<td><?=$value->id?></td>
+								<td><?=$value->title?></td>
+								<td><?=$value->content?></td>
+								<td><?=$value->create_time?></td>
+								<td><?=$value->update_time?></td>
+								<td>
 								<a href="" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
 								<a href="" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
 								<a href="" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
-							</td>
-						</tr>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+						
 					</tbody>
 				</table>
 			</div>

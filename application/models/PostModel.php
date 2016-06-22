@@ -11,4 +11,11 @@ class PostModel extends CI_Model
 			);
 		$this->db->insert('ci_post',$data);
 	}
+
+	public function read() {
+		$this->db->from('ci_post');
+		$data = $this->db->get();
+		return array(
+			'data' => $data);
+	}
 }

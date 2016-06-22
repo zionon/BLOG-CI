@@ -2,7 +2,10 @@
 class PostController extends CI_Controller
 {
 	public function postList(){
-		$this->load->view('postList');
+		$this->load->model('PostModel','pm');
+		$data = $this->pm->read();
+		// var_dump($data);die;
+		$this->load->view('postList', $data);
 	}
 
 	public function postCreate() {
@@ -13,7 +16,7 @@ class PostController extends CI_Controller
 		} else {
 			$this->load->model('PostModel','pm');
 			$this->pm->create();
-			echo "插入成功";
+			redirect(site_url('PostController/postList'));
 		}
 	}
 }
