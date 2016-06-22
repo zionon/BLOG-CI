@@ -32,6 +32,7 @@ class PostModel extends MY_Model
 		$data = array(
 			'title' => $this->input->post('Post[title]',TRUE),
 			'content' => $this->input->post('Post[content]', TRUE),
+			'update_time' => time(),
 			);
 		$ret = $this->db->update('ci_post', $data);
 		return $ret;

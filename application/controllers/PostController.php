@@ -38,4 +38,8 @@ class PostController extends CI_Controller
 		$this->pm->delete($id);
 		redirect(site_url('PostController/postList'));
 	}
+
+	public function postDetail($id) {
+		$this->load->view('postDetail');
+	}
 }
