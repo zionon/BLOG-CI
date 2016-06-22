@@ -8,13 +8,13 @@
 	</ul>        
 
 	<div class="post-create">
-		<h1>新增文章</h1>
+		<h1>文章修改</h1>
 		<div class="post-form">
-			<form id="w0" action="<?=site_url('PostController/postCreate')?>" method="post">
+			<form id="w0" action="<?=site_url('PostController/postUpdate')?>" method="post">
 		<!-- 		<input type="hidden" name="_csrf" value="RDB0NmpwNUx1RjFmWxV9Hxx7Hkw6IHc9G14WTg01fykDZx8BHBJmFg==" /> -->
 				<div class="form-group field-post-title required">
 					<label class="control-label" for="post-title">标题</label>
-					<input type="text" id="post-title" class="form-control" name="Post[title]" maxlength="128" value="<?=set_value('Post[title]')?>" />
+					<input type="text" id="post-title" class="form-control" name="Post[title]" maxlength="128" value="<?=$title?>" />
 					<?php $error = form_error('Post[title]'); ?>
 			        <span style="color:#F00;font-weight:bold;"><?=$error?></span>
 
@@ -23,7 +23,8 @@
 
 				<div class="form-group field-post-content required">
 					<label class="control-label" for="post-content">内容</label>
-					<textarea id="post-content" class="form-control" name="Post[content]" rows="6"><?=set_value('Post[content]')?></textarea>
+					<textarea id="post-content" class="form-control" name="Post[content]" rows="6"><?=$content?>
+					</textarea>
 					<?php $error = form_error('Post[content]'); ?>
 					<span style="color:#F00;font-weight:bold;"><?=$error?></span>
 

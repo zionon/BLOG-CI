@@ -18,4 +18,12 @@ class PostModel extends CI_Model
 		return array(
 			'data' => $data);
 	}
+
+	public function find($id) {
+		$this->db->from('ci_post');
+		$this->db->where('id', $id);
+		$data = $this->db->get();
+		$data = $data->result('array');
+		return $data[0];
+	}
 }

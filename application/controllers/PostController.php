@@ -19,4 +19,16 @@ class PostController extends CI_Controller
 			redirect(site_url('PostController/postList'));
 		}
 	}
+
+	public function postUpdate($id) {
+		$this->load->model('PostModel','pm');
+		//验证表单
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('post') === FALSE) {
+			$data = $this->pm->find($id);
+			$this->load->view('postUpdate', $data);
+		} else {
+			echo "修改成功";
+		}
+	}
 }
