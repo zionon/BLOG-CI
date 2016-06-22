@@ -27,7 +27,7 @@ class PostModel extends CI_Model
 		return $data[0];
 	}
 
-	public function save() {
+	public function update() {
 		$this->db->where('id', $this->input->post('Post[id]'));
 		$data = array(
 			'title' => $this->input->post('Post[title]',TRUE),
@@ -35,6 +35,10 @@ class PostModel extends CI_Model
 			);
 		$ret = $this->db->update('ci_post', $data);
 		return $ret;
+	}
+
+	public function delete($id) {
+		$this->db->delete('ci_post', array('id' => $id));
 	}
 }
 

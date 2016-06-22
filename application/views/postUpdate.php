@@ -48,7 +48,7 @@
 				</div> -->
 
 				<div class="form-group">
-				    <button type="submit" class="btn btn-success"> 修 改 </button>    
+				    <button type="submit" class="btn btn-primary"> 修 改 </button>    
 				</div>
 			</form>
 		</div>

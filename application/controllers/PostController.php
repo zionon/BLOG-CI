@@ -28,8 +28,14 @@ class PostController extends CI_Controller
 			$data = $this->pm->find($id);
 			$this->load->view('postUpdate', $data);
 		} else {
-			$this->pm->save();
+			$this->pm->update();
 			redirect(site_url('PostController/postList'));
 		}
+	}
+
+	public function postDelete($id) {
+		$this->load->model('PostModel', 'pm');
+		$this->pm->delete($id);
+		redirect(site_url('PostController/postList'));
 	}
 }
