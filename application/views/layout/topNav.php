@@ -17,12 +17,7 @@
 	<script src="<?=_PUBLIC?>/js/jquery.js"></script>
 	<script src="<?=_PUBLIC?>/js/yii.js"></script>
 	<script src="<?=_PUBLIC?>/js/yii.gridView.js"></script>
-	<script src="<?=_PUBLIC?>/js/bootstrap.js"></script>
-	<script type="text/javascript">
-		jQuery(document).ready(function () {
-		jQuery('#w0').yiiGridView({"filterUrl":"\/blog2\/web\/index.php?r=post%2Findex","filterSelector":"#w0-filters input, #w0-filters select"});
-		});
-	</script>   	
+	<script src="<?=_PUBLIC?>/js/bootstrap.js"></script>	
 </head>
 <body>
 

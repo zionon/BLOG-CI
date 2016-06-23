@@ -63,8 +63,11 @@
 	</div>
 </div>
 
-<script type="text/javascript">jQuery(document).ready(function () {
-jQuery('#w0').yiiGridView({"filterUrl":"","filterSelector":"#w0-filters input, #w0-filters select"});
-});</script>
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php?r=post%2Findex\u0026sort=-id","filterSelector":"#w0-filters input, #w0-filters select"});
+	});
+	//抽时间要理解get上面url乱码
+</script>
 
 <?php $this->load->view('layout/foot'); ?>
