@@ -1,15 +1,18 @@
 <?php
 class PostModel extends MY_Model
 {
-	public function create() {
-		//接收表单
-		$data = array(
-			'title' => $this->input->post('Post[title]',TRUE),
-			'content' => $this->input->post('Post[content]', TRUE),
-			'create_time' => time(),
-			'update_time' => time(),
-			);
-		$this->db->insert('ci_post',$data);
+	protected $_tableName = 'post';
+	protected $_insertFields = array('title','content');
+	protected $_updateFields = array('title','content');
+
+	public function _before_insert(&$data) {
+		$data['create_time'] = time();
+		$data['update_time'] = time();
+		if ($data['create_time'] == $data['update_time']) {
+			return TRUE;
+		} else{
+			return FALSE;
+		}
 	}
 
 	public function read() {
@@ -17,29 +20,6 @@ class PostModel extends MY_Model
 		$data = $this->db->get();
 		return array(
 			'data' => $data);
-	}
-
-	public function find($id) {
-		$this->db->from('ci_post');
-		$this->db->where('id', $id);
-		$data = $this->db->get();
-		$data = $data->result('array');
-		return $data[0];
-	}
-
-	public function update() {
-		$this->db->where('id', $this->input->post('Post[id]'));
-		$data = array(
-			'title' => $this->input->post('Post[title]',TRUE),
-			'content' => $this->input->post('Post[content]', TRUE),
-			'update_time' => time(),
-			);
-		$ret = $this->db->update('ci_post', $data);
-		return $ret;
-	}
-
-	public function delete($id) {
-		$this->db->delete('ci_post', array('id' => $id));
 	}
 }
 
