@@ -37,7 +37,7 @@ $config = array(
         array(
             'field' => 'User[code]',
             'label' => '验证码',
-            'rules' => 'required',
+            'rules' => 'required|callback_checkCode',
             ),
         ),
 );
