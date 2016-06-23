@@ -8,12 +8,12 @@ class PostModel extends MY_Model
 	public function search($perpage = 2) {
 		$this->db->from($this->_tableName);
 		//标题
-		$title = $this->input->get('Post[title]');
+		$title = $this->input->get('PostSearch[title]');
 		if ($title) {
 			$this->db->like('title',$title);
 		}
 		//内容
-		$content = $this->input->get('Post[content]');
+		$content = $this->input->get('PostSearch[content]');
 		if ($content) {
 			$this->db->like('content',$content);
 		}

@@ -25,9 +25,9 @@
 						</tr>
 
 						<tr id="w0-filters" class="filters">
-							<td><input type="text" class="form-control" name="PostSearch[id]"></td>
-							<td><input type="text" class="form-control" name="PostSearch[title]"></td>
-							<td><input type="text" class="form-control" name="PostSearch[content]"></td>
+							<td><input type="text" class="form-control" name="PostSearch[id]" value="<?=$this->input->get('PostSearch[id]')?>"></td>
+							<td><input type="text" class="form-control" name="PostSearch[title]" value="<?=$this->input->get('PostSearch[title]')?>"></td>
+							<td><input type="text" class="form-control" name="PostSearch[content]" value="<?=$this->input->get('PostSearch[content]')?>"></td>
 						<!-- 	<td><input type="text" class="form-control" name="PostSearch[tags]"></td>
 							<td><input type="text" class="form-control" name="PostSearch[status]"></td> -->
 							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><!-- <td>&nbsp;</td> -->
@@ -62,5 +62,9 @@
     	</div>
 	</div>
 </div>
+
+<script type="text/javascript">jQuery(document).ready(function () {
+jQuery('#w0').yiiGridView({"filterUrl":"","filterSelector":"#w0-filters input, #w0-filters select"});
+});</script>
 
 <?php $this->load->view('layout/foot'); ?>
