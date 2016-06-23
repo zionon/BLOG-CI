@@ -51,6 +51,13 @@
 						
 					</tbody>
 				</table>
+				<ul class="pagination">
+					<?=$page?>
+<!-- 					<li class="prev disabled"><span>&laquo;</span></li>
+					<li class="active"><a href="/blog2/web/index.php?r=post%2Findex&amp;page=1&amp;per-page=8" data-page="0">1</a></li>
+					<li><a href="/blog2/web/index.php?r=post%2Findex&amp;page=2&amp;per-page=8" data-page="1">2</a></li>
+					<li class="next"><a href="/blog2/web/index.php?r=post%2Findex&amp;page=2&amp;per-page=8" data-page="1">&raquo;</a></li> -->
+				</ul>
 			</div>
     	</div>
 	</div>

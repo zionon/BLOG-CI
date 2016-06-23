@@ -14,8 +14,8 @@ class MY_Model extends CI_Model
 		}
 		//添加前的钩子函数
 		if (method_exists($this, '_before_insert')) {
-			if ($this->_before_insert($data) === FASLE) {
-				return FASLE;
+			if ($this->_before_insert($data) === FALSE) {
+				return FALSE;
 			}
 		}
 		//插入数据库
@@ -40,9 +40,9 @@ class MY_Model extends CI_Model
 	public function update() {
 		$data = array();
 		$this->_tableName = ucfirst($this->_tableName);
-		$this->db->where('id',$this->input->post("{$this->$_tableName[id]}"));
-		foreach ($_updateFields as $value) {
-			$data[$value] = $this->input->post("{$this->$_tableName[$value]}",TRUE);
+		$this->db->where('id',$this->input->post("$this->_tableName[id]"));
+		foreach ($this->_updateFields as $value) {
+			$data[$value] = $this->input->post("$this->_tableName[$value]",TRUE);
 		}
 		//更新前的钩子函数
 		if (method_exists($this,'_before_update')) {
