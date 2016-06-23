@@ -39,12 +39,13 @@
 			<div id="w1-collapse" class="collapse navbar-collapse">
 				<ul id="w2" class="navbar-nav navbar-right nav">
 					<li><a href="<?=site_url('PostController/postList')?>">首页</a></li>
-					<li class="active"><a href="/blog2/web/index.php?r=post%2Findex">文章管理</a></li>
-					<li><a href="/blog2/web/index.php?r=comment%2Findex">评论管理</a></li>
+					<li><a href="<?=site_url('UserController/login')?>">注册</a></li>
+					<li class="active"><a href="">文章管理</a></li>
+					<li><a href="">评论管理</a></li>
 					<li><span class="badge badge-inverse">1</span></li>
-					<li><a href="/blog2/web/index.php?r=comment%2Findex">博客参数</a></li>
-					<li><a href="/blog2/web/index.php?r=site%2Fabout">关于博主</a></li>
-					<li><a href="/blog2/web/index.php?r=site%2Flogout" data-method="post">退出 (admin)</a></li>
+					<li><a href="">博客参数</a></li>
+					<li><a href="">关于博主</a></li>
+					<li><a href="" data-method="post">退出 (admin)</a></li>
 				</ul>
 			</div>
 		</div>
