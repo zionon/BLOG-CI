@@ -38,7 +38,14 @@ class PostModel extends MY_Model
 		//根据当前页计算偏移量
 		$offset = (max(1,(int)$this->pagination->cur_page) - 1) * $perpage;
 		//排序
-		$this->db->order_by('id','desc');
+		$odbyKey = 'id';
+		$odbyWay = 'desc';
+		if ($this->input->get('PostSequence')) {
+			$key = key($this->input->get('PostSequence'));
+			$odbyKey = $key;
+			$odbyWay = $this->input->get("PostSequence[$key]");
+		}
+		$this->db->order_by($odbyKey,$odbyWay);
 		//取数据
 		$data = $this->db->get('',$perpage,$offset);
 		//返回数据

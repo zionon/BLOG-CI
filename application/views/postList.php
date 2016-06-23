@@ -13,13 +13,13 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th><a href="" data-sort="id">ID</a></th>
+							<th><a href="<?=site_url('PostController/postList/'.'?PostSequence[id]=asc')?>" data-sort="id">ID</a></th>
 							<th><a href="" data-sort="title">标题</a></th>
 							<th><a href="" data-sort="content">内容</a></th>
 			<!-- 				<th><a href="" data-sort="tags">标签</a></th>
 							<th><a href="" data-sort="status">状态</a></th> -->
-							<th>添加时间</th>
-							<th>修改时间</th>
+							<th><a href="">添加时间</a></th>
+							<th><a href="">修改时间</a></th>
 							<!-- <th>作者</th> -->
 							<th class="action-column">操作</th>
 						</tr>
@@ -47,8 +47,7 @@
 								<a href="<?=site_url('PostController/postDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
 								</td>
 							</tr>
-						<?php endforeach; ?>
-						
+						<?php endforeach; ?>						
 					</tbody>
 				</table>
 				<ul class="pagination">
@@ -65,7 +64,7 @@
 
 <script type="text/javascript">
 	jQuery(document).ready(function () {
-		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php?r=post%2Findex\u0026sort=-id","filterSelector":"#w0-filters input, #w0-filters select"});
+		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/PostController\/postList?","filterSelector":"#w0-filters input, #w0-filters select"});
 	});
 	//抽时间要理解get上面url乱码
 </script>

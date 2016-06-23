@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-param" content="_csrf">
-    <meta name="csrf-token" content="XzBCeE5fM0puRgcofzp7GQd7KAIeD3E7AF4gACkaeS8YZylPOD1gEA==">
+<!--     <meta name="csrf-token" content="XzBCeE5fM0puRgcofzp7GQd7KAIeD3E7AF4gACkaeS8YZylPOD1gEA=="> -->
     <title>文章管理</title>
     <link href="<?=_PUBLIC?>/css/bootstrap.css" rel="stylesheet">
 	<link href="<?=_PUBLIC?>/css/site.css" rel="stylesheet">    
