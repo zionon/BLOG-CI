@@ -1,6 +1,7 @@
 <?php
 class UserController extends CI_Controller
 {
+	//会员注册
 	public function register(){
 		$this->load->library('form_validation');
 		if ($this->form_validation->run('register') === FALSE) {
@@ -13,6 +14,7 @@ class UserController extends CI_Controller
 		}
 	}
 
+	//显示会员
 	public function userList(){
 		$this->load->model('UserModel','um');
 		$data = $this->um->search();
@@ -20,6 +22,7 @@ class UserController extends CI_Controller
 		$this->load->view('userList', $data);
 	}
 
+	//会员修改
 	public function userUpdate($id){
 		$this->load->model('UserModel','um');
 		//验证表单
@@ -33,6 +36,18 @@ class UserController extends CI_Controller
 		}
 	}
 
+	//后台增加会员
+	public function userCreate() {
+		//验证表单
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('register') === FALSE) {
+			$this->load->view('userCreate');
+		} else {
+			$this->load->model('UserModel','um');
+			$this->um->create();
+			redirect(site_url('UserController/userList'));
+		}
+	}
 	//生成验证码
 	public function getCaptcha() {
 		$this->load->library('captcha');
