@@ -11,7 +11,10 @@ create table ci_post
 	content text collate utf8_unicode_ci not null comment '内容',
 	create_time int(11) default null comment '添加时间',
 	update_time int(11) default null comment '最后一次修改时间',
-	primary key (id)
+	author_id int(11) not null comment '作者id',
+	primary key (id),
+	key `FK_post_author` (`author_id`),
+	constraint `FK_post_author` foreign key (`author_id`) references `ci_user` (`id`) on delete cascade
 )engine=InnoDB default charset=utf8 collate=utf8_unicode_ci comment '日志';
 
 drop table if exists ci_user
