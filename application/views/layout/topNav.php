@@ -38,7 +38,7 @@
 					<li class="active"><a href="">文章管理</a></li>
 					<li><a href="">评论管理</a></li>
 					<li><span class="badge badge-inverse">1</span></li>
-					<li><a href="">博客参数</a></li>
+					<li><a href="<?=site_url('UserController/userList')?>">会员管理</a></li>
 					<li><a href="">关于博主</a></li>
 					<li><a href="" data-method="post">退出 (admin)</a></li>
 				</ul>

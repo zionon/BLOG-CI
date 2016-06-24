@@ -13,11 +13,12 @@ class UserController extends CI_Controller
 		}
 	}
 
-	// public function lst(){
-	// 	$this->load->model('UserModel','um');
-	// 	$data = $this->um->read();
-	// 	var_dump($data);die;
-	// }
+	public function userList(){
+		$this->load->model('UserModel','um');
+		$data = $this->um->search();
+		// var_dump($data);die;
+		$this->load->view('userList');
+	}
 
 	//生成验证码
 	public function getCaptcha() {

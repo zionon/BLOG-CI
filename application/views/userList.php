@@ -14,35 +14,35 @@
 					<thead>
 						<tr>
 							<th>
-							<a <?php if($odby['key'] == 'id') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=id').'" data-sort="id"'; ?> >ID</a>
+							<a>ID</a>
 							</th>
 							<th>
-							<a <?php if($odby['key'] == 'title') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=title').'" data-sort="title"'; ?> >标题</a>
+							<a>用户名</a>
 							</th>
 							<th>
-							<a <?php if($odby['key'] == 'username') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=username').'" data-sort="username"'; ?> >作者</a>
+							<a>邮  箱</a>
 							</th>
 			<!-- 				<th><a href="" data-sort="tags">标签</a></th>
 							<th><a href="" data-sort="status">状态</a></th> -->
 							<th>
-							<a <?php if($odby['key'] == 'update_time') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=update_time').'" data-sort="update_time"'; ?> >修改时间</a>
+							<a>修改时间</a>
 							</th>							
-							<th>添加时间</th>
+							<th>注册时间</th>
 							<!-- <th>作者</th> -->
 							<th class="action-column">操作</th>
 						</tr>
 
 						<tr id="w0-filters" class="filters">
-							<td><input type="text" class="form-control" name="PostSearch[id]" value="<?=$this->input->get('PostSearch[id]')?>"></td>
-							<td><input type="text" class="form-control" name="PostSearch[title]" value="<?=$this->input->get('PostSearch[title]')?>"></td>
-							<td><input type="text" class="form-control" name="PostSearch[content]" value="<?=$this->input->get('PostSearch[content]')?>"></td>
+							<td><input type="text" class="form-control" name="UserSearch[id]" value="<?=$this->input->get('PostSearch[id]')?>"></td>
+							<td><input type="text" class="form-control" name="UserSearch[username]" value="<?=$this->input->get('PostSearch[title]')?>"></td>
+							<td><input type="text" class="form-control" name="UserSearch[email]" value="<?=$this->input->get('PostSearch[content]')?>"></td>
 						<!-- 	<td><input type="text" class="form-control" name="PostSearch[tags]"></td>
 							<td><input type="text" class="form-control" name="PostSearch[status]"></td> -->
 							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><!-- <td>&nbsp;</td> -->
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($data->result() as $key => $value): ?>
+<!-- 						<?php foreach ($data->result() as $key => $value): ?>
 							<tr data-key="<?=$value->id?>">
 								<td><?=$value->id?></td>
 								<td><?=$value->title?></td>
@@ -55,11 +55,11 @@
 								<a href="<?=site_url('PostController/postDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
 								</td>
 							</tr>
-						<?php endforeach; ?>						
+						<?php endforeach; ?> -->						
 					</tbody>
 				</table>
 				<ul class="pagination">
-					<?=$page?>
+					<!-- <?=$page?> -->
 <!-- 					<li class="prev disabled"><span>&laquo;</span></li>
 					<li class="active"><a href="/blog2/web/index.php?r=post%2Findex&amp;page=1&amp;per-page=8" data-page="0">1</a></li>
 					<li><a href="/blog2/web/index.php?r=post%2Findex&amp;page=2&amp;per-page=8" data-page="1">2</a></li>

@@ -7,6 +7,11 @@ class PostModel extends MY_Model
 
 	public function search($perpage = 2) {
 		$this->db->from($this->_tableName);
+		//文章id
+		$id = $this->input->get('PostSearch[id]');
+		if ($id) {
+			$this->db->where('ci_post.id', $id);
+		}
 		//标题
 		$title = $this->input->get('PostSearch[title]');
 		if ($title) {
