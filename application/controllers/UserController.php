@@ -6,6 +6,7 @@ class UserController extends CI_Controller
 		if ($this->form_validation->run('register') === FALSE) {
 			$this->load->view('register');
 		} else {
+			// var_dump($this->input->post());die;
 			$this->load->model('UserModel','um');
 			$this->um->create();
 			echo "注册成功";
