@@ -48,6 +48,14 @@ class UserController extends CI_Controller
 			redirect(site_url('UserController/userList'));
 		}
 	}
+
+	//后台删除会员
+	public function userDelete($id) {
+		$this->load->model('UserModel','um');
+		$this->um->delete($id);
+		redirect(site_url('UserController/userList'));
+	}
+
 	//生成验证码
 	public function getCaptcha() {
 		$this->load->library('captcha');
