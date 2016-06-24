@@ -56,6 +56,13 @@ class UserController extends CI_Controller
 		redirect(site_url('UserController/userList'));
 	}
 
+	//显示会员详情
+	public function userDetail($id) {
+		$this->load->model('UserModel','um');
+		$data = $this->um->find($id);
+		$this->load->view('userDetail', $data);
+	}
+
 	//生成验证码
 	public function getCaptcha() {
 		$this->load->library('captcha');
