@@ -40,10 +40,21 @@ class PostModel extends MY_Model
 		//排序
 		$odbyKey = 'id';
 		$odbyWay = 'desc';
-		if ($this->input->get('PostSequence')) {
-			$key = key($this->input->get('PostSequence'));
-			$odbyKey = $key;
-			$odbyWay = $this->input->get("PostSequence[$key]");
+		$odbyArray = array();
+		if ($this->input->get('sort')) {
+			$key = $this->input->get('sort');
+			$find = '-';
+			$pos = strpos($key, $find);
+			if ($pos === FALSE) {
+				$odbyKey = $key;
+				$odbyWay = 'asc';
+				$odbyArray['odbyString'] = 'class="asc" data-sort="-'.$key.'" href="'.site_url('PostController/postList').'?sort=-'.$key.'"';
+				$odbyArray['key'] = $odbyKey;
+			} else {
+				$odbyKey = trim($key, $find);
+				$odbyArray['odbyString'] = 'class="desc" data-sort="'.$odbyKey.'" href="'.site_url('PostController/postList').'?sort='.$odbyKey.'"';
+				$odbyArray['key'] = $odbyKey;
+			}
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
 		//取数据
@@ -52,6 +63,7 @@ class PostModel extends MY_Model
 		return array(
 			'data' => $data,
 			'page' => $pageString,
+			'odby' => $odbyArray,
 		);
 	}
 

@@ -13,13 +13,13 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th><a href="<?=site_url('PostController/postList/'.'?PostSequence[id]=asc')?>" data-sort="id">ID</a></th>
-							<th><a href="" data-sort="title">标题</a></th>
-							<th><a href="" data-sort="content">内容</a></th>
+							<th><a <?php if($odby['key'] == 'id') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=id').'" data-sort="id"'; ?> >ID</a></th>
+							<th><a <?php if($odby['key'] == 'title') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=title').'" data-sort="title"'; ?> >标题</a></th>
+							<th><a <?php if($odby['key'] == 'content') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=content').'" data-sort="content"'; ?> >内容</a></th>
 			<!-- 				<th><a href="" data-sort="tags">标签</a></th>
 							<th><a href="" data-sort="status">状态</a></th> -->
-							<th><a href="">添加时间</a></th>
-							<th><a href="">修改时间</a></th>
+							<th>添加时间</th>
+							<th><a <?php if($odby['key'] == 'update_time') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=update_time').'" data-sort="update_time"'; ?> >修改时间</a></th>
 							<!-- <th>作者</th> -->
 							<th class="action-column">操作</th>
 						</tr>

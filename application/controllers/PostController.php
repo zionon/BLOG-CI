@@ -5,7 +5,7 @@ class PostController extends CI_Controller
 		$this->load->model('PostModel','pm');
 		$data = $this->pm->search();
 		// var_dump($data['page']);die;
-		// var_dump($this->input->get());die;
+		// var_dump($data);die;
 		$this->load->view('postList', $data);
 	}
 
