@@ -57,11 +57,12 @@ class UserModel extends MY_Model
 			if ($pos === FALSE) {
 				$odbyKey = $key;
 				$odbyWay = 'asc';
-				$odbyArray['odbyString'] = 'class="asc" sort-data="-'.$odbyKey.' href="'.site_url('UserController/userList').'?sort=-'.$odbyKey.'"';
+				$odbyArray['odbyString'] = 'class="asc" sort-data="-'.$odbyKey.'" href="'.site_url('UserController/userList').'?sort=-'.$odbyKey.'"';
 				$odbyArray['key'] = $odbyKey;
 			} else {
 				$odbyKey = trim($key, $find);
-				$odbyArray['odbyString'] = 'class="asc" sort-data="'.$odbyKey.' href="'.site_url('UserController/userList').'?sort='.$odbyKey.'"';
+				$odbyArray['odbyString'] = 'class="desc" sort-data="'.$odbyKey.'" href="'.site_url('UserController/userList').'?sort='.$odbyKey.'"';
+				$odbyArray['key'] = $odbyKey;
 			}
 		}
 		$this->db->order_by($odbyKey, $odbyWay);

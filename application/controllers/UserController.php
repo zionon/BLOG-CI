@@ -17,7 +17,7 @@ class UserController extends CI_Controller
 		$this->load->model('UserModel','um');
 		$data = $this->um->search();
 		// var_dump($data);die;
-		$this->load->view('userList');
+		$this->load->view('userList', $data);
 	}
 
 	//生成验证码
