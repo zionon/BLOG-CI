@@ -9,7 +9,7 @@
 	        </p>
 
 	    	<div id="w0" class="grid-view">
-		    	<div class="summary">第<b>1-8</b>条，共<b>11</b>条数据.</div>
+		    	<div class="summary"><?php if($count) echo $count; ?></div>
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
@@ -42,20 +42,24 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($data->result() as $key => $value): ?>
-							<tr data-key="<?=$value->id?>">
-								<td><?=$value->id?></td>
-								<td><?=$value->title?></td>
-							 	<td><?=$value->username?></td>
-							 	<td><?=date('Y-m-d H:i:s',$value->update_time)?></td>
-								<td><?=date('Y-m-d H:i:s',$value->create_time)?></td>
-								<td>
-								<a href="<?=site_url('PostController/postDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
-								<a href="<?=site_url('PostController/postUpdate/'.$value->id)?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
-								<a href="<?=site_url('PostController/postDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
-								</td>
-							</tr>
-						<?php endforeach; ?>						
+						<?php if($data->result()): ?>
+							<?php foreach ($data->result() as $key => $value): ?>
+								<tr data-key="<?=$value->id?>">
+									<td><?=$value->id?></td>
+									<td><?=$value->title?></td>
+								 	<td><?=$value->username?></td>
+								 	<td><?=date('Y-m-d H:i:s',$value->update_time)?></td>
+									<td><?=date('Y-m-d H:i:s',$value->create_time)?></td>
+									<td>
+									<a href="<?=site_url('PostController/postDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
+									<a href="<?=site_url('PostController/postUpdate/'.$value->id)?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
+									<a href="<?=site_url('PostController/postDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						<?php else : ?>
+							<tr><td colspan="7"><div class="empty">没有找到数据。</div></td></tr>
+						<?php endif; ?>
 					</tbody>
 				</table>
 				<ul class="pagination">

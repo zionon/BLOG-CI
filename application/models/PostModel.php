@@ -30,11 +30,11 @@ class PostModel extends MY_Model
 		$config['total_rows'] = $count;
 		$config['per_page'] = $perpage;
 		//翻页是变量继续传
-		$config['reuse_query_string'] = TRUE;
-		$config['first_link'] = '首页';
-		$config['last_link'] = '尾页';
-		$config['next_link'] = '下一页';
-		$config['prev_link'] = '上一页';
+		// $config['reuse_query_string'] = TRUE;
+		// $config['first_link'] = '首页';
+		// $config['last_link'] = '尾页';
+		// $config['next_link'] = '下一页';
+		// $config['prev_link'] = '上一页';
 		//根据数组配置翻页类
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
@@ -68,11 +68,20 @@ class PostModel extends MY_Model
 		$this->db->join('user','post.author_id=user.id','left');
 		//取数据
 		$data = $this->db->get('',$perpage,$offset);
+		//查询记录数
+		$countString = null;
+		if ($data->result()) {
+			$countTotal = count($data->result());
+			$countRight = min($perpage * (int)$this->pagination->cur_page, $count);
+			$countLeft = ((int)$this->pagination->cur_page - 1) * $perpage + 1;
+			$countString = '第<b>'.$countLeft.'-'.$countRight.'</b>条，共<b>'.$count.'</b>条记录';
+		}
 		//返回数据
 		return array(
 			'data' => $data,
 			'page' => $pageString,
 			'odby' => $odbyArray,
+			'count' => $countString,
 		);
 	}
 
