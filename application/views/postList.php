@@ -15,7 +15,7 @@
 						<tr>
 							<th><a <?php if($odby['key'] == 'id') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=id').'" data-sort="id"'; ?> >ID</a></th>
 							<th><a <?php if($odby['key'] == 'title') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=title').'" data-sort="title"'; ?> >标题</a></th>
-							<th><a <?php if($odby['key'] == 'content') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=content').'" data-sort="content"'; ?> >内容</a></th>
+							<th><a <?php if($odby['key'] == 'author_id') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=author_id').'" data-sort="author_id"'; ?> >作者</a></th>
 			<!-- 				<th><a href="" data-sort="tags">标签</a></th>
 							<th><a href="" data-sort="status">状态</a></th> -->
 							<th>添加时间</th>
@@ -38,7 +38,7 @@
 							<tr data-key="<?=$value->id?>">
 								<td><?=$value->id?></td>
 								<td><?=$value->title?></td>
-								<td><?=$value->content?></td>
+							 	<td><?=$value->username?></td>
 								<td><?=date('Y-m-d H:i:s',$value->create_time)?></td>
 								<td><?=date('Y-m-d H:i:s',$value->update_time)?></td>
 								<td>

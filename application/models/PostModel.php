@@ -13,10 +13,10 @@ class PostModel extends MY_Model
 			$this->db->like('title',$title);
 		}
 		//内容
-		$content = $this->input->get('PostSearch[content]');
-		if ($content) {
-			$this->db->like('content',$content);
-		}
+		// $content = $this->input->get('PostSearch[content]');
+		// if ($content) {
+		// 	$this->db->like('content',$content);
+		// }
 		//制作翻页
 		$count = $this->db->count_all_results('', FALSE);
 		//构造配置的数组
@@ -41,6 +41,7 @@ class PostModel extends MY_Model
 		$odbyKey = 'id';
 		$odbyWay = 'desc';
 		$odbyArray = array();
+		$odbyArray['key'] = null;
 		if ($this->input->get('sort')) {
 			$key = $this->input->get('sort');
 			$find = '-';
@@ -57,6 +58,9 @@ class PostModel extends MY_Model
 			}
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
+		//连表查询
+		$this->db->select('post.id,post.title,post.create_time,post.update_time,user.username', FALSE);
+		$this->db->join('user','post.author_id=user.id','left');
 		//取数据
 		$data = $this->db->get('',$perpage,$offset);
 		//返回数据
@@ -70,6 +74,7 @@ class PostModel extends MY_Model
 	public function _before_insert(&$data) {
 		$data['create_time'] = time();
 		$data['update_time'] = time();
+		$data['author_id'] = '1';
 		if ($data['create_time'] == $data['update_time']) {
 			return TRUE;
 		} else{
