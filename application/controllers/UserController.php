@@ -20,6 +20,19 @@ class UserController extends CI_Controller
 		$this->load->view('userList', $data);
 	}
 
+	public function userUpdate($id){
+		$this->load->model('UserModel','um');
+		//验证表单
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('register') === FALSE) {
+			$data = $this->um->find($id);
+			$this->load->view('userUpdate', $data);
+		} else {
+			$this->um->update();
+			redirect(site_url('UserController/userList'));
+		}
+	}
+
 	//生成验证码
 	public function getCaptcha() {
 		$this->load->library('captcha');

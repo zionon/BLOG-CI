@@ -86,4 +86,26 @@ class UserModel extends MY_Model
 			return FALSE;
 		}
 	}
+
+	public function _before_update(&$data) {
+		$data['password'] = md5($data['password']);
+		$data['update_time'] = time();
+		if ($data['update_time'] == TRUE) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
