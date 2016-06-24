@@ -8,7 +8,7 @@
 		<div class="post-view">
 			<h1><?=$title?></h1>
 			<p>
-				<a class="btn btn-primary" href="">修改</a> 
+				<a class="btn btn-primary" href="<?=site_url('PostController/postUpdate/'.$id)?>">修改</a> 
 				<a class="btn btn-danger" href="" data-confirm="Are you sure you want to delete this item?" data-method="post">删除</a>    
 			</p>
 
@@ -41,10 +41,10 @@
 					<th>修改时间</th>
 					<td><?=date('Y-m-d H:i:s',$update_time)?></td>
 				</tr>
-<!-- 				<tr>
+				<tr>
 					<th>作者</th>
-					<td>魏曦</td>
-				</tr> -->
+					<td><?=$username?></td>
+				</tr>
 			</table>
 		</div>
     </div>

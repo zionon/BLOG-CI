@@ -71,6 +71,16 @@ class PostModel extends MY_Model
 		);
 	}
 
+	public function find($id) {
+		$this->db->from($this->_tableName);
+		$this->db->where('ci_post.id', $id);
+		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,user.username', FALSE);
+		$this->db->join('user','post.author_id=user.id','left');
+		$data = $this->db->get();
+		$data = $data->result('array');
+		return $data[0];
+	}
+
 	public function _before_insert(&$data) {
 		$data['create_time'] = time();
 		$data['update_time'] = time();
@@ -84,6 +94,7 @@ class PostModel extends MY_Model
 
 	public function _before_update(&$data) {
 		$data['update_time'] = time();
+		$data['author_id'] = '1';
 		if ($data['update_time'] == TRUE) {
 			return TRUE;
 		} else {
