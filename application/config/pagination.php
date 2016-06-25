@@ -12,5 +12,9 @@ $config = array(
 	'prev_tag_open' => '<li class="prev">',
 	'prev_tag_close' => '</li>',
 	'num_tag_open' => '<li>',
-	'num_tag_close' => '</li>'
+	'num_tag_close' => '</li>',
+	'first_tag_open' => '<li>',
+	'first_tag_close' => '</li>',
+	'last_tag_open' => '<li>',
+	'last_tag_close' => '</li>',
 );
