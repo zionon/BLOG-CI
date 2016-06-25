@@ -32,8 +32,9 @@ class TestModel extends MY_Model
 		return $titleString;
 	}
 
-	private function createTime() {
-
+	private function createTime($min, $max) {
+		$createTime = rand($min, $max);
+		return $createTime;
 	}
 
 	private function authorId($min, $max) {
