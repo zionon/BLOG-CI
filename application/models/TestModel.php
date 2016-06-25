@@ -3,13 +3,14 @@ class TestModel extends MY_Model
 {
 	protected $_tableName = 'post';
 	public function create() {
-		$titleString = $this->title(4,10);
+		$titleString = $this->randCjk(4,10);
+		$contentString = $this->randCjk(50,100);
 		$createTime = $this->createTime(1466800000,1467000000);
 		$updateTime = $this->updateTime(1466800000,1467000000);
 		$authorId = $this->authorId(1,7);
 		$data = array();
 		$data['title'] = $titleString;
-		$data['content'] = '美国，人类的希望';
+		$data['content'] = $contentString;
 		$data['create_time'] = $createTime;
 		$data['update_time'] = $updateTime;
 		$data['author_id'] = $authorId;
@@ -17,7 +18,7 @@ class TestModel extends MY_Model
 		return $data['id'] = $this->db->insert_id();
 	}
 
-	private function title($min, $max) {
+	private function randCjk($min, $max) {
 		$titleTotal = rand($min, $max);
 		$titleNum = array();
 		$titleString = '';
