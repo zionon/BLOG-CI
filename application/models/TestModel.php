@@ -24,12 +24,7 @@ class TestModel extends MY_Model
 		foreach ($unicode->result() as $value) {
 			$titleString .= '&#x'.$value->cjk.';';
 		}
-		var_dump($titleString);die;
 		$titleString = html_entity_decode($titleString); 
-		var_dump($titleString);die;
-		// $test = 0b111001001011100010100101;
-		// $test = utf8_decode($test);
-		// var_dump($titleString);die;
 		$data = array();
 		$data['title'] = $titleString;
 		$data['content'] = '美国，人类的希望';
@@ -38,5 +33,9 @@ class TestModel extends MY_Model
 		$data['author_id'] = 3;
 		$this->db->insert($this->_tableName, $data);
 		return $data['id'] = $this->db->insert_id();
+	}
+
+	private function title($min, $max) {
+		
 	}
 }
