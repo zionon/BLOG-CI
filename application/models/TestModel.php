@@ -11,9 +11,16 @@ class TestModel extends MY_Model
 			// $hex = dechex($ds);
 			$titleNum[$i] = rand(1,23940);
 		}
-
+		// $titleNum = implode(',',$titleNum);
+		// var_dump($titleNum);die;
+		$this->db->from('ci_cp936');
+		$this->db->select('cjk');
+		$this->db->where_in('id',$titleNum);
+		$unicode = $this->db->get();
+		// $str = $this->db->last_query();
+		// var_dump($str);die;
 		// $titleString = "&#x8FD9;&#x662F;&#x6807;&#x9898;&#xFF0C;&#x8FD9;&#x662F;&#x5185;&#x5BB9;";
-		var_dump($titleNum);die;
+		var_dump($unicode->result());die;
 		$titleString = html_entity_decode($titleString); 
 		var_dump($titleString);die;
 		// $test = 0b111001001011100010100101;
