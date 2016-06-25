@@ -20,7 +20,11 @@ class TestModel extends MY_Model
 		// $str = $this->db->last_query();
 		// var_dump($str);die;
 		// $titleString = "&#x8FD9;&#x662F;&#x6807;&#x9898;&#xFF0C;&#x8FD9;&#x662F;&#x5185;&#x5BB9;";
-		var_dump($unicode->result());die;
+		// var_dump($unicode->result());die;
+		foreach ($unicode->result() as $value) {
+			$titleString .= '&#x'.$value->cjk.';';
+		}
+		var_dump($titleString);die;
 		$titleString = html_entity_decode($titleString); 
 		var_dump($titleString);die;
 		// $test = 0b111001001011100010100101;
