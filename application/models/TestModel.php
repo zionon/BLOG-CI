@@ -4,12 +4,14 @@ class TestModel extends MY_Model
 	protected $_tableName = 'post';
 	public function create() {
 		$titleString = $this->title(4,10);
+		$createTime = $this->createTime(1466800000,1467000000);
+		$updateTime = $this->updateTime(1466800000,1467000000);
 		$authorId = $this->authorId(1,7);
 		$data = array();
 		$data['title'] = $titleString;
 		$data['content'] = '美国，人类的希望';
-		$data['create_time'] = time();
-		$data['update_time'] = time();
+		$data['create_time'] = $createTime;
+		$data['update_time'] = $updateTime;
 		$data['author_id'] = $authorId;
 		$this->db->insert($this->_tableName, $data);
 		return $data['id'] = $this->db->insert_id();
@@ -35,6 +37,11 @@ class TestModel extends MY_Model
 	private function createTime($min, $max) {
 		$createTime = rand($min, $max);
 		return $createTime;
+	}
+
+	private function updateTime($min, $max) {
+		$updateTime = rand($min, $max);
+		return $updateTime;
 	}
 
 	private function authorId($min, $max) {
