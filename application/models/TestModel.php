@@ -36,6 +36,19 @@ class TestModel extends MY_Model
 	}
 
 	private function title($min, $max) {
-		
+		$titleTotal = rand($min, $max);
+		$titleNum = array();
+		$titleString = '';
+		for ($i=0; $i < $titleTotal; $i++) { 
+			$titleNum[$i] = rand(1, 23940);
+		}
+		$this->db->select('cjk');
+		$this->db->where_in('id', $titleNum);
+		$unicode = $this->db->get('ci_cp936');
+		foreach ($unicode->result() as $value) {
+			$titleString .= '&#x'.$value->cjk.';';
+		}
+		$titleString = html_entity_decode($titleString);
+		return $titleString;
 	}
 }
