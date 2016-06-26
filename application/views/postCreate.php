@@ -55,6 +55,9 @@
 	</div>
 </div>
 
+
+</div>
+<?php $this->load->view('layout/foot'); ?>
 <link rel="stylesheet" type="text/css" href="<?=_PUBLIC?>/simditor-2.3.6/styles/simditor.css" />
 <script type="text/javascript" src="<?=_PUBLIC?>/simditor-2.3.6/scripts/module.js"></script>
 <script type="text/javascript" src="<?=_PUBLIC?>/simditor-2.3.6/scripts/hotkeys.js"></script>
@@ -65,6 +68,3 @@
 		textarea: $('#editor')
 	});
 </script>
-
-</div>
-<?php $this->load->view('layout/foot'); ?>
