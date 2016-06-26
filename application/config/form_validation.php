@@ -18,26 +18,44 @@ $config = array(
             'field' => 'User[username]',
             'label' => '用户名',
             'rules' => 'required',
-            ),
+        ),
         array(
             'field' => 'User[password]',
             'label' => '密码',
             'rules' => 'required',
-            ),
+        ),
         array(
             'field' => 'User[passconf]',
             'label' => '确认密码',
             'rules' => 'required|matches[User[password]]',
-            ),
+        ),
         array(
             'field' => 'User[email]',
             'label' => '邮箱',
             'rules' => 'required|valid_email',
-            ),
+        ),
         array(
             'field' => 'User[code]',
             'label' => '验证码',
             'rules' => 'required|callback_checkCode',
-            ),
         ),
+    ),
+
+    'login' => array(
+        array(
+            'field' => 'LoginForm[username]',
+            'label' => '用户名',
+            'rules' => 'required|callback_checkUsername',
+        ),
+        array(
+            'field' => 'LoginForm[password]',
+            'label' => '密码',
+            'rules' => 'required',
+        ),
+        array(
+            'field' => 'LoginForm[code]',
+            'label' => '验证码',
+            'rules' => 'required|callback_checkCode',
+        ),
+    ),
 );

@@ -76,6 +76,20 @@ class UserModel extends MY_Model
 		);
 	}
 
+	public function findUsername($username) {
+		$this->db->where('username', $username);
+		$isUsername = $this->db->get('user');
+		if ($isUsername->result()) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	public function checkPass($password) {
+		
+	}
+
 	public function _before_insert(&$data) {
 		$data['password'] = md5($data['password']);
 		$data['register_time'] = time();

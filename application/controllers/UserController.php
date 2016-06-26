@@ -14,6 +14,21 @@ class UserController extends CI_Controller
 		}
 	}
 
+	//会员登录
+	public function login() {
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('login') === FALSE) {
+			// var_dump($this->input->post());die;
+			$this->load->view('login');
+		} else {
+			$this->load->model('UserModel','um');
+			$data = array(
+				'confError' => '密码错误',
+			);
+			$this->load->view('login',$data);
+		}
+	}
+
 	//显示会员
 	public function userList(){
 		$this->load->model('UserModel','um');
@@ -71,6 +86,18 @@ class UserController extends CI_Controller
 		$this->captcha->showImg();
 	}
 
+	//检查用户名是否存在
+	public function checkUsername($username) {
+		// var_dump($username);die;
+		$this->load->model('UserModel','um');
+		if ($this->um->findUsername($username)) {
+			return TRUE;
+		} else {
+			$this->form_validation->set_message('checkUsername','用户名不存在');
+			return FALSE;
+		}
+	}
+
 	//检查验证码
 	public function checkCode($code) {
 		$code = strtolower($code);
@@ -83,3 +110,25 @@ class UserController extends CI_Controller
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
