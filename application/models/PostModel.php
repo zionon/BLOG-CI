@@ -5,7 +5,7 @@ class PostModel extends MY_Model
 	protected $_insertFields = array('title','content');
 	protected $_updateFields = array('title','content');
 
-	public function search($perpage = 2) {
+	public function search($perpage = 10) {
 		$this->db->from($this->_tableName);
 		//文章id
 		$id = $this->input->get('PostSearch[id]');
