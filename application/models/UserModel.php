@@ -86,8 +86,16 @@ class UserModel extends MY_Model
 		}
 	}
 
-	public function checkPass($password) {
-		
+	public function checkPass($username, $password) {
+		$this->db->where('username', $username);
+		$this->db->select('password,is_admin');
+		$data = $this->db->get('user');
+		// var_dump($data->result());die;
+		if ($data->result()[0]->password === $password) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
 
 	public function _before_insert(&$data) {

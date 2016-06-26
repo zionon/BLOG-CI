@@ -19,13 +19,19 @@ class UserController extends CI_Controller
 		$this->load->library('form_validation');
 		if ($this->form_validation->run('login') === FALSE) {
 			// var_dump($this->input->post());die;
-			$this->load->view('login');
+			$data['confError'] = null;
+			$this->load->view('login', $data);
 		} else {
-			$this->load->model('UserModel','um');
-			$data = array(
-				'confError' => '密码错误',
-			);
-			$this->load->view('login',$data);
+			$this->load->model('UserModel', 'um');
+			$password = $this->input->post('LoginForm[password]', TRUE);
+			$username = $this->input->post('LoginForm[username]', TRUE);
+			$password = md5($password);
+			if($this->um->checkPass($username, $password)){
+				echo "登录成功";
+			} else {
+				$data['confError'] = '密码错误';
+				$this->load->view('login', $data);
+			}
 		}
 	}
 
