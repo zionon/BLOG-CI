@@ -4,7 +4,7 @@ class TestModel extends MY_Model
 	protected $_tableName = 'post';
 	public function create() {
 		$titleString = $this->randCc(4,10);
-		$contentString = $this->randCc(50,100);
+		$contentString = $this->randCc(50,100,50);
 		$createTime = $this->createTime(1466800000,1467000000);
 		$updateTime = $this->updateTime(1466800000,1467000000);
 		$authorId = $this->authorId(1,7);
@@ -14,7 +14,7 @@ class TestModel extends MY_Model
 		$data['create_time'] = $createTime;
 		$data['update_time'] = $updateTime;
 		$data['author_id'] = $authorId;
-		var_dump($data['title']);die();
+		var_dump($data);die();
 		$this->db->insert($this->_tableName, $data);
 		return $data['id'] = $this->db->insert_id();
 	}
@@ -51,7 +51,17 @@ class TestModel extends MY_Model
 		return $authorId;
 	}
 
-	private function randCc($min, $max) {
+	private function randPun($contentTotal) {
+		$punctuation = array("ff0c","3002","ff1f","3001");
+		$randNum = $contentTotal / 10;
+		$punNum = array();
+		for ($i=0; $i < $randNum; $i++) { 
+			$punNum[$i] = $punctuation[array_rand($punctuation)];
+		}
+		return $punNum;
+	}
+
+	private function randCc($min, $max, $pun = null) {
 		$character = array(
 		 		"7684","4e00","662f","4e86","6211","4e0d","4eba","5728","4ed6","6709","8fd9","4e2a","4e0a","4eec","6765",
 				"5230","65f6","5927","5730","4e3a","5b50","4e2d","4f60","8bf4","751f","56fd","5e74","7740","5c31","90a3",
@@ -128,6 +138,12 @@ class TestModel extends MY_Model
 		for ($i=0; $i < $titleTotal; $i++) { 
 			$titleNum[$i] = $character[$characterKey[$i]];
 		}
+		if ($pun) {
+			$punNum = $this->randPun($pun);
+			$titleNum = array_merge($titleNum, $punNum);
+			shuffle($titleNum);
+		}
+
 		foreach ($titleNum as $value) {
 			$titleString .= '&#x'.$value.';';
 		}
