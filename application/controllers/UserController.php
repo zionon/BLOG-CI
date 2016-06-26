@@ -42,11 +42,21 @@ class UserController extends CI_Controller
 					);
 					$this->session->set_userdata($sessionData);
 				}
+				// var_dump($_SESSION);die;
+				redirect(site_url('Welcome'));
 			} else {
 				$data['confError'] = '密码错误';
 				$this->load->view('login', $data);
 			}
 		}
+	}
+
+	//会员登出
+	public function logout() {
+		// var_dump($_SESSION);
+		session_destroy();
+		// var_dump($_SESSION);die;
+		redirect(site_url('Welcome'));
 	}
 
 	//显示会员
