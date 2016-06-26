@@ -88,11 +88,11 @@ class UserModel extends MY_Model
 
 	public function checkPass($username, $password) {
 		$this->db->where('username', $username);
-		$this->db->select('password,is_admin');
+		$this->db->select('id,username,password,is_admin');
 		$data = $this->db->get('user');
 		// var_dump($data->result());die;
 		if ($data->result()[0]->password === $password) {
-			return TRUE;
+			return $data->result()[0];
 		} else {
 			return FALSE;
 		}

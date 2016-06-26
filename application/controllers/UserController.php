@@ -26,8 +26,22 @@ class UserController extends CI_Controller
 			$password = $this->input->post('LoginForm[password]', TRUE);
 			$username = $this->input->post('LoginForm[username]', TRUE);
 			$password = md5($password);
-			if($this->um->checkPass($username, $password)){
-				echo "登录成功";
+			$userInfo = $this->um->checkPass($username, $password);
+			if($userInfo) {
+				if ($userInfo->is_admin) {
+					$sessionData = array(
+						'id' => $userInfo->id,
+						'username' => $userInfo->username,
+						'is_admin' => $userInfo->is_admin,
+					);
+					$this->session->set_userdata($sessionData);
+				} else {
+					$sessionData = array(
+						'id' => $userInfo->id,
+						'username' => $userInfo->username,
+					);
+					$this->session->set_userdata($sessionData);
+				}
 			} else {
 				$data['confError'] = '密码错误';
 				$this->load->view('login', $data);
