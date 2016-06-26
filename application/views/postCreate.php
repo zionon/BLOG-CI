@@ -23,7 +23,8 @@
 
 				<div class="form-group field-post-content required">
 					<label class="control-label" for="post-content">内容</label>
-					<textarea id="post-content" class="form-control" name="Post[content]" rows="6"><?=set_value('Post[content]')?></textarea>
+					<!-- <textarea id="post-content" class="form-control" name="Post[content]" rows="6"><?=set_value('Post[content]')?></textarea> -->
+					<textarea id="editor" name="Post[content]" placeholder="Hello world" autofocus></textarea>
 					<?php $error = form_error('Post[content]'); ?>
 					<span style="color:#F00;font-weight:bold;"><?=$error?></span>
 
@@ -54,7 +55,16 @@
 	</div>
 </div>
 
-
+<link rel="stylesheet" type="text/css" href="<?=_PUBLIC?>/simditor-2.3.6/styles/simditor.css" />
+<script type="text/javascript" src="<?=_PUBLIC?>/simditor-2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="<?=_PUBLIC?>/simditor-2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="<?=_PUBLIC?>/simditor-2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="<?=_PUBLIC?>/simditor-2.3.6/scripts/simditor.js"></script>
+<script type="text/javascript">
+	var editor = new Simditor({
+		textarea: $('#editor')
+	});
+</script>
 
 </div>
 <?php $this->load->view('layout/foot'); ?>

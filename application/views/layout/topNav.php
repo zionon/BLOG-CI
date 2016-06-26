@@ -49,15 +49,6 @@
 						<li><a href="<?=site_url('UserController/register')?>">注册</a></li>
 						<li><a href="<?=site_url('UserController/login')?>">登录</a></li>
 					<?php endif; ?>
-<!-- 					<li><a href="<?=site_url('UserController/register')?>">注册</a></li>
-					<li class="active"><a href="">文章管理</a></li>
-					<li><a href="">评论管理</a></li>
-					<li><span class="badge badge-inverse">1</span></li>
-					<li><a href="<?=site_url('UserController/userList')?>">会员管理</a></li> -->
-					<!-- <li><a href="">关于博主</a></li> -->
-					<!-- <li><a href="" data-method="post">退出 (admin)</a></li> -->
-<!-- 					<li><a href="<?=site_url('UserController/register')?>">注册</a></li>
-					<li><a href="<?=site_url('UserController/login')?>">登录</a></li> -->
 				</ul>
 			</div>
 		</div>
