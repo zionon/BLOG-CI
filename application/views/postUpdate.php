@@ -48,16 +48,17 @@
 
 				<div class="help-block"></div>
 				</div> -->
-		<!-- 		<div class="form-group field-post-status required">
-				<label class="control-label" for="post-status">状态</label>
-				<select id="post-status" class="form-control" name="Post[status]">
-				<option value="1">草稿</option>
-				<option value="2">已发布</option>
-				<option value="3">已归档</option>
-				</select>
+				<div class="form-group field-post-status required" style="width: 8%">
+					<label class="control-label" for="post-status">状态</label>
+					<?php $status=set_value('Post[status]', $status); ?>
+					<select id="post-status" class="form-control" name="Post[status]">
+					<option value="1" <?php if ($status == '1') echo 'selected="selected"'; ?>>草稿</option>
+					<option value="2" <?php if ($status == '2') echo 'selected="selected"'; ?>>已发布</option>
+					<option value="3" <?php if ($status == '3') echo 'selected="selected"'; ?>>已归档</option>
+					</select>
 
-				<div class="help-block"></div>
-				</div> -->
+					<div class="help-block"></div>
+				</div>
 
 				<div class="form-group">
 				    <button type="submit" class="btn btn-primary"> 修 改 </button>    
