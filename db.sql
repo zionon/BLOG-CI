@@ -39,12 +39,24 @@ create table ci_lookup
 drop table if exists ci_tag
 create table ci_tag
 (
-	id int(11) not null auto_increment comment 'Id' comment 'Id',
+	id int(11) not null auto_increment comment 'Id',
 	name varchar(128) collate utf8_unicode_ci not null comment '标签名字',
 	frequency int(11) default '1' comment '标签点击次数',
 	primary key (id)
 )engine=InnoDB default charset=utf8 collate=utf8_unicode_ci comment '标签表';
 
+drop table if exists ci_comment
+create table ci_comment
+(
+	id int(11) not null auto_increment comment 'Id',
+	content text collate utf8_unicode_ci not null comment '评论内容',
+	status int(11) not null,
+	create_time int(11) default null comment '评论时间',
+	author varchar(128) collate utf8_unicode_ci not null comment '评论昵称',
+	email varchar(128) collate utf8_unicode_ci not null comment '邮箱',
+	post_id int(11) not null,
+	primary key (id)
+)engine=InnoDB default charset=utf8 collate=utf8_unicode_ci comment '评论表';
 
 
 
