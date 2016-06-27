@@ -58,6 +58,19 @@ create table ci_comment
 	primary key (id)
 )engine=InnoDB default charset=utf8 collate=utf8_unicode_ci comment '评论表';
 
+CREATE TABLE `ci_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `content` text COLLATE utf8_unicode_ci NOT NULL COMMENT '评论内容',
+  `status` int(11) NOT NULL,
+  `create_time` int(11) DEFAULT NULL COMMENT '评论时间',
+  `author` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT '评论昵称',
+  `email` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT '邮箱',
+  `post_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_comment_post` (`post_id`),
+  CONSTRAINT `FK_comment_post` FOREIGN KEY (`post_id`) REFERENCES `ci_post` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 

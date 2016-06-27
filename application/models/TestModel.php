@@ -8,6 +8,7 @@ class TestModel extends MY_Model
 		$createTime = $this->createTime(1466800000,1467000000);
 		$updateTime = $this->updateTime(1466800000,1467000000);
 		$authorId = $this->authorId(1,7);
+		$tags = $this->randTags(rand(1,4));
 		$data = array();
 		$data['title'] = $titleString;
 		$data['content'] = $contentString;
@@ -15,6 +16,7 @@ class TestModel extends MY_Model
 		$data['update_time'] = $updateTime;
 		$data['author_id'] = $authorId;
 		$data['status'] = rand(1,3);
+		$data['tags'] = $tags;
 		// var_dump($data);die();
 		$this->db->insert($this->_tableName, $data);
 		return $data['id'] = $this->db->insert_id();
@@ -64,6 +66,21 @@ class TestModel extends MY_Model
 			$punNum[$i] = $punctuation[array_rand($punctuation)];
 		}
 		return $punNum;
+	}
+
+	private function randTags($rand) {
+		$tagsArray = array("PHP","Composer","教程","安装","查询构建器","模型","Laravel","CI3","Controller","Linux","数组","字符串","转换");
+		$tagsNum = array_rand($tagsArray, $rand);
+		$tags = '';
+		if ($rand == 1) {
+			$tags = $tagsArray[$tagsNum];
+		} else {
+			for ($i=0; $i < $rand; $i++) { 
+				$tags .= $tagsArray[$tagsNum[$i]].',';
+			}
+			$tags = rtrim($tags, ',');
+		}
+		return $tags;
 	}
 
 	private function randCc($min, $max, $pun = null, $perPun = 10) {
