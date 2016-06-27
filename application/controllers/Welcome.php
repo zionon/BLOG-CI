@@ -20,6 +20,9 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('blog');
+		$this->load->model('PostModel','pm');
+		$data = $this->pm->search();
+		// var_dump($data);die;
+		$this->load->view('blog', $data);
 	}
 }

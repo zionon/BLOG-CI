@@ -33,11 +33,11 @@
 			</div>
 			<div id="w1-collapse" class="collapse navbar-collapse">
 				<ul id="w2" class="navbar-nav navbar-right nav">
-					<li><a href="<?=site_url('PostController/postList')?>">首页</a></li>
+					<li><a href="<?=site_url('welcome/index')?>">首页</a></li>
 					<?php if(count($_SESSION) == 5): ?>
-						<li><a href="">文章管理</a></li>
+						<li><a href="<?=site_url('PostController/postList')?>">文章管理</a></li>
 						<li><a href="">评论管理</a></li>
-						<li><a href="">会员管理</a></li>
+						<li><a href="<?=site_url('UserController/userList')?>">会员管理</a></li>
 						<li><a href="<?=site_url('UserController/logout')?>">退出</a></li>
 					<?php elseif(count($_SESSION) == 4): ?>
 						<li><a href="">我的收藏</a></li>

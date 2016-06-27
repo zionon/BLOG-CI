@@ -10,14 +10,44 @@
 					</ol>
 				
 					<div id="postList" class="list-view">
-						<div data-key="40">
+						<?php if($data->result()): ?>
+							<?php foreach($data->result() as $key => $value): ?>
+								<div data-key="<?=$value->id?>">
+									<div class="post">
+										<div class="title">
+											<h2><a href=""><?=$value->title?></a></h2>
+											<div class="author">
+												<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em><?=date('Y-m-d H:i:s',$value->create_time)?>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em><?=$value->username?></em>
+											</div>
+										</div>
+									<br />
+										<div class="content">
+											<?=$value->content?>
+										</div>
+									<br />
+										<div class="nav">
+											<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> 
+											<a href=""><?=$value->tags?></a>			
+											<br/>
+											<a href="">评论 (0)</a> |
+											最后修改于 <?=date('Y-m-d H:i:s',$value->update_time)?>
+										</div>
+									</div>
+								<hr />
+								</div>
+							<?php endforeach; ?>
+						<?php else: ?>
+							<p>暂时还没有文章</p>
+						<?php endif; ?>
+<!-- 						<div data-key="40">
 							<div class="post">
 								<div class="title">
 									<h2><a href="/blog2/web/index.php?r=post%2Fdetail&id=40&title=fsdfasd">fsdfasd</a></h2>							
-										<div class="author">
-											<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>1970-01-01 08:00&nbsp;&nbsp;&nbsp;&nbsp;</em>
-											<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>魏曦</em>
-										</div>
+									<div class="author">
+										<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>1970-01-01 08:00&nbsp;&nbsp;&nbsp;&nbsp;</em>
+										<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>魏曦</em>
+									</div>
 								</div>
 							<br>
 								<div class="content">
@@ -33,15 +63,16 @@
 								</div>
 							</div>				
 						<hr>
-						</div>
-					<hr>
+						</div> -->
+					
 					</div>
 
 					<ul class="pagination">
-						<li class="prev disabled"><span>上一页</span></li>
+<!-- 						<li class="prev disabled"><span>上一页</span></li>
 						<li class="active"><a href="/blog2/web/index.php?r=post%2Fhome&amp;page=1&amp;per-page=8" data-page="0">1</a></li>
 						<li><a href="/blog2/web/index.php?r=post%2Fhome&amp;page=2&amp;per-page=8" data-page="1">2</a></li>
-						<li class="next"><a href="/blog2/web/index.php?r=post%2Fhome&amp;page=2&amp;per-page=8" data-page="1">下一页</a></li>
+						<li class="next"><a href="/blog2/web/index.php?r=post%2Fhome&amp;page=2&amp;per-page=8" data-page="1">下一页</a></li> -->
+						<?=$page?>
 					</ul>
 				</div>																
 

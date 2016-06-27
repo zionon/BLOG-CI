@@ -38,8 +38,8 @@
 							<td><input type="text" class="form-control" name="PostSearch[id]" value="<?=$this->input->get('PostSearch[id]')?>"></td>
 							<td><input type="text" class="form-control" name="PostSearch[title]" value="<?=$this->input->get('PostSearch[title]')?>"></td>
 							<td><input type="text" class="form-control" name="PostSearch[content]" value="<?=$this->input->get('PostSearch[author_id]')?>"></td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
+							<td><input type="" name="" class="form-control"></td>
+							<td><input type="text" name="PostSearch[tags]" class="form-control" ></td>
 							<td>				
 								<select id="post-status" class="form-control" name="PostSearch[status]">
 								<?php $status=$this->input->get('PostSearch[status]'); ?>
@@ -74,7 +74,7 @@
 								</tr>
 							<?php endforeach; ?>
 						<?php else : ?>
-							<tr><td colspan="7"><div class="empty">没有找到数据。</div></td></tr>
+							<tr><td colspan="8"><div class="empty">没有找到数据。</div></td></tr>
 						<?php endif; ?>
 					</tbody>
 				</table>

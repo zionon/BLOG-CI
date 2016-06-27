@@ -14,6 +14,7 @@ class TestModel extends MY_Model
 		$data['create_time'] = $createTime;
 		$data['update_time'] = $updateTime;
 		$data['author_id'] = $authorId;
+		$data['status'] = rand(1,3);
 		// var_dump($data);die();
 		$this->db->insert($this->_tableName, $data);
 		return $data['id'] = $this->db->insert_id();

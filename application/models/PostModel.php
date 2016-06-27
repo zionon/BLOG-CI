@@ -69,7 +69,7 @@ class PostModel extends MY_Model
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
 		//连表查询
-		$this->db->select('post.id,post.title,post.create_time,post.update_time,post.tags,user.username,lookup.name', FALSE);
+		$this->db->select('post.content,post.id,post.title,post.create_time,post.update_time,post.tags,user.username,lookup.name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
 		$this->db->join('lookup','post.status=lookup.code','left');
 		$this->db->where('ci_lookup.type','PostStatus');
