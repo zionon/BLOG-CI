@@ -28,11 +28,11 @@
 <!-- 				<tr>
 					<th>标签</th>
 					<td>Yii2,视频教程,教程</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<th>状态</th>
-					<td>草稿</td>
-				</tr> -->
+					<td><?=$name?></td>
+				</tr>
 				<tr>
 					<th>创建时间</th>
 					<td><?=date('Y-m-d H:i:s',$create_time)?></td>

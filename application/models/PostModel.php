@@ -95,10 +95,10 @@ class PostModel extends MY_Model
 	public function find($id) {
 		$this->db->from($this->_tableName);
 		$this->db->where('ci_post.id', $id);
-		// $this->db->where('ci_lookup.type', 'PostStatus');
-		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.status,user.username', FALSE);
+		$this->db->where('ci_lookup.type', 'PostStatus');
+		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.status,user.username,lookup.name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
-		// $this->db->join('lookup','post.status=lookup.code','left');
+		$this->db->join('lookup','post.status=lookup.code','left');
 		$data = $this->db->get();
 		$data = $data->result('array');
 		return $data[0];

@@ -34,7 +34,16 @@ create table ci_lookup
 	name varchar(128) collate utf8_unicode_ci not null comment '状态名字',
 	code int(11) not null,
 	primary key (id)
-)engine=InnoDB default charset=utf8 collate=utf8_unicode_ci comment'评论以及日志状态表';
+)engine=InnoDB default charset=utf8 collate=utf8_unicode_ci comment '评论以及日志状态表';
+
+drop table if exists ci_tag
+create table ci_tag
+(
+	id int(11) not null auto_increment comment 'Id' comment 'Id',
+	name varchar(128) collate utf8_unicode_ci not null comment '标签名字',
+	frequency int(11) default '1' comment '标签点击次数',
+	primary key (id)
+)engine=InnoDB default charset=utf8 collate=utf8_unicode_ci comment '标签表';
 
 
 
