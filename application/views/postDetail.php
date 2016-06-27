@@ -14,7 +14,7 @@
 
 			<table id="w0" class="table table-striped table-bordered detail-view">
 				<tr>
-					<th>ID</th>
+					<th style="width: 8%;">ID</th>
 					<td><?=$id?></td>
 				</tr>
 				<tr>
@@ -25,10 +25,10 @@
 					<th>内容</th>
 					<td><?=$content?></td>
 				</tr>
-<!-- 				<tr>
+				<tr>
 					<th>标签</th>
-					<td>Yii2,视频教程,教程</td>
-				</tr> -->
+					<td><?=$tags?></td>
+				</tr>
 				<tr>
 					<th>状态</th>
 					<td><?=$name?></td>

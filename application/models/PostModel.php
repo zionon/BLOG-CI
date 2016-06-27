@@ -69,7 +69,7 @@ class PostModel extends MY_Model
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
 		//连表查询
-		$this->db->select('post.id,post.title,post.create_time,post.update_time,user.username,lookup.name', FALSE);
+		$this->db->select('post.id,post.title,post.create_time,post.update_time,post.tags,user.username,lookup.name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
 		$this->db->join('lookup','post.status=lookup.code','left');
 		$this->db->where('ci_lookup.type','PostStatus');
@@ -96,12 +96,41 @@ class PostModel extends MY_Model
 		$this->db->from($this->_tableName);
 		$this->db->where('ci_post.id', $id);
 		$this->db->where('ci_lookup.type', 'PostStatus');
-		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.status,user.username,lookup.name', FALSE);
+		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.status,post.tags,user.username,lookup.name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
 		$this->db->join('lookup','post.status=lookup.code','left');
 		$data = $this->db->get();
 		$data = $data->result('array');
 		return $data[0];
+	}
+
+	public function update() {
+		$data = array();
+		$this->_tableName = ucfirst($this->_tableName);
+		$this->db->where('id',$this->input->post("$this->_tableName[id]"));
+		$oldTags = $this->db->select('tags')->get($this->_tableName);
+		$oldTags = $oldTags->result()[0]->tags;
+		$oldTags = explode(',', $oldTags);
+		// var_dump($oldTags);die();
+		foreach ($this->_updateFields as $value) {
+			$data[$value] = $this->input->post("$this->_tableName[$value]",TRUE);
+		}
+		//更新前的钩子函数
+		if (method_exists($this,'_before_update')) {
+			if ($this->_before_update($data) === FALSE) {
+				return FALSE;
+			}
+		}
+		//更新数据库
+		$this->db->where('id', $this->input->post("$this->_tableName[id]"));
+		$ret = $this->db->update($this->_tableName,$data);
+		//更新后的钩子函数
+		$newTags = array_diff(explode(',', $data['tags']), $oldTags);
+		// var_dump($newTags);die;
+		if (method_exists($this,'_after_update') && !empty($newTags)) {
+			$this->_after_update($newTags);
+		}
+		return $ret;
 	}
 
 	public function _before_insert(&$data) {
@@ -129,10 +158,18 @@ class PostModel extends MY_Model
 	public function _before_update(&$data) {
 		$data['update_time'] = time();
 		$data['author_id'] = '1';
+		$data['tags'] = str_replace('，', ',', $data['tags']);
 		if ($data['update_time'] == TRUE) {
 			return TRUE;
 		} else {
 			return FALSE;
+		}
+	}
+
+	public function _after_update($data) {
+		foreach ($data as $value) {
+			$newTags['name'] = $value;
+			$this->db->insert('tag', $newTags);
 		}
 	}
 }

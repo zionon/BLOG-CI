@@ -13,23 +13,22 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>
+							<th style="width: 5%">
 							<a <?php if($odby['key'] == 'id') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=id').'" data-sort="id"'; ?> >ID</a>
 							</th>
 							<th>
 							<a <?php if($odby['key'] == 'title') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=title').'" data-sort="title"'; ?> >标题</a>
 							</th>
-							<th>
+							<th style="width: 10%">
 							<a <?php if($odby['key'] == 'username') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=username').'" data-sort="username"'; ?> >作者</a>
 							</th>
 			<!-- 				<th><a href="" data-sort="tags">标签</a></th>
 							<th><a href="" data-sort="status">状态</a></th> -->
 							<th>
-							<a href="">状态</a>
-							</th>
-							<th>
 							<a <?php if($odby['key'] == 'update_time') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=update_time').'" data-sort="update_time"'; ?> >修改时间</a>
-							</th>							
+							</th>
+							<th>标签</th>							
+							<th>状态</th>
 							<th>添加时间</th>
 							<!-- <th>作者</th> -->
 							<th class="action-column">操作</th>
@@ -38,7 +37,9 @@
 						<tr id="w0-filters" class="filters">
 							<td><input type="text" class="form-control" name="PostSearch[id]" value="<?=$this->input->get('PostSearch[id]')?>"></td>
 							<td><input type="text" class="form-control" name="PostSearch[title]" value="<?=$this->input->get('PostSearch[title]')?>"></td>
-							<td><input type="text" class="form-control" name="PostSearch[content]" value="<?=$this->input->get('PostSearch[content]')?>"></td>
+							<td><input type="text" class="form-control" name="PostSearch[content]" value="<?=$this->input->get('PostSearch[author_id]')?>"></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
 							<td>				
 								<select id="post-status" class="form-control" name="PostSearch[status]">
 								<?php $status=$this->input->get('PostSearch[status]'); ?>
@@ -50,7 +51,8 @@
 							</td>
 						<!-- 	<td><input type="text" class="form-control" name="PostSearch[tags]"></td>
 							<td><input type="text" class="form-control" name="PostSearch[status]"></td> -->
-							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><!-- <td>&nbsp;</td> -->
+							<td>&nbsp;</td>
+							<td>&nbsp;</td><!-- <td>&nbsp;</td><td>&nbsp;</td> --><!-- <td>&nbsp;</td> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -60,8 +62,9 @@
 									<td><?=$value->id?></td>
 									<td><?=$value->title?></td>
 								 	<td><?=$value->username?></td>
-								 	<td><?=$value->name?></td>
 								 	<td><?=date('Y-m-d H:i:s',$value->update_time)?></td>
+								 	<td><?=$value->tags?></td>
+								 	<td><?=$value->name?></td>
 									<td><?=date('Y-m-d H:i:s',$value->create_time)?></td>
 									<td>
 									<a href="<?=site_url('PostController/postDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
