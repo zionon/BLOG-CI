@@ -79,6 +79,8 @@
 <script type="text/javascript" src="<?=_PUBLIC?>/wangEditor-2.1.13/dist/js/wangEditor.min.js"></script>
 <script type="text/javascript">
 	var editor = new wangEditor('textarea1');
+	editor.config.uploadImgUrl = 'http://www.blog.com/public/wangEditor-2.1.13/uploadfiles/upload.php';
+	editor.config.uploadImgFileName = 'file'
 	editor.create();
 </script>
 
