@@ -12,7 +12,7 @@ $config = array(
             'rules' => 'required'
         ),
         array(
-            'fiele' => 'Post[status]',
+            'field' => 'Post[status]',
             'label' => '必须选择状态',
             'rules' => 'required'
         ),

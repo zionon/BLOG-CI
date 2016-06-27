@@ -33,20 +33,21 @@
 
 					<div class="help-block"></div>
 				</div>
-		<!-- 		<div class="form-group field-post-tags">
-				<label class="control-label" for="post-tags">标签</label>
-				<textarea id="post-tags" class="form-control" name="Post[tags]" rows="6"></textarea>
 
-				<div class="help-block"></div>
-				</div> -->
+				<div class="form-group field-post-tags required">
+					<label class="control-label" for="post-tags">标签</label>
+					<input type="text" id="post-tags" class="form-control" name="Post[tags]" style="color: #F00;" placeholder="多个标签之间用,号隔开" autofocus="" />
+					<?php $error = form_error('Post[tags]'); ?>
+					<span style="color: #F00;font-weight: bold;"><?=$error?></span>
+					<div class="help-block"></div>
+				</div>
 				<div class="form-group field-post-status required" style="width: 10%">
-				<label class="control-label" for="post-status">状态</label>
-				<select id="post-status" class="form-control" name="Post[status]">
-				<option value="1">草稿</option>
-				<option value="2">已发布</option>
-				<option value="3">已归档</option>
-				</select>
-
+					<label class="control-label" for="post-status">状态</label>
+					<select id="post-status" class="form-control" name="Post[status]">
+					<option value="1">草稿</option>
+					<option value="2">已发布</option>
+					<option value="3">已归档</option>
+					</select>
 				<div class="help-block"></div>
 				</div>
 

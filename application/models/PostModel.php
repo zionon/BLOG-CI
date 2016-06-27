@@ -2,8 +2,8 @@
 class PostModel extends MY_Model
 {
 	protected $_tableName = 'post';
-	protected $_insertFields = array('title','content','status');
-	protected $_updateFields = array('title','content','status');
+	protected $_insertFields = array('title','content','status','tags');
+	protected $_updateFields = array('title','content','status','tags');
 
 	public function search($perpage = 10) {
 		$this->db->from($this->_tableName);
@@ -108,10 +108,21 @@ class PostModel extends MY_Model
 		$data['create_time'] = time();
 		$data['update_time'] = time();
 		$data['author_id'] = '1';
+		$data['tags'] = str_replace('，', ',', $data['tags']);
 		if ($data['create_time'] == $data['update_time']) {
 			return TRUE;
 		} else{
 			return FALSE;
+		}
+	}
+
+	public function _after_insert($data) {
+		$tags = explode(',',$data['tags']);
+		foreach ($tags as $value) {
+			$data = array(
+				'name' => $value
+			);
+			$this->db->insert('tag', $data);
 		}
 	}
 
