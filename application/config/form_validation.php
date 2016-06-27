@@ -3,12 +3,17 @@ $config = array(
     'post' => array(
         array(
             'field' => 'Post[title]',
-            'label' => 'Post[title]',
+            'label' => '标题',
             'rules' => 'required'
         ),
         array(
             'field' => 'Post[content]',
-            'label' => 'Post[content]',
+            'label' => '文章',
+            'rules' => 'required'
+        ),
+        array(
+            'fiele' => 'Post[status]',
+            'label' => '必须选择状态',
             'rules' => 'required'
         ),
     ),

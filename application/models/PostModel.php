@@ -2,8 +2,8 @@
 class PostModel extends MY_Model
 {
 	protected $_tableName = 'post';
-	protected $_insertFields = array('title','content');
-	protected $_updateFields = array('title','content');
+	protected $_insertFields = array('title','content','status');
+	protected $_updateFields = array('title','content','status');
 
 	public function search($perpage = 10) {
 		$this->db->from($this->_tableName);
@@ -16,6 +16,11 @@ class PostModel extends MY_Model
 		$title = $this->input->get('PostSearch[title]');
 		if ($title) {
 			$this->db->like('title',$title);
+		}
+		//状态
+		$status = $this->input->get('PostSearch[status]');
+		if ($status) {
+			$this->db->where('ci_post.status', $status);
 		}
 		//内容
 		// $content = $this->input->get('PostSearch[content]');
@@ -64,8 +69,10 @@ class PostModel extends MY_Model
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
 		//连表查询
-		$this->db->select('post.id,post.title,post.create_time,post.update_time,user.username', FALSE);
+		$this->db->select('post.id,post.title,post.create_time,post.update_time,user.username,lookup.name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
+		$this->db->join('lookup','post.status=lookup.code','left');
+		$this->db->where('ci_lookup.type','PostStatus');
 		//取数据
 		$data = $this->db->get('',$perpage,$offset);
 		//查询记录数
