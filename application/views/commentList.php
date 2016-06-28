@@ -18,7 +18,7 @@
 							<a <?php if($odby['key'] == 'status') echo $odby['odbyString']; else echo 'href="'.site_url('CommentController/commentList?sort=status').'" data-sort="status"'; ?> >状态</a>
 							</th>
 							<th>
-							<a <?php if($odby['key'] == 'update_time') echo $odby['odbyString']; else echo 'href="'.site_url('CommentController/commentList?sort=update_time').'" data-sort="update_time"'; ?> >发表时间</a>
+							<a <?php if($odby['key'] == 'create_time') echo $odby['odbyString']; else echo 'href="'.site_url('CommentController/commentList?sort=create_time').'" data-sort="create_time"'; ?> >发表时间</a>
 							</th>						
 							<th>作者</th>
 							<th>标题</th>
@@ -32,12 +32,12 @@
 								<select id="comment-status" class="form-control" name="CommentSearch[status]">
 								<?php $status=$this->input->get('CommentSearch[status]'); ?>
 								<option value="0">全部</option>
-								<option value="1" <?php if($status == 1) echo 'selected="selected"'; ?> >代审核</option>
+								<option value="1" <?php if($status == 1) echo 'selected="selected"'; ?> >待审核</option>
 								<option value="2" <?php if($status == 2) echo 'selected="selected"'; ?> >已审核</option>
 								</select>
 							</td>
-							<td><input type="text" class="form-control" name="CommentSearch[status]" value="<?=$this->input->get('CommentSearch[status]')?>"></td>
 							<td><input type="text" name="CommentSearch[update_time]" class="form-control" value="<?=$this->input->get('CommentSearch[update_time]')?>"></td>
+							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 						</tr>
@@ -76,7 +76,7 @@
 <?php $this->load->view('layout/foot'); ?>
 <script type="text/javascript">
 	jQuery(document).ready(function () {
-		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/PostController\/postList?","filterSelector":"#w0-filters input, #w0-filters select"});
+		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/CommentController\/commentList?","filterSelector":"#w0-filters input, #w0-filters select"});
 	});
 	//抽时间要理解get上面url乱码
 </script>

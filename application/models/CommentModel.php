@@ -7,19 +7,20 @@ class CommentModel extends MY_Model
 	public function search($perpage = 3) {
 		$this->db->from($this->_tableName);
 		//评论id
-		$id = $this->input->get('CommnetSearch[id]');
+		$id = $this->input->get('CommentSearch[id]');
 		if ($id) {
 			$this->db->where('ci_comment.id', $id);
 		}
 		//内容
-		$title = $this->input->get('CommnetSearch[content]');
+		$title = $this->input->get('CommentSearch[content]');
 		if ($title) {
-			$this->db->like('content',$title);
+			$this->db->like('ci_comment.content',$title);
 		}
 		//状态
-		$status = $this->input->get('CommnetSearch[status]');
+		$status = $this->input->get('CommentSearch[status]');
+		// var_dump($status);die;
 		if ($status) {
-			$this->db->where('status', $status);
+			$this->db->where('ci_comment.status', $status);
 		}
 		//内容
 		// $content = $this->input->get('PostSearch[content]');
@@ -57,12 +58,12 @@ class CommentModel extends MY_Model
 			$pos = strpos($key, $find);
 			if ($pos === FALSE) {
 				$odbyKey = $key;
-				$odbyWay = 'asc';
-				$odbyArray['odbyString'] = 'class="asc" data-sort="-'.$key.'" href="'.site_url('PostController/postList').'?sort=-'.$key.'"';
+				$odbyWay = 'desc';
+				$odbyArray['odbyString'] = 'class="desc" data-sort="-'.$key.'" href="'.site_url('CommentController/commentList').'?sort=-'.$key.'"';
 				$odbyArray['key'] = $odbyKey;
 			} else {
 				$odbyKey = trim($key, $find);
-				$odbyArray['odbyString'] = 'class="desc" data-sort="'.$odbyKey.'" href="'.site_url('PostController/postList').'?sort='.$odbyKey.'"';
+				$odbyArray['odbyString'] = 'class="asc" data-sort="'.$odbyKey.'" href="'.site_url('CommentController/commentList').'?sort='.$odbyKey.'"';
 				$odbyArray['key'] = $odbyKey;
 			}
 		}
@@ -74,6 +75,7 @@ class CommentModel extends MY_Model
 		$this->db->where('ci_lookup.type','CommentStatus');
 		//取数据
 		$data = $this->db->get('',$perpage,$offset);
+		// var_dump($this->db->last_query());die;
 		//查询记录数
 		$countString = null;
 		if ($data->result()) {
