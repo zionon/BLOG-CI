@@ -69,7 +69,7 @@ class PostModel extends MY_Model
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
 		//连表查询
-		$this->db->select('post.content,post.id,post.title,post.create_time,post.update_time,post.tags,user.username,lookup.name', FALSE);
+		$this->db->select('post.id,post.title,post.create_time,post.update_time,post.tags,user.username,lookup.name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
 		$this->db->join('lookup','post.status=lookup.code','left');
 		$this->db->where('ci_lookup.type','PostStatus');
@@ -90,6 +90,34 @@ class PostModel extends MY_Model
 			'odby' => $odbyArray,
 			'count' => $countString,
 		);
+	}
+
+	public function lst($perpage = 10) {
+		$this->db->from($this->_tableName);
+		$this->db->where('status', '2');
+		$count = $this->db->count_all_results('', FALSE);
+		$config['base_url'] = site_url('Welcome');
+		$config['total_rows'] = $count;
+		$config['per_page'] = $perpage;
+		$this->load->library('pagination');
+		$this->pagination->initialize($config);
+		//生成翻页字符串
+		$pageString = $this->pagination->create_links();
+		//根据当前页计算偏移量
+		$offset = (max(1,(int)$this->pagination->cur_page) - 1) * $perpage;
+		//链表查询
+		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.tags,user.username');
+		$this->db->join('user','post.author_id=user.id','left');
+		//取数据
+		$data = $this->db->get('', $perpage, $offset);
+		for ($i=0; $i < $perpage; $i++) { 
+			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);
+		}
+		return array(
+			'data' => $data,
+			'page' => $pageString
+		);
+		
 	}
 
 	public function find($id) {
