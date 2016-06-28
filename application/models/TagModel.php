@@ -7,22 +7,23 @@ class TagModel extends MY_Model
 	public function search() {
 		$this->db->order_by('frequency','desc');
 		$data = $this->db->get($this->_tableName)->result();
+		// static $oldCount = '';
 		$count = count($data)/5 + 1;
 		$tagsArray = array_chunk($data, $count);
 		foreach ($tagsArray[0] as $key => $value) {
-			$tagsH2[$key] = '<a href=""><h2 style="display: inline-block;"><span class="label label-success">'.$value->name.'</span></h2></a>';
+			$tagsH2[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name).'"><h2 style="display: inline-block;"><span class="label label-success">'.$value->name.'</span></h2></a>';
 		}
 		foreach ($tagsArray[1] as $key => $value) {
-			$tagsH3[$key] = '<a href=""><h3 style="display: inline-block;"><span class="label label-primary">'.$value->name.'</span></h3></a>';
+			$tagsH3[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name).'"><h3 style="display: inline-block;"><span class="label label-primary">'.$value->name.'</span></h3></a>';
 		}
 		foreach ($tagsArray[2] as $key => $value) {
-			$tagsH4[$key] = '<a href=""><h4 style="display: inline-block;"><span class="label label-warning">'.$value->name.'</span></h4></a>';
+			$tagsH4[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name).'"><h4 style="display: inline-block;"><span class="label label-warning">'.$value->name.'</span></h4></a>';
 		}
 		foreach ($tagsArray[3] as $key => $value) {
-			$tagsH5[$key] = '<a href=""><h5 style="display: inline-block;"><span class="label label-info">'.$value->name.'</span></h5></a>';
+			$tagsH5[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name).'"><h5 style="display: inline-block;"><span class="label label-info">'.$value->name.'</span></h5></a>';
 		}
 		foreach ($tagsArray[4] as $key => $value) {
-			$tagsH6[$key] = '<a href=""><h6 style="display: inline-block;"><span class="label label-danger">'.$value->name.'</span></h6></a>';
+			$tagsH6[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name).'"><h6 style="display: inline-block;"><span class="label label-danger">'.$value->name.'</span></h6></a>';
 		}
 		$tags = array_merge($tagsH2, $tagsH3, $tagsH4, $tagsH5, $tagsH6);
 		shuffle($tags);
