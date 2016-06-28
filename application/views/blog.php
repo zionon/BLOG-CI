@@ -44,38 +44,11 @@
 						<?php else: ?>
 							<p>暂时还没有文章</p>
 						<?php endif; ?>
-<!-- 						<div data-key="40">
-							<div class="post">
-								<div class="title">
-									<h2><a href="/blog2/web/index.php?r=post%2Fdetail&id=40&title=fsdfasd">fsdfasd</a></h2>							
-									<div class="author">
-										<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>1970-01-01 08:00&nbsp;&nbsp;&nbsp;&nbsp;</em>
-										<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>魏曦</em>
-									</div>
-								</div>
-							<br>
-								<div class="content">
-								3省份发生
-								</div>				
-							<br>
-						
-								<div class="nav">
-									<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> 
-									<a href="/blog2/web/index.php?r=post%2Findex&amp;tag=33">33</a>			<br/>
-									<a href="/blog2/web/index.php?r=post%2Fdetail&amp;id=40&amp;title=fsdfasd#comments">评论 (0)</a> |
-									最后修改于 1970-01-00 08:00:00
-								</div>
-							</div>				
-						<hr>
-						</div> -->
+
 					
 					</div>
 
 					<ul class="pagination">
-<!-- 						<li class="prev disabled"><span>上一页</span></li>
-						<li class="active"><a href="/blog2/web/index.php?r=post%2Fhome&amp;page=1&amp;per-page=8" data-page="0">1</a></li>
-						<li><a href="/blog2/web/index.php?r=post%2Fhome&amp;page=2&amp;per-page=8" data-page="1">2</a></li>
-						<li class="next"><a href="/blog2/web/index.php?r=post%2Fhome&amp;page=2&amp;per-page=8" data-page="1">下一页</a></li> -->
 						<?=$page?>
 					</ul>
 				</div>																
@@ -83,12 +56,64 @@
 				<div class="col-md-3">
 					<div class="tags">					
 						<ul class="list-group">
-				    			<li class="list-group-item">
+				    		<li class="list-group-item">
 								<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 标签
 							</li>
 
 							<li class="list-group-item">
-								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=ActiveRecord"> <h2 style="display: inline-block;"><span class="label label-success">ActiveRecord</span></h2></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Composer"> <h5 style="display: inline-block;"><span class="label label-info">Composer</span></h5></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=DAO"> <h3 style="display: inline-block;"><span class="label label-primary">DAO</span></h3></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=DetailView"> <h3 style="display: inline-block;"><span class="label label-primary">DetailView</span></h3></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Gii"> <h4 style="display: inline-block;"><span class="label label-warning">Gii</span></h4></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=GridView"> <h2 style="display: inline-block;"><span class="label label-success">GridView</span></h2></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=ListView"> <h3 style="display: inline-block;"><span class="label label-primary">ListView</span></h3></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=RESTful Web服务"> <h4 style="display: inline-block;"><span class="label label-warning">RESTful Web服务</span></h4></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Yii"> <h2 style="display: inline-block;"><span class="label label-success">Yii</span></h2></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Yii2"> <h2 style="display: inline-block;"><span class="label label-success">Yii2</span></h2></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=widget"> <h5 style="display: inline-block;"><span class="label label-info">widget</span></h5></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=安装"> <h5 style="display: inline-block;"><span class="label label-info">安装</span></h5></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=小部件"> <h5 style="display: inline-block;"><span class="label label-info">小部件</span></h5></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=教程"> <h4 style="display: inline-block;"><span class="label label-warning">教程</span></h4></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=查询构建器"> <h3 style="display: inline-block;"><span class="label label-primary">查询构建器</span></h3></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=视频教程"> <h4 style="display: inline-block;"><span class="label label-warning">视频教程</span></h4></a><a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=33"> <h6 style="display: inline-block;"><span class="label label-danger">33</span></h6></a>											
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=ActiveRecord"> 
+									<h2 style="display: inline-block;"><span class="label label-success">ActiveRecord</span></h2>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Composer"> 
+									<h5 style="display: inline-block;"><span class="label label-info">Composer</span></h5>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=DAO"> 
+									<h3 style="display: inline-block;"><span class="label label-primary">DAO</span></h3>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=DetailView"> 
+									<h3 style="display: inline-block;"><span class="label label-primary">DetailView</span></h3>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Gii"> 
+									<h4 style="display: inline-block;"><span class="label label-warning">Gii</span></h4>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=GridView"> 
+									<h2 style="display: inline-block;"><span class="label label-success">GridView</span></h2>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=ListView"> 
+									<h3 style="display: inline-block;"><span class="label label-primary">ListView</span></h3>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=RESTful Web服务"> 
+									<h4 style="display: inline-block;"><span class="label label-warning">RESTful Web服务</span></h4>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Yii"> 
+									<h2 style="display: inline-block;"><span class="label label-success">Yii</span></h2>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=Yii2"> 
+									<h2 style="display: inline-block;"><span class="label label-success">Yii2</span></h2>
+								</a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=widget"> <h5 style="display: inline-block;"><span class="label label-info">widget</span></h5></a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=安装"> <h5 style="display: inline-block;"><span class="label label-info">安装</span></h5></a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=小部件"> <h5 style="display: inline-block;"><span class="label label-info">小部件</span></h5></a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=教程"> <h4 style="display: inline-block;"><span class="label label-warning">教程</span></h4></a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=查询构建器"> <h3 style="display: inline-block;"><span class="label label-primary">查询构建器</span></h3></a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=视频教程"> <h4 style="display: inline-block;"><span class="label label-warning">视频教程</span></h4></a>
+
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=33"> <h6 style="display: inline-block;"><span class="label label-danger">33</span></h6></a>											
 							</li>
 						</ul>					
 					</div>

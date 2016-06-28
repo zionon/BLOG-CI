@@ -23,6 +23,9 @@ class Welcome extends CI_Controller {
 		$this->load->model('PostModel','pm');
 		$data = $this->pm->lst();
 		// var_dump($data['data']->result());die;
+		$this->load->model('TagModel','tm');
+		$tag = $this->tm->search();
+		var_dump($tag->result());die;
 		$this->load->view('blog', $data);
 	}
 }

@@ -22,6 +22,11 @@ class PostModel extends MY_Model
 		if ($status) {
 			$this->db->where('ci_post.status', $status);
 		}
+		//标签
+		$tags = $this->input->get('PostSearch[tags]');
+		if ($tags) {
+			$this->db->like('ci_post.tags', $tags);
+		}
 		//内容
 		// $content = $this->input->get('PostSearch[content]');
 		// if ($content) {
@@ -96,7 +101,7 @@ class PostModel extends MY_Model
 		$this->db->from($this->_tableName);
 		$this->db->where('status', '2');
 		$count = $this->db->count_all_results('', FALSE);
-		$config['base_url'] = site_url('Welcome');
+		$config['base_url'] = site_url('Welcome/index');
 		$config['total_rows'] = $count;
 		$config['per_page'] = $perpage;
 		$this->load->library('pagination');
@@ -110,7 +115,7 @@ class PostModel extends MY_Model
 		$this->db->join('user','post.author_id=user.id','left');
 		//取数据
 		$data = $this->db->get('', $perpage, $offset);
-		for ($i=0; $i < $perpage; $i++) { 
+		for ($i=0; $i < count($data->result()); $i++) { 
 			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);
 		}
 		return array(

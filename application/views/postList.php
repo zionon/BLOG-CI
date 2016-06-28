@@ -39,7 +39,7 @@
 							<td><input type="text" class="form-control" name="PostSearch[title]" value="<?=$this->input->get('PostSearch[title]')?>"></td>
 							<td><input type="text" class="form-control" name="PostSearch[content]" value="<?=$this->input->get('PostSearch[author_id]')?>"></td>
 							<td><input type="" name="" class="form-control"></td>
-							<td><input type="text" name="PostSearch[tags]" class="form-control" ></td>
+							<td><input type="text" name="PostSearch[tags]" class="form-control" value="<?=$this->input->get('PostSearch[tags]')?>"></td>
 							<td>				
 								<select id="post-status" class="form-control" name="PostSearch[status]">
 								<?php $status=$this->input->get('PostSearch[status]'); ?>
