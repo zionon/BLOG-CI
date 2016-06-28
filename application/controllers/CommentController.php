@@ -8,8 +8,10 @@ class CommentController extends CI_Controller
 		echo "插入成功";		
 	}
 
-	public function commnetList() {
+	public function commentList() {
 		$this->load->model('CommentModel','cm');
 		$data = $this->cm->search();
+		// var_dump($data);die;
+		$this->load->view('commentList', $data);
 	}
 }
