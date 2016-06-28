@@ -17,8 +17,6 @@
 							<th style="width: 10%">
 							<a <?php if($odby['key'] == 'status') echo $odby['odbyString']; else echo 'href="'.site_url('CommentController/commentList?sort=status').'" data-sort="status"'; ?> >状态</a>
 							</th>
-			<!-- 				<th><a href="" data-sort="tags">标签</a></th>
-							<th><a href="" data-sort="status">状态</a></th> -->
 							<th>
 							<a <?php if($odby['key'] == 'update_time') echo $odby['odbyString']; else echo 'href="'.site_url('CommentController/commentList?sort=update_time').'" data-sort="update_time"'; ?> >发表时间</a>
 							</th>						
@@ -30,18 +28,16 @@
 						<tr id="w0-filters" class="filters">
 							<td><input type="text" class="form-control" name="CommentSearch[id]" value="<?=$this->input->get('CommentSearch[id]')?>"></td>
 							<td><input type="text" class="form-control" name="CommentSearch[content]" value="<?=$this->input->get('CommentSearch[content]')?>"></td>
-							<td><input type="text" class="form-control" name="CommentSearch[status]" value="<?=$this->input->get('CommentSearch[status]')?>"></td>
-							<td><input type="text" name="CommentSearch[update_time]" class="form-control" value="<?=$this->input->get('CommentSearch[update_time]')?>"></td>
-<!-- 							<td>				
-								<select id="post-status" class="form-control" name="CommentSearch[status]">
+							<td>				
+								<select id="comment-status" class="form-control" name="CommentSearch[status]">
 								<?php $status=$this->input->get('CommentSearch[status]'); ?>
 								<option value="0">全部</option>
-								<option value="1" <?php if($status == 1) echo 'selected="selected"'; ?> >草稿</option>
-								<option value="2" <?php if($status == 2) echo 'selected="selected"'; ?> >已发布</option>
-								<option value="3" <?php if($status == 3) echo 'selected="selected"'; ?> >已归档</option>
+								<option value="1" <?php if($status == 1) echo 'selected="selected"'; ?> >代审核</option>
+								<option value="2" <?php if($status == 2) echo 'selected="selected"'; ?> >已审核</option>
 								</select>
-							</td> -->
-							<td>&nbsp;</td>
+							</td>
+							<td><input type="text" class="form-control" name="CommentSearch[status]" value="<?=$this->input->get('CommentSearch[status]')?>"></td>
+							<td><input type="text" name="CommentSearch[update_time]" class="form-control" value="<?=$this->input->get('CommentSearch[update_time]')?>"></td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 						</tr>
@@ -52,7 +48,7 @@
 								<tr data-key="<?=$value->id?>">
 									<td><?=$value->id?></td>
 									<td><?=$value->content?></td>
-								 	<td><?=$value->status?></td>
+								 	<td <?php if($value->status == 1) echo 'class="bg-danger"' ?>><?=$value->name?></td>
 								 	<td><?=date('Y-m-d H:i:s',$value->create_time)?></td>
 								 	<td><?=$value->author?></td>
 								 	<td><?=$value->title?></td>
@@ -60,6 +56,7 @@
 									<a href="<?=site_url('PostController/postDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
 									<a href="<?=site_url('PostController/postUpdate/'.$value->id)?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
 									<a href="<?=site_url('PostController/postDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+									<a href="<?=site_url('CommentController/commentChk/'.$value->id)?>" title="审核" aria-label="审核" data-pjax="0" data-confirm="确定要审核吗?"><span class="glyphicon glyphicon-check"></span></a>
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -70,10 +67,6 @@
 				</table>
 				<ul class="pagination">
 					<?=$page?>
-<!-- 					<li class="prev disabled"><span>&laquo;</span></li>
-					<li class="active"><a href="/blog2/web/index.php?r=post%2Findex&amp;page=1&amp;per-page=8" data-page="0">1</a></li>
-					<li><a href="/blog2/web/index.php?r=post%2Findex&amp;page=2&amp;per-page=8" data-page="1">2</a></li>
-					<li class="next"><a href="/blog2/web/index.php?r=post%2Findex&amp;page=2&amp;per-page=8" data-page="1">&raquo;</a></li> -->
 				</ul>
 			</div>
     	</div>

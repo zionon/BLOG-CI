@@ -47,8 +47,8 @@ class CommentModel extends MY_Model
 		//根据当前页计算偏移量
 		$offset = (max(1,(int)$this->pagination->cur_page) - 1) * $perpage;
 		//排序
-		$odbyKey = 'id';
-		$odbyWay = 'desc';
+		$odbyKey = 'status';
+		$odbyWay = 'asc';
 		$odbyArray = array();
 		$odbyArray['key'] = null;
 		if ($this->input->get('sort')) {
@@ -68,8 +68,10 @@ class CommentModel extends MY_Model
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
 		//连表查询
-		$this->db->select('comment.id,comment.content,comment.create_time,comment.status,comment.author,post.title', FALSE);
+		$this->db->select('comment.id,comment.content,comment.create_time,comment.status,comment.author,post.title,lookup.name', FALSE);
 		$this->db->join('post','post.id=comment.post_id','left');
+		$this->db->join('lookup','lookup.code=comment.status');
+		$this->db->where('ci_lookup.type','CommentStatus');
 		//取数据
 		$data = $this->db->get('',$perpage,$offset);
 		//查询记录数
@@ -100,5 +102,13 @@ class CommentModel extends MY_Model
 		} else {
 			return FALSE;
 		}
+	}
+
+	public function chkCom($id) {
+		$this->db->where('id', $id);
+		$data = array(
+			'status' => '2',
+		);
+		$this->db->update($this->_tableName, $data);
 	}
 }

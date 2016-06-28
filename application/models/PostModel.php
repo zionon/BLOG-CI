@@ -83,10 +83,14 @@ class PostModel extends MY_Model
 		//查询记录数
 		$countString = null;
 		if ($data->result()) {
-			$countTotal = count($data->result());
-			$countRight = min($perpage * (int)$this->pagination->cur_page, $count);
-			$countLeft = ((int)$this->pagination->cur_page - 1) * $perpage + 1;
-			$countString = '第<b>'.$countLeft.'-'.$countRight.'</b>条，共<b>'.$count.'</b>条记录';
+			if ($this->pagination->cur_page == 0) {
+				$countString = '第<b>1-'.$count.'</b>条，共<b>'.$count.'</b>条记录';
+			} else {
+				$countTotal = count($data->result());
+				$countRight = min($perpage * (int)$this->pagination->cur_page, $count);
+				$countLeft = ((int)$this->pagination->cur_page - 1) * $perpage + 1;
+				$countString = '第<b>'.$countLeft.'-'.$countRight.'</b>条，共<b>'.$count.'</b>条记录';				
+			}
 		}
 		//返回数据
 		return array(

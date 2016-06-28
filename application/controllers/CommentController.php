@@ -14,4 +14,10 @@ class CommentController extends CI_Controller
 		// var_dump($data);die;
 		$this->load->view('commentList', $data);
 	}
+
+	public function commentChk($id) {
+		$this->load->model('CommentModel', 'cm');
+		$this->cm->chkCom($id);
+		redirect(site_url('CommentController/commentList'));
+	}
 }
