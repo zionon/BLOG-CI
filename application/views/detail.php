@@ -27,12 +27,28 @@
 						<a href=""><?=$tags?></a>
 						<!-- <a href="">ListView</a>	 -->			
 						<br/>
-						<a href="">评论 (0)</a> |
+						<a href="">评论 (<?=count($comment)?>)</a> |
 						最后修改于 <?=date('Y-m-d H:i:s', $update_time)?>	
 					</div>
 				</div>
-	
 				<div id="comments">
+					<h5><?=count($comment)?>条评论</h5>
+					<?php foreach ($comment as $value): ?>
+						<div class="comment">
+							<div class="row">
+							  <div class="col-md-12">
+								  <div class="comment_detail">
+								  <p class="bg-info">						  
+								  	<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em><?=$value['author']?>:</em>							
+								    <br><?=$value['content']?><br>
+								  	<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em><?=date('Y-m-d H:i:s', $value['create_time'])?></em>	
+								  </p>
+								  </div>
+							  </div>
+							</div>
+						</div>
+					<?php endforeach ?>
+	
 					<h5>发表评论</h5>						
 					<div class="comment-form">
 					    <form id="w0" action="<?=site_url('CommentController/commentCreate')?>" method="post">
@@ -62,10 +78,9 @@
 									</div>			
 								</div>
 							</div>							
-					    <div class="form-group">
-					        <button type="submit" class="btn btn-success">发 布</button>    
-					    </div>
-					    
+						    <div class="form-group">
+						        <button type="submit" class="btn btn-success">发 布</button>    
+						    </div>					    
 					    </form>
 					</div>
 				</div>				

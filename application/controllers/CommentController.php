@@ -5,7 +5,7 @@ class CommentController extends CI_Controller
 		// $this->load->library('form_validation');
 		$this->load->model('CommentModel','cm');
 		$this->cm->create();
-		echo "插入成功";		
+		redirect(site_url('CommentController/commentList'));	
 	}
 
 	public function commentList() {

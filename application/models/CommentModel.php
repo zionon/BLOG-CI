@@ -22,6 +22,11 @@ class CommentModel extends MY_Model
 		if ($status) {
 			$this->db->where('ci_comment.status', $status);
 		}
+		//发表时间
+		// $create_time = $this->input->get('CommentSearch[create_time]');
+		// if ($create_time) {
+		// 	$this->db->like('ci_comment.create_time', $create_time);
+		// }
 		//内容
 		// $content = $this->input->get('PostSearch[content]');
 		// if ($content) {
@@ -58,7 +63,7 @@ class CommentModel extends MY_Model
 			$pos = strpos($key, $find);
 			if ($pos === FALSE) {
 				$odbyKey = $key;
-				$odbyWay = 'desc';
+				$odbyWay = 'asc';
 				$odbyArray['odbyString'] = 'class="desc" data-sort="-'.$key.'" href="'.site_url('CommentController/commentList').'?sort=-'.$key.'"';
 				$odbyArray['key'] = $odbyKey;
 			} else {
@@ -104,6 +109,16 @@ class CommentModel extends MY_Model
 		} else {
 			return FALSE;
 		}
+	}
+
+	public function find($post_id) {
+		$this->db->from($this->_tableName);
+		$this->db->where('post_id',$post_id);
+		$this->db->where('status', '2');
+		$this->db->select('content,create_time,author');
+		$data = $this->db->get();
+		$data = $data->result('array');
+		return $data;
 	}
 
 	public function chkCom($id) {

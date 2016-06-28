@@ -36,7 +36,8 @@
 								<option value="2" <?php if($status == 2) echo 'selected="selected"'; ?> >已审核</option>
 								</select>
 							</td>
-							<td><input type="text" name="CommentSearch[update_time]" class="form-control" value="<?=$this->input->get('CommentSearch[update_time]')?>"></td>
+<!-- 							<td><input type="text" name="CommentSearch[update_time]" class="form-control" value="<?=$this->input->get('CommentSearch[update_time]')?>"></td> -->
+							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
