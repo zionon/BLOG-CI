@@ -4,7 +4,7 @@ class CommentModel extends MY_Model
 	protected $_tableName = 'comment';
 	protected $_insertFields = array('content','author','email','post_id');
 
-	public function search($perpage = 2) {
+	public function search($perpage = 3) {
 		$this->db->from($this->_tableName);
 		//评论id
 		$id = $this->input->get('CommnetSearch[id]');
@@ -75,10 +75,14 @@ class CommentModel extends MY_Model
 		//查询记录数
 		$countString = null;
 		if ($data->result()) {
-			$countTotal = count($data->result());
-			$countRight = min($perpage * (int)$this->pagination->cur_page, $count);
-			$countLeft = ((int)$this->pagination->cur_page - 1) * $perpage + 1;
-			$countString = '第<b>'.$countLeft.'-'.$countRight.'</b>条，共<b>'.$count.'</b>条记录';
+			if ($this->pagination->cur_page == 0) {
+				$countString = '第<b>1-'.$count.'</b>条，共<b>'.$count.'</b>条记录';
+			} else {
+				$countTotal = count($data->result());
+				$countRight = min($perpage * (int)$this->pagination->cur_page, $count);
+				$countLeft = ((int)$this->pagination->cur_page - 1) * $perpage + 1;
+				$countString = '第<b>'.$countLeft.'-'.$countRight.'</b>条，共<b>'.$count.'</b>条记录';				
+			}
 		}
 		//返回数据
 		return array(
