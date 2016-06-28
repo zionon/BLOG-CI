@@ -25,7 +25,9 @@ class Welcome extends CI_Controller {
 		// var_dump($data['data']->result());die;
 		$this->load->model('TagModel','tm');
 		$tag = $this->tm->search();
-		var_dump($tag->result());die;
+		// var_dump($tag->result());die;
+		$data['tags'] = $tag;
+		// var_dump($data);die;
 		$this->load->view('blog', $data);
 	}
 }

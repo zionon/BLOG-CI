@@ -61,7 +61,10 @@
 							</li>
 
 							<li class="list-group-item">
-								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=ActiveRecord"> 
+								<?php foreach($tags as $value): ?>
+									<?=$value?>
+								<?php endforeach; ?>
+<!-- 								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=ActiveRecord"> 
 									<h2 style="display: inline-block;"><span class="label label-success">ActiveRecord</span></h2>
 								</a>
 
@@ -113,7 +116,7 @@
 
 								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=视频教程"> <h4 style="display: inline-block;"><span class="label label-warning">视频教程</span></h4></a>
 
-								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=33"> <h6 style="display: inline-block;"><span class="label label-danger">33</span></h6></a>											
+								<a href="/blog2/web/index.php?r=post/home&PostSearch[tags]=33"> <h6 style="display: inline-block;"><span class="label label-danger">33</span></h6></a>											 -->
 							</li>
 						</ul>					
 					</div>
