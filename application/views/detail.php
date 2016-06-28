@@ -35,8 +35,8 @@
 				<div id="comments">
 					<h5>发表评论</h5>						
 					<div class="comment-form">
-					    <form id="w0" action="/blog2/web/index.php?r=post%2Fdetail&amp;id=37#comments" method="post">
-							<input type="hidden" name="_csrf" value="QUtzV3M3N2cCGSASQxpPABQbGAUjdAIlBh5EHj97cFIKLEEtFF9HPg==">    
+					    <form id="w0" action="<?=site_url('CommentController/commentCreate')?>" method="post">
+							<input type="hidden" name="Comment[post_id]" value=<?=$id?> />    
 							<div class="row"> 
 								<div class="col-md-4">
 									<div class="form-group field-comment-author required">
@@ -49,13 +49,6 @@
 									<div class="form-group field-comment-email required">
 										<label class="control-label" for="comment-email">邮箱</label>
 										<input type="text" id="comment-email" class="form-control" name="Comment[email]" maxlength="128">
-										<div class="help-block"></div>
-									</div>			
-								</div>
-								<div class="col-md-4">
-									<div class="form-group field-comment-url">
-										<label class="control-label" for="comment-url">网址</label>
-										<input type="text" id="comment-url" class="form-control" name="Comment[url]" maxlength="128">
 										<div class="help-block"></div>
 									</div>			
 								</div>
@@ -90,3 +83,11 @@
 </div>
 
 <?php $this->load->view('layout/foot'); ?>
+
+<script type="text/javascript" src="<?=_PUBLIC?>/js/yii.activeForm.js"></script>
+<script type="text/javascript" src="<?=_PUBLIC?>/js/yii.validation.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+jQuery('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".field-comment-author","input":"#comment-author","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"作者不能为空。"});yii.validation.string(value, messages, {"message":"作者必须是一条字符串。","max":128,"tooLong":"作者只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-email","name":"email","container":".field-comment-email","input":"#comment-email","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"邮箱不能为空。"});yii.validation.string(value, messages, {"message":"邮箱必须是一条字符串。","max":128,"tooLong":"邮箱只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-url","name":"url","container":".field-comment-url","input":"#comment-url","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"网址必须是一条字符串。","max":128,"tooLong":"网址只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-content","name":"content","container":".field-comment-content","input":"#comment-content","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"内容不能为空。"});yii.validation.string(value, messages, {"message":"内容必须是一条字符串。","skipOnEmpty":1});}}], []);
+});
+</script>
