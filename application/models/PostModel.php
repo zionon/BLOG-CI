@@ -98,13 +98,16 @@ class PostModel extends MY_Model
 	}
 
 	public function lst($perpage = 10) {
-		$this->db->from($this->_tableName);
-		$this->db->where('status', '2');
 		//标签
 		$tags = $this->input->get('PostSearch[tags]');
 		if ($tags) {
+			// $id = $this->input->get('Tags[id]');
+			// $this->load->model('TagModel', 'tm');
+			// $this->tm->addFrequency($id);
 			$this->db->like('ci_post.tags', $tags);
 		}
+		$this->db->from($this->_tableName);
+		$this->db->where('status', '2');
 		$count = $this->db->count_all_results('', FALSE);
 		$config['base_url'] = site_url('Welcome/index');
 		$config['total_rows'] = $count;
@@ -119,6 +122,7 @@ class PostModel extends MY_Model
 		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.tags,user.username');
 		$this->db->join('user','post.author_id=user.id','left');
 		//取数据
+		$this->db->order_by('create_time','desc');
 		$data = $this->db->get('', $perpage, $offset);
 		for ($i=0; $i < count($data->result()); $i++) { 
 			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);
@@ -126,8 +130,7 @@ class PostModel extends MY_Model
 		return array(
 			'data' => $data,
 			'page' => $pageString
-		);
-		
+		);		
 	}
 
 	public function find($id) {

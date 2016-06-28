@@ -26,8 +26,31 @@ class Welcome extends CI_Controller {
 		$this->load->model('TagModel','tm');
 		$tag = $this->tm->search();
 		// var_dump($tag->result());die;
-		$data['tags'] = $tag;
+		$data['tags']['tags'] = $tag;
 		// var_dump($data);die;
 		$this->load->view('blog', $data);
 	}
+
+	public function detail() {
+		$this->load->model('PostModel', 'pm');
+		$data = $this->pm->find($this->input->get('id'));
+		// $data['tags'] = null;
+		$this->load->model('TagModel','tm');
+		$tag = $this->tm->search();
+		$data['tag']['tags'] = $tag;
+		$this->load->view('detail', $data);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
