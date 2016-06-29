@@ -112,6 +112,16 @@ class CommentModel extends MY_Model
 		return $data;
 	}
 
+	public function totalCom(CI_DB_mysqli_result $data) {
+		$total = array();
+		foreach ($data->result() as $value) {
+			$this->db->where('post_id', $value->id);
+			$this->db->where('status', '2');
+			$total[$value->id] = $this->db->count_all_results($this->_tableName);
+		}
+		return $total;
+	}
+
 	protected function _before_insert(&$data) {
 		$data['create_time'] = time();
 		if ($data['create_time']) {

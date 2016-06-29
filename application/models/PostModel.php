@@ -125,6 +125,8 @@ class PostModel extends MY_Model
 		//链表查询
 		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.tags,user.username');
 		$this->db->join('user','post.author_id=user.id','left');
+		// $this->db->join('comment','comment.post_id=post.id','left');
+		// $this->db->where('comment.status', '2');
 		//取数据
 		$this->db->order_by('create_time','desc');
 		$data = $this->db->get('', $perpage, $offset);

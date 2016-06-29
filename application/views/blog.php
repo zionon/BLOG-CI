@@ -12,7 +12,7 @@
 					<div id="postList" class="list-view">
 						<?php if($data->result()): ?>
 							<?php foreach($data->result() as $key => $value): ?>
-								<div data-key="<?=$value->id?>">
+								<div class="post-id" data-key="<?=$value->id?>">
 									<div class="post">
 										<div class="title">
 											<h2><a href="<?=site_url('Welcome/detail?id='.$value->id)?>"><?=$value->title?></a></h2>
@@ -32,7 +32,7 @@
 												<a href=""><?=$tag?></a>
 											<?php endforeach; ?>		
 											<br/>
-											<a href="">评论 (0)</a> |
+											<a href="">评论 (<?=$num[$value->id]?>)</a> |
 											最后修改于 <?=date('Y-m-d H:i:s',$value->update_time)?>
 										</div>
 									</div>
@@ -41,9 +41,7 @@
 							<?php endforeach; ?>
 						<?php else: ?>
 							<p>暂时还没有文章</p>
-						<?php endif; ?>
-
-					
+						<?php endif; ?>					
 					</div>
 
 					<ul class="pagination">
@@ -63,3 +61,20 @@
 
 
 <?php $this->load->view('layout/foot'); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
