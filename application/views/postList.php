@@ -90,11 +90,22 @@
 	</div>
 </div>
 
+
+<?php $this->load->view('layout/foot'); ?>
+
 <script type="text/javascript">
 	jQuery(document).ready(function () {
 		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/PostController\/postList?","filterSelector":"#w0-filters input, #w0-filters select"});
-	});
-	//抽时间要理解get上面url乱码
-</script>
 
-<?php $this->load->view('layout/foot'); ?>
+		jQuery.ajax({
+			type : "GET",
+			url : "<?=site_url('CommentController/commentStatus')?>",
+			dataType : "json",
+			success : function(data){
+				jQuery('#status-num').text(data);
+			}
+		});
+
+	});
+	//抽时间要理解get上面url乱码	
+</script>

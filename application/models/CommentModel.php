@@ -138,4 +138,12 @@ class CommentModel extends MY_Model
 		);
 		$this->db->update($this->_tableName, $data);
 	}
+
+	public function statusNum() {
+		$this->db->from($this->_tableName);
+		$this->db->where('status', '1');
+		$this->db->select('status');
+		$data = $this->db->get();
+		return count($data->result());
+	}
 }

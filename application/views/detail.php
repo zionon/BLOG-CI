@@ -95,7 +95,7 @@
 
 			<div class="col-md-3">
 				<?php $this->load->view('layout/tags', $tag); ?>
-				<?php $this->load->view('layout/comment'); ?>
+				<?php $this->load->view('layout/comment', $comments); ?>
 			</div>
 		</div>
 	</div>

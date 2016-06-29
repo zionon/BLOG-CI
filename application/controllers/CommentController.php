@@ -1,5 +1,5 @@
 <?php
-class CommentController extends CI_Controller
+class CommentController extends MY_Controller
 {
 	public function commentCreate() {
 		// $this->load->library('form_validation');
@@ -20,5 +20,11 @@ class CommentController extends CI_Controller
 		$this->load->model('CommentModel', 'cm');
 		$this->cm->chkCom($id);
 		redirect(site_url('CommentController/commentList'));
+	}
+
+	public function commentStatus() {
+		$this->load->model('CommentModel', 'cm');
+		$num = $this->cm->statusNum();
+		echo json_decode($num);
 	}
 }

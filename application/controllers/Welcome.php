@@ -40,11 +40,14 @@ class Welcome extends CI_Controller {
 		// $data['tags'] = null;
 		$this->load->model('TagModel','tm');
 		$tag = $this->tm->search();
-		$data['tags']['tags'] = $tag;
+		$data['tag']['tags'] = $tag;
+		// var_dump($data);die;
 		$this->load->model('CommentModel', 'cm');
 		$comm = $this->cm->find($this->input->get('id'));
-		// var_dump($comm);die;
+		$comments = $this->cm->newCom();
 		$data['comment'] = $comm;
+		$data['comments']['comment'] = $comments->result();
+
 		$this->load->view('detail', $data);
 	}
 

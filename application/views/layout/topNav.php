@@ -1,13 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-param" content="_csrf">
-<!--     <meta name="csrf-token" content="XzBCeE5fM0puRgcofzp7GQd7KAIeD3E7AF4gACkaeS8YZylPOD1gEA=="> -->
     <title>文章管理</title>
     <link href="<?=_PUBLIC?>/css/bootstrap.css" rel="stylesheet">
 	<link href="<?=_PUBLIC?>/css/site.css" rel="stylesheet">    
@@ -25,7 +21,7 @@
     <nav id="w1" class="navbar-inverse navbar-fixed-top navbar" role="navigation">
 	    <div class="container">
 		    <div class="navbar-header">
-			    <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w1-collapse"><span class="sr-only">Toggle navigation</span>
+<!-- 			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w1-collapse"><span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span></button> -->
@@ -36,7 +32,7 @@
 					<li><a href="<?=site_url('welcome/index')?>">首页</a></li>
 					<?php if(count($_SESSION) == 5): ?>
 						<li><a href="<?=site_url('PostController/postList')?>">文章管理</a></li>
-						<li><a href="<?=site_url('CommentController/commentList')?>">评论管理</a></li>
+						<li><a href="<?=site_url('CommentController/commentList')?>">评论管理<span class="badge badge-inverse" id="status-num"></span></a></li>
 						<li><a href="<?=site_url('UserController/userList')?>">会员管理</a></li>
 						<li><a href="<?=site_url('UserController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php elseif(count($_SESSION) == 4): ?>
