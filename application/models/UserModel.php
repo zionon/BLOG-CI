@@ -76,6 +76,32 @@ class UserModel extends MY_Model
 		);
 	}
 
+	public function chkLogin() {
+		$password = $this->input->post('LoginForm[password]', TRUE);
+		$username = $this->input->post('LoginForm[username]', TRUE);
+		$password = md5($password);
+		$userInfo = $this->checkPass($username, $password);
+		if($userInfo) {
+			if ($userInfo->is_admin) {
+				$sessionData = array(
+					'id' => $userInfo->id,
+					'username' => $userInfo->username,
+					'is_admin' => $userInfo->is_admin,
+				);
+				$this->session->set_userdata($sessionData);
+			} else {
+				$sessionData = array(
+					'id' => $userInfo->id,
+					'username' => $userInfo->username,
+				);
+				$this->session->set_userdata($sessionData);
+			}
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
 	public function findUsername($username) {
 		$this->db->where('username', $username);
 		$isUsername = $this->db->get('user');
@@ -86,7 +112,7 @@ class UserModel extends MY_Model
 		}
 	}
 
-	public function checkPass($username, $password) {
+	protected function checkPass($username, $password) {
 		$this->db->where('username', $username);
 		$this->db->select('id,username,password,is_admin');
 		$data = $this->db->get('user');
@@ -98,7 +124,7 @@ class UserModel extends MY_Model
 		}
 	}
 
-	public function _before_insert(&$data) {
+	protected function _before_insert(&$data) {
 		$data['password'] = md5($data['password']);
 		$data['register_time'] = time();
 		$data['update_time'] = time();
@@ -109,7 +135,7 @@ class UserModel extends MY_Model
 		}
 	}
 
-	public function _before_update(&$data) {
+	protected function _before_update(&$data) {
 		$data['password'] = md5($data['password']);
 		$data['update_time'] = time();
 		if ($data['update_time'] == TRUE) {

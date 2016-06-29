@@ -4,7 +4,7 @@ class CommentModel extends MY_Model
 	protected $_tableName = 'comment';
 	protected $_insertFields = array('content','author','email','post_id');
 
-	public function search($perpage = 3) {
+	public function search($perpage = 10) {
 		$this->db->from($this->_tableName);
 		//评论id
 		$id = $this->input->get('CommentSearch[id]');
@@ -100,6 +100,16 @@ class CommentModel extends MY_Model
 			'odby' => $odbyArray,
 			'count' => $countString,
 		);
+	}
+
+	public function newCom() {
+		$this->db->from($this->_tableName);
+		$this->db->where('comment.status', '2');
+		$this->db->select('comment.content,comment.author,comment.post_id,post.title');
+		$this->db->join('post','comment.post_id=post.id','left');
+		$this->db->order_by('comment.id', 'desc');
+		$data = $this->db->get('', '6');
+		return $data;
 	}
 
 	protected function _before_insert(&$data) {

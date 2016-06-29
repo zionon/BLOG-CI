@@ -1,5 +1,5 @@
 <?php
-class PostController extends CI_Controller
+class PostController extends MY_Controller
 {
 	public function postList(){
 		$this->load->model('PostModel','pm');

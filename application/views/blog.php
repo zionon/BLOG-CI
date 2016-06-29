@@ -30,9 +30,7 @@
  											<?php foreach($value->tags as $tag): ?>
 												<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
 												<a href=""><?=$tag?></a>
-											<?php endforeach; ?>
-										<!-- 	<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> 
-											<a href=""><?=$value->tags?></a> -->			
+											<?php endforeach; ?>		
 											<br/>
 											<a href="">评论 (0)</a> |
 											最后修改于 <?=date('Y-m-d H:i:s',$value->update_time)?>
@@ -55,7 +53,7 @@
 
 				<div class="col-md-3">
 					<?php $this->load->view('layout/tags', $tags); ?>						
-					<?php $this->load->view('layout/comment'); ?>
+					<?php $this->load->view('layout/comment', $comments); ?>
 				</div>
 			</div>			
 		</div>

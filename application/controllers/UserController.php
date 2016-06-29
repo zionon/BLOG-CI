@@ -23,26 +23,7 @@ class UserController extends CI_Controller
 			$this->load->view('login', $data);
 		} else {
 			$this->load->model('UserModel', 'um');
-			$password = $this->input->post('LoginForm[password]', TRUE);
-			$username = $this->input->post('LoginForm[username]', TRUE);
-			$password = md5($password);
-			$userInfo = $this->um->checkPass($username, $password);
-			if($userInfo) {
-				if ($userInfo->is_admin) {
-					$sessionData = array(
-						'id' => $userInfo->id,
-						'username' => $userInfo->username,
-						'is_admin' => $userInfo->is_admin,
-					);
-					$this->session->set_userdata($sessionData);
-				} else {
-					$sessionData = array(
-						'id' => $userInfo->id,
-						'username' => $userInfo->username,
-					);
-					$this->session->set_userdata($sessionData);
-				}
-				// var_dump($_SESSION);die;
+			if ($this->um->chkLogin()) {
 				redirect(site_url('Welcome'));
 			} else {
 				$data['confError'] = '密码错误';
@@ -140,25 +121,3 @@ class UserController extends CI_Controller
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

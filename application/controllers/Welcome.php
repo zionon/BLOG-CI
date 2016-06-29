@@ -25,8 +25,11 @@ class Welcome extends CI_Controller {
 		// var_dump($data['data']->result());die;
 		$this->load->model('TagModel','tm');
 		$tag = $this->tm->search();
-		// var_dump($tag->result());die;
 		$data['tags']['tags'] = $tag;
+		// var_dump($data);die;
+		$this->load->model('CommentModel', 'cm');
+		$comment = $this->cm->newCom();
+		$data['comments']['comment'] = $comment->result();
 		// var_dump($data);die;
 		$this->load->view('blog', $data);
 	}
@@ -37,13 +40,14 @@ class Welcome extends CI_Controller {
 		// $data['tags'] = null;
 		$this->load->model('TagModel','tm');
 		$tag = $this->tm->search();
-		$data['tag']['tags'] = $tag;
+		$data['tags']['tags'] = $tag;
 		$this->load->model('CommentModel', 'cm');
 		$comm = $this->cm->find($this->input->get('id'));
 		// var_dump($comm);die;
 		$data['comment'] = $comm;
 		$this->load->view('detail', $data);
 	}
+
 }
 
 

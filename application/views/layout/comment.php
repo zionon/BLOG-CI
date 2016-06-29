@@ -1,15 +1,18 @@
 <div class="comments">
-				
-				    	<ul class="list-group">
-				    			<li class="list-group-item">
-							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 最新回复
-							</li>
-							
-							<li class="list-group-item">
-							
-					
-							<div class="post"><div class="title"><p style="color:#777777;font-style:italic;">适合用常规格式显示一个模型（例如在一个表格的一行中显示模型的每个属性）。</p><p class="text-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>testing</p><p style="font-size:8pt;color:blue">《 <a href="/blog2/web/index.php?r=post%2Fdetail&id=36&title=DetailView">DetailView</a>》</p><hr></div></div><div class="post"><div class="title"><p style="color:#777777;font-style:italic;">yii\db\Query::one() 方法只返回查询结果当中的第一条数据， 条件语句中不会加上 LIMIT 1 条</p><p class="text-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>csc</p><p style="font-size:8pt;color:blue">《 <a href="/blog2/web/index.php?r=post%2Fdetail&id=39&title=%E6%9F%A5%E8%AF%A2%E6%9E%84%E5%BB%BA%E5%99%A8">查询构建器</a>》</p><hr></div></div><div class="post"><div class="title"><p style="color:#777777;font-style:italic;">如需使用表达式的值做为索引，那么只需要传递一个匿名函数给 yii\db\Query::indexBy() 方法即可</p><p class="text-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>kiki</p><p style="font-size:8pt;color:blue">《 <a href="/blog2/web/index.php?r=post%2Fdetail&id=39&title=%E6%9F%A5%E8%AF%A2%E6%9E%84%E5%BB%BA%E5%99%A8">查询构建器</a>》</p><hr></div></div><div class="post"><div class="title"><p style="color:#777777;font-style:italic;">当你在调用 yii\db\Query::all() 方法时，它将返回一个以连续的整型数值为索引的数组。 而有时候你可能希望使用一个特定的字段或者表达式的值来作为索引结果集数组。那么你可以在调用 yii\db\Query::all() 之前使用 yii\db\Query::indexBy() 方法来达到这个目的。</p><p class="text-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>陈天桥</p><p style="font-size:8pt;color:blue">《 <a href="/blog2/web/index.php?r=post%2Fdetail&id=39&title=%E6%9F%A5%E8%AF%A2%E6%9E%84%E5%BB%BA%E5%99%A8">查询构建器</a>》</p><hr></div></div><div class="post"><div class="title"><p style="color:#777777;font-style:italic;">传说中的沙发。</p><p class="text-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>萨芬</p><p style="font-size:8pt;color:blue">《 <a href="/blog2/web/index.php?r=post%2Fdetail&id=34&title=ActiveRecord+%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%8A%EF%BC%89">ActiveRecord 详解（上）</a>》</p><hr></div></div><div class="post"><div class="title"><p style="color:#777777;font-style:italic;">yii\db\Query::one() 方法只返回查询结果当中的第一条数据， 条件语句中不会加上 LIMIT 1 条件。如果你清楚的知道查询将会只返回一行或几行数据 （例如， 如果你是通过某些主键来查询的），这很好也提倡这样做。但是，如果查询结果 有机会返回大量的数据时，那么你应该显示调用 limit(1) 方法，以改善性能。 例如， (new \yii\db\Query())->from('user')->limit(1)->one()。</p><p class="text-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>马奇芳</p><p style="font-size:8pt;color:blue">《 <a href="/blog2/web/index.php?r=post%2Fdetail&id=39&title=%E6%9F%A5%E8%AF%A2%E6%9E%84%E5%BB%BA%E5%99%A8">查询构建器</a>》</p><hr></div></div>					
-							</li>
-												
-						</ul>
-					</div>
+	<ul class="list-group">
+		<li class="list-group-item">
+			<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 最新回复
+		</li>
+		
+		<li class="list-group-item">
+			<?php foreach($comment as $value): ?>
+				<div class="title">
+					<p style="color: #777777;font-style: italic;"><?=$value->content?></p>
+					<p class="text-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><?=$value->author?></p>
+					<p style="font-size:8pt;color: blue;">《 <a href="<?=site_url('Weclome/detail/id='.$value->post_id)?>"><?=$value->title?></a>》</p>
+					<hr />
+				</div>
+			<?php endforeach; ?>				
+		</li>							
+	</ul>
+</div>

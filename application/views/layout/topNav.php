@@ -36,14 +36,14 @@
 					<li><a href="<?=site_url('welcome/index')?>">首页</a></li>
 					<?php if(count($_SESSION) == 5): ?>
 						<li><a href="<?=site_url('PostController/postList')?>">文章管理</a></li>
-						<li><a href="">评论管理</a></li>
+						<li><a href="<?=site_url('CommentController/commentList')?>">评论管理</a></li>
 						<li><a href="<?=site_url('UserController/userList')?>">会员管理</a></li>
-						<li><a href="<?=site_url('UserController/logout')?>">退出</a></li>
+						<li><a href="<?=site_url('UserController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php elseif(count($_SESSION) == 4): ?>
 						<li><a href="">我的收藏</a></li>
 						<li><a href="">我的评论</a></li>
 						<li><a href="">我的提问</a></li>
-						<li><a href="<?=site_url('UserController/logout')?>">退出</a></li>
+						<li><a href="<?=site_url('UserController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php else: ?>
 						<li><a href="">关于博主</a></li>
 						<li><a href="<?=site_url('UserController/register')?>">注册</a></li>
