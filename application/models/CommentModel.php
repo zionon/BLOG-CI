@@ -35,7 +35,7 @@ class CommentModel extends MY_Model
 		//制作翻页
 		$count = $this->db->count_all_results('', FALSE);
 		//构造配置的数组
-		$config['base_url'] = site_url('CommnetController/commentList');
+		$config['base_url'] = site_url('CommentController/commentList');
 		//总的记录数
 		$config['total_rows'] = $count;
 		$config['per_page'] = $perpage;

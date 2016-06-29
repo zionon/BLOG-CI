@@ -4,8 +4,9 @@ class CommentController extends CI_Controller
 	public function commentCreate() {
 		// $this->load->library('form_validation');
 		$this->load->model('CommentModel','cm');
-		$this->cm->create();
-		redirect(site_url('CommentController/commentList'));	
+		$data = $this->cm->create();
+		$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
+		echo json_encode($data);
 	}
 
 	public function commentList() {

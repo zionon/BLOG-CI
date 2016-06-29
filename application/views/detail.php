@@ -32,6 +32,13 @@
 					</div>
 				</div>
 				<div id="comments">
+<!-- 					<div class="alert alert-danger alert-dismissible fade in" role="alert">
+				      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				      <h4>谢谢您的回复，我会尽快审核后将其展现出来！</h4>
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>hj:</em>
+						<p>u 很健康很健康</p>
+						<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>2016-06-28 23:37:32</em>	
+				    </div> -->
 					<h5><?=count($comment)?>条评论</h5>
 					<?php foreach ($comment as $value): ?>
 						<div class="comment">
@@ -51,7 +58,7 @@
 	
 					<h5>发表评论</h5>						
 					<div class="comment-form">
-					    <form id="w0" action="<?=site_url('CommentController/commentCreate')?>" method="post">
+					    <form id="w0">
 							<input type="hidden" name="Comment[post_id]" value=<?=$id?> />    
 							<div class="row"> 
 								<div class="col-md-4">
@@ -78,8 +85,8 @@
 									</div>			
 								</div>
 							</div>							
-						    <div class="form-group">
-						        <button type="submit" class="btn btn-success">发 布</button>    
+						    <div>
+						        <input type="button" value="提交评论"  class="comment_btn btn btn-success" />	   
 						    </div>					    
 					    </form>
 					</div>
@@ -102,7 +109,50 @@
 <script type="text/javascript" src="<?=_PUBLIC?>/js/yii.activeForm.js"></script>
 <script type="text/javascript" src="<?=_PUBLIC?>/js/yii.validation.js"></script>
 <script type="text/javascript">
-jQuery(document).ready(function () {
-jQuery('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".field-comment-author","input":"#comment-author","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"作者不能为空。"});yii.validation.string(value, messages, {"message":"作者必须是一条字符串。","max":128,"tooLong":"作者只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-email","name":"email","container":".field-comment-email","input":"#comment-email","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"邮箱不能为空。"});yii.validation.string(value, messages, {"message":"邮箱必须是一条字符串。","max":128,"tooLong":"邮箱只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-url","name":"url","container":".field-comment-url","input":"#comment-url","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"网址必须是一条字符串。","max":128,"tooLong":"网址只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-content","name":"content","container":".field-comment-content","input":"#comment-content","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"内容不能为空。"});yii.validation.string(value, messages, {"message":"内容必须是一条字符串。","skipOnEmpty":1});}}], []);
+$(document).ready(function () {
+$('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".field-comment-author","input":"#comment-author","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"作者不能为空。"});yii.validation.string(value, messages, {"message":"作者必须是一条字符串。","max":128,"tooLong":"作者只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-email","name":"email","container":".field-comment-email","input":"#comment-email","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"邮箱不能为空。"});yii.validation.string(value, messages, {"message":"邮箱必须是一条字符串。","max":128,"tooLong":"邮箱只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-url","name":"url","container":".field-comment-url","input":"#comment-url","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"网址必须是一条字符串。","max":128,"tooLong":"网址只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"comment-content","name":"content","container":".field-comment-content","input":"#comment-content","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"内容不能为空。"});yii.validation.string(value, messages, {"message":"内容必须是一条字符串。","skipOnEmpty":1});}}], []);
 });
+	//AJAX发表评论
+	$(".comment_btn").click(function(){
+		//先接收表单中的数据，并拼成这样格式的字符串:name=tom&age=231
+		var form = $("#w0");
+		var formData = form.serialize();
+		$.ajax({
+			type : "POST",
+			url : "<?=site_url('CommentController/commentCreate');?>",
+			data : formData,	//表单中要提交的数据
+			dataType : "json",	//服务器返回的数据格式
+			success : function(data){
+				console.log(data);
+				//清空表单
+				form.trigger("reset");	//触发表单的reset事件
+				var html = '<div class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来！</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+data.author+':</em><p>'+data.content+'</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+data.create_time+'</em></div>';
+				//把整个评论的字符串转化成jq的对象
+				html = $(html);
+				//把拼好的评论放到页面中
+				$("#comments").prepend(html);
+				//让导航条直接滚动到第一个评论处
+				$("body").animate({
+					"scrollTop" : "750px"
+				},1000,function(){
+					html.fadeIn(2000);
+				} );
+			}
+		});
+	});
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

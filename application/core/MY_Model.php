@@ -26,7 +26,7 @@ class MY_Model extends CI_Model
 		if (method_exists($this, '_after_insert')) {
 			$this->_after_insert($data);
 		}
-		return $data['id'];
+		return $data;
 	}
 
 	public function find($id) {
