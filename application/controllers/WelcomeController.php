@@ -54,6 +54,11 @@ class WelcomeController extends CI_Controller {
 	public function ajaxGetPost() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->getPost();
+		$this->load->model('CommentModel', 'cm');
+		$commentNum = $this->cm->totalCom($data['data']);
+		$data['num'] = $commentNum;
+		$data['data'] = $data['data']->result();
+		// var_dump($data['data']);die;
 		echo json_encode($data);
 	}
 

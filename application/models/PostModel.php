@@ -169,9 +169,11 @@ class PostModel extends MY_Model
 		$data = $this->db->get('', $perpage, $offset);
 		for ($i=0; $i < count($data->result()); $i++) { 
 			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);
+			$data->result()[$i]->update_time = date('Y-m-d H:i:s', $data->result()[$i]->update_time);
+			$data->result()[$i]->create_time = date('Y-m-d H:i:s', $data->result()[$i]->create_time);
 		}
 		return array(
-			'data' => $data->result(),
+			'data' => $data,
 			'pageCount' => $pageCount,
 		);
 	}
