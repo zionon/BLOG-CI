@@ -248,6 +248,7 @@ class CI_Router {
 	protected function _set_request($segments = array())
 	{
 		$segments = $this->_validate_request($segments);
+
 		// If we don't have any segments left - try the default controller;
 		// WARNING: Directories get shifted out of the segments array!
 		if (empty($segments))
@@ -295,12 +296,13 @@ class CI_Router {
 		}
 
 		// Is the method being specified?
+		// 后两个可选参数引用方式传入
 		if (sscanf($this->default_controller, '%[^/]/%s', $class, $method) !== 2)
 		{
 			$method = 'index';
 		}
 
-		if ( ! file_exists(APPPATH.'controllers/'.$this->directory.ucfirst($class).'.php'))
+		if ( ! file_exists(APPPATH.'controllers/'.$this->directory.ucfirst($class).'Controller.php'))
 		{
 			// This will trigger 404 later
 			return;
@@ -311,9 +313,10 @@ class CI_Router {
 
 		// Assign routed segments, index starting from 1
 		$this->uri->rsegments = array(
-			1 => $class,
+			1 => $class.'Controller',
 			2 => $method
 		);
+		// var_dump($this->uri->rsegments);die;
 
 		log_message('debug', 'No URI present. Default controller set.');
 	}
@@ -433,7 +436,8 @@ class CI_Router {
 	 */
 	public function set_class($class)
 	{
-		$this->class = str_replace(array('/', '.'), '', $class);
+		$this->class = str_replace(array('/', '.'), '', $class).'Controller';
+		// var_dump($this->class);die;
 	}
 
 	// --------------------------------------------------------------------
