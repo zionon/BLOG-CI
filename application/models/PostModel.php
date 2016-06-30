@@ -217,7 +217,7 @@ class PostModel extends MY_Model
 		return $ret;
 	}
 
-	public function _before_insert(&$data) {
+	protected function _before_insert(&$data) {
 		$data['create_time'] = time();
 		$data['update_time'] = time();
 		$data['author_id'] = '1';
@@ -229,7 +229,7 @@ class PostModel extends MY_Model
 		}
 	}
 
-	public function _after_insert($data) {
+	protected function _after_insert($data) {
 		$tags = explode(',',$data['tags']);
 		foreach ($tags as $value) {
 			$data = array(
@@ -239,7 +239,7 @@ class PostModel extends MY_Model
 		}
 	}
 
-	public function _before_update(&$data) {
+	protected function _before_update(&$data) {
 		$data['update_time'] = time();
 		$data['author_id'] = '1';
 		$data['tags'] = str_replace('，', ',', $data['tags']);
@@ -250,11 +250,15 @@ class PostModel extends MY_Model
 		}
 	}
 
-	public function _after_update($data) {
+	protected function _after_update($data) {
 		foreach ($data as $value) {
 			$newTags['name'] = $value;
 			$this->db->insert('tag', $newTags);
 		}
+	}
+
+	protected function pageArray($curPage, $totalPage) {
+		
 	}
 }
 

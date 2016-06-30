@@ -131,6 +131,7 @@ $(".comment_btn").click(function(){
 			//把拼好的评论放到页面中
 			$("#comments").prepend(html);
 
+			//动画滚动
 			$('html, body').animate({scrollTop: $("#comments").offset().top-$("#alert-comment").height()}, 500); 
 		}
 	});

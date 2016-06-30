@@ -10,10 +10,10 @@
 	<style type="text/css">
 		.navbar-inverse .navbar-brand {color: #fff;}
 	</style>
-	<script src="<?=_PUBLIC?>/js/jquery.js"></script>
+ 	<script src="<?=_PUBLIC?>/js/jquery.js"></script>
 	<script src="<?=_PUBLIC?>/js/yii.js"></script>
 	<script src="<?=_PUBLIC?>/js/yii.gridView.js"></script>
-	<script src="<?=_PUBLIC?>/js/bootstrap.js"></script>	
+	<script src="<?=_PUBLIC?>/js/bootstrap.js"></script>
 </head>
 <body>
 
