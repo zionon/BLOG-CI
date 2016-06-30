@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-md-9">
 					<ol class="breadcrumb">
-					  <li><a href="/blog2/web/index.php">首页</a></li>
+					  <li><a href="<?=site_url('welcome')?>">首页</a></li>
 					  <li>文章列表</li>
 					</ol>
 				

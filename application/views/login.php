@@ -3,13 +3,11 @@
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="<?=site_url('PostController/postList')?>">首页</a></li>
-        <li class="active">Login</li>
+        <li class="active">登录</li>
     </ul>
 
     <div class="site-login">
-        <h1>Login</h1>
-
-        <p>Please fill out the following fields to login:</p>
+        <h2>登  录</h2>
 
         <form id="login-form" class="form-horizontal" action="<?=site_url('UserController/login')?>" method="post">
     <!--         <input type="hidden" name="_csrf" value="R3RlbnIwVW8VWQc8E0M6MHQ/IiQteyM5KD4QXAoAAAAWRC8AEAQsNg=="> -->
@@ -66,9 +64,14 @@
 
 
 </div>
+
+<?php $this->load->view('layout/foot'); ?>
+
+
 <script type="text/javascript" src="<?=_PUBLIC?>/js/yii.activeForm.js"></script>
 <script type="text/javascript" src="<?=_PUBLIC?>/js/yii.validation.js"></script>
-<script type="text/javascript">jQuery(document).ready(function () {
-jQuery('#login-form').yiiActiveForm([{"id":"loginform-username","name":"username","container":".field-loginform-username","input":"#loginform-username","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Username不能为空。"});}},{"id":"loginform-password","name":"password","container":".field-loginform-password","input":"#loginform-password","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"Password不能为空。"});}},{"id":"loginform-rememberme","name":"rememberMe","container":".field-loginform-rememberme","input":"#loginform-rememberme","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.boolean(value, messages, {"trueValue":"1","falseValue":"0","message":"Remember Me的值必须要么为\"1\"，要么为\"0\"。","skipOnEmpty":1});}}], []);
-});</script>
-<?php $this->load->view('layout/foot'); ?>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+jQuery('#login-form').yiiActiveForm([{"id":"loginform-username","name":"username","container":".field-loginform-username","input":"#loginform-username","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"用户名不能为空。"});}},{"id":"loginform-password","name":"password","container":".field-loginform-password","input":"#loginform-password","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"密码不能为空。"});}},{"id":"contactform-verifycode","name":"code","container":".field-contactform-verifycode","input":"#contactform-verifycode","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"验证码不能为空。"});}},{"id":"loginform-rememberme","name":"rememberMe","container":".field-loginform-rememberme","input":"#loginform-rememberme","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.boolean(value, messages, {"trueValue":"1","falseValue":"0","message":"Remember Me的值必须要么为\"1\"，要么为\"0\"。","skipOnEmpty":1});}}], []);
+});
+</script>
