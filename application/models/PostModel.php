@@ -139,6 +139,43 @@ class PostModel extends MY_Model
 		);		
 	}
 
+	public function getPost($perpage = 10) {
+		//标签
+		$tags = $this->input->get('PostSearch[tags]');
+		if ($tags) {
+			// $id = $this->input->get('Tags[id]');
+			// $this->load->model('TagModel', 'tm');
+			// $this->tm->addFrequency($id);
+			$this->db->like('ci_post.tags', $tags);
+		}
+		$this->db->from($this->_tableName);
+		$this->db->where('status', '2');
+		//总的记录数
+		$count = $this->db->count_all_results('', FALSE);
+		//计算总的页数
+		$pageCount = ceil($count / $perpage);
+		//当前页
+		$currpage = max(1, (int)$this->input->get('p'));
+		// var_dump($currpage);die;
+		//根据当前页计算偏移量
+		$offset = ($currpage - 1) * $perpage;
+		//链表查询
+		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.tags,user.username');
+		$this->db->join('user','post.author_id=user.id','left');
+		// $this->db->join('comment','comment.post_id=post.id','left');
+		// $this->db->where('comment.status', '2');
+		//取数据
+		$this->db->order_by('create_time','desc');
+		$data = $this->db->get('', $perpage, $offset);
+		for ($i=0; $i < count($data->result()); $i++) { 
+			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);
+		}
+		return array(
+			'data' => $data->result(),
+			'pageCount' => $pageCount,
+		);
+	}
+
 	public function find($id) {
 		$this->db->from($this->_tableName);
 		$this->db->where('ci_post.id', $id);

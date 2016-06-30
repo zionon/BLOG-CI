@@ -10,7 +10,7 @@
 					</ol>
 				
 					<div id="postList" class="list-view">
-						<?php if($data->result()): ?>
+<!-- 						<?php if($data->result()): ?>
 							<?php foreach($data->result() as $key => $value): ?>
 								<div class="post-id" data-key="<?=$value->id?>">
 									<div class="post">
@@ -41,11 +41,11 @@
 							<?php endforeach; ?>
 						<?php else: ?>
 							<p>暂时还没有文章</p>
-						<?php endif; ?>					
+						<?php endif; ?>		 -->			
 					</div>
 
 					<ul class="pagination">
-						<?=$page?>
+
 					</ul>
 				</div>																
 
@@ -61,6 +61,48 @@
 
 
 <?php $this->load->view('layout/foot'); ?>
+
+<script type="text/javascript">
+	function ajaxGetPost(page) {
+		$.ajax({
+			type : "GET",
+			url : "<?=site_url('welcome/ajaxGetPost')?>?p="+page,
+			dataType : "json",
+			success : function(data){
+				console.log(data);
+				var html ="";
+				$(data.data).each(function(key,value){
+					//拼标签
+					var tagshtml = "";
+					$(value.tags).each(function(key1,value1){
+						tagshtml += '<span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="">'+value1+'</a>';
+					});
+html += '<div class="post-id" data-key="'+value.id+'"><div class="post"><div class="title"><h2><a href="www.blog.com/index.php/welcome/detail?id='+value.id+'">'+value.title+'</a></h2><div class="author"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'&nbsp;&nbsp;&nbsp;&nbsp;</em><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.username+'</em></div></div><br /><div class="content">'+value.content+'</div><br /><div class="nav">'+tagshtml+'<br/><a href="">评论 ()</a> |最后修改于 '+value.update_time+'</div></div><hr /></div>'
+				});
+				//放到页面中覆盖原数据
+				$("#postList").html(html);
+
+				//根据总的页数，拼出翻页字符串
+				var pageString = "";
+				for (var i = 1; i <= data.pageCount; i++)
+				{
+					if (page == i) {
+						var cls = 'class="active"';
+					} else {
+						var cls = '';
+					}
+					pageString += '<li><a '+cls+' onclick="ajaxGetPost('+i+');" href="javascript:void(0);">'+i+'</a></li>';
+				}
+				$('.pagination').html(pageString);
+
+				//放到缓存中
+				// cache.push([page, html, pageString]);
+
+			}
+		});
+	}
+	ajaxGetPost(1);
+</script>
 
 
 

@@ -59,12 +59,14 @@ class Captcha
 	}
 
 	private function setCaptcha() {
+		// $font = 'public/fonts/glyphicons-halflings-regular';
 		for ($i=0; $i < $this->codeNum; $i++) { 
 			$color = imagecolorallocate($this->im,rand(20,250),rand(100,250),rand(128,250));
-			$size = rand(floor($this->height / 1.5), floor($this->height / 1.3));
+			$size = rand(floor($this->height / 1.2), floor($this->height / 1.1));
 			$x = floor($this->width / $this->codeNum) * $i + 5;
 			$y = rand(0, $this->height -20);
 			imagechar($this->im, $size, $x,$y,$this->code{$i},$color);
+			// imagettftext($this->im, 10, 0, $x,$y, $color, $font, $this->code{$i});
 		}
 	}
 

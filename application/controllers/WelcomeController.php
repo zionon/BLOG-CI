@@ -51,4 +51,10 @@ class WelcomeController extends CI_Controller {
 		$this->load->view('detail', $data);
 	}
 
+	public function ajaxGetPost() {
+		$this->load->model('PostModel', 'pm');
+		$data = $this->pm->getPost();
+		echo json_encode($data);
+	}
+
 }
