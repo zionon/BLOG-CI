@@ -32,19 +32,19 @@
 				<ul id="w2" class="navbar-nav navbar-right nav">
 					<li><a href="<?=site_url('welcome/index')?>">首页</a></li>
 					<?php if(count($_SESSION) == 5): ?>
-						<li><a href="<?=site_url('PostController/postList')?>">文章管理</a></li>
-						<li><a href="<?=site_url('CommentController/commentList')?>">评论管理<span class="badge badge-inverse" id="status-num"></span></a></li>
-						<li><a href="<?=site_url('UserController/userList')?>">会员管理</a></li>
-						<li><a href="<?=site_url('UserController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
+						<li><a href="<?=site_url('postController/postList')?>">文章管理</a></li>
+						<li><a href="<?=site_url('commentController/commentList')?>">评论管理<span class="badge badge-inverse" id="status-num"></span></a></li>
+						<li><a href="<?=site_url('userController/userList')?>">会员管理</a></li>
+						<li><a href="<?=site_url('userController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php elseif(count($_SESSION) == 4): ?>
 						<li><a href="">我的收藏</a></li>
 						<li><a href="">我的评论</a></li>
 						<li><a href="">我的提问</a></li>
-						<li><a href="<?=site_url('UserController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
+						<li><a href="<?=site_url('userController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php else: ?>
 						<li><a href="">关于博主</a></li>
-						<li><a href="<?=site_url('UserController/register')?>">注册</a></li>
-						<li><a href="<?=site_url('UserController/login')?>">登录</a></li>
+						<li><a href="<?=site_url('userController/register')?>">注册</a></li>
+						<li><a href="<?=site_url('userController/login')?>">登录</a></li>
 					<?php endif; ?>
 				</ul>
 			</div>

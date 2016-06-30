@@ -341,7 +341,7 @@ class CI_Config {
 			{
 				$uri = implode('/', $uri);
 			}
-			return trim($uri, '/');
+			return trim(str_replace('Controller', '', $uri), '/');
 		}
 		elseif (is_array($uri))
 		{
