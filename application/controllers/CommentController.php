@@ -1,13 +1,13 @@
 <?php
 class CommentController extends MY_Controller
 {
-	public function commentCreate() {
-		// $this->load->library('form_validation');
-		$this->load->model('CommentModel','cm');
-		$data = $this->cm->create();
-		$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
-		echo json_encode($data);
-	}
+	// public function commentCreate() {
+	// 	// $this->load->library('form_validation');
+	// 	$this->load->model('CommentModel','cm');
+	// 	$data = $this->cm->create();
+	// 	$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
+	// 	echo json_encode($data);
+	// }
 
 	public function commentList() {
 		$this->load->model('CommentModel','cm');

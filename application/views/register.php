@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-5">
 
-            <form id="contact-form" action="<?=site_url('UserController/register')?>" method="post" role="form">
+            <form id="contact-form" action="<?=site_url('WelcomeController/register')?>" method="post" role="form">
                 <div class="form-group field-contactform-username required">
                     <label class="control-label" for="contactform-name">用户名:</label>
                     <input type="text" id="contactform-username" class="form-control" name="User[username]" autofocus value="<?=set_value('User[username]')?>" />
@@ -50,7 +50,7 @@
                     <div class="row">
                         <div class="col-lg-6"><input type="text" id="contactform-verifycode" class="form-control" name="User[code]">
                         </div>
-                        <div class="col-lg-3"><img id="contactform-verifycode-image" src="<?=site_url('UserController/getCaptcha')?>" alt="" style="cursor: pointer" onclick="this.src='<?=site_url('UserController/getCaptcha')?>#'+Math.random()" />
+                        <div class="col-lg-3"><img id="contactform-verifycode-image" src="<?=site_url('WelcomeController/getCaptcha')?>" alt="" style="cursor: pointer" onclick="this.src='<?=site_url('WelcomeController/getCaptcha')?>#'+Math.random()" />
                         </div>
                     </div>
                     <p class="help-block help-block-error">

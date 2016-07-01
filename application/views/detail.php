@@ -17,11 +17,11 @@
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em><?=$username?></em>
 						</div>
 					</div>
-					<br>
+					<br />
 					<div class="content">
 						<?=$content?>
 					</div>
-					<br>					
+					<br />					
 					<div class="nav">
 						<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> 
 						<a href=""><?=$tags?></a>
@@ -55,7 +55,8 @@
 							</div>
 						</div>
 					<?php endforeach ?>
-	
+						
+					<hr />
 					<h5>发表评论</h5>						
 					<div class="comment-form">
 					    <form id="w0">
@@ -119,7 +120,7 @@ $(".comment_btn").click(function(){
 	var formData = form.serialize();
 	$.ajax({
 		type : "POST",
-		url : "<?=site_url('CommentController/commentCreate');?>",
+		url : "<?=site_url('WelcomeController/ajaxPushComment');?>",
 		data : formData,	//表单中要提交的数据
 		dataType : "json",	//服务器返回的数据格式
 		success : function(data){

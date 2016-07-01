@@ -18,6 +18,7 @@ class WelcomeController extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	//主页
 	public function index()
 	{
 		$this->load->model('PostModel','pm');
@@ -35,6 +36,7 @@ class WelcomeController extends CI_Controller {
 		$this->load->view('blog', $data);
 	}
 
+	//单条页面
 	public function detail() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->find($this->input->get('id'));
@@ -51,6 +53,70 @@ class WelcomeController extends CI_Controller {
 		$this->load->view('detail', $data);
 	}
 
+	//会员注册
+	public function register(){
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('register') === FALSE) {
+			$this->load->view('register');
+		} else {
+			// var_dump($this->input->post());die;
+			$this->load->model('UserModel','um');
+			$this->um->create();
+			echo "注册成功";
+		}
+	}
+
+	//会员登录
+	public function login() {
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('login') === FALSE) {
+			// var_dump($this->input->post());die;
+			$data['confError'] = null;
+			$this->load->view('login', $data);
+		} else {
+			$this->load->model('UserModel', 'um');
+			if ($this->um->chkLogin()) {
+				redirect(site_url('Welcome'));
+			} else {
+				$data['confError'] = '密码错误';
+				$this->load->view('login', $data);
+			}
+		}
+	}
+
+	//生成验证码
+	public function getCaptcha() {
+		$this->load->library('captcha');
+		$code = $this->captcha->getCaptcha();
+		$this->session->set_userdata('code',$code);
+		$this->captcha->showImg();
+	}
+
+	//检查用户名是否存在
+	public function checkUsername($username) {
+		// var_dump($username);die;
+		$this->load->model('UserModel','um');
+		if ($this->um->findUsername($username)) {
+			return TRUE;
+		} else {
+			$this->form_validation->set_message('checkUsername','用户名不存在');
+			return FALSE;
+		}
+	}
+
+	//检查验证码
+	public function checkCode($code) {
+		$code = strtolower($code);
+		$codeConf = strtolower($this->session->userdata('code'));
+		if ($codeConf != $code) {
+			$this->form_validation->set_message('checkCode','验证码错误');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
+	//ajax获取全部日志
 	public function ajaxGetAllPost() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->getPost('ajaxGetAllPost');
@@ -65,6 +131,7 @@ class WelcomeController extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	//
 	public function ajaxGetTagPost() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->getPost('ajaxGetTagPost');
@@ -72,6 +139,14 @@ class WelcomeController extends CI_Controller {
 		$commentNum = $this->cm->totalCom($data['data']);
 		$data['num'] = $commentNum;
 		$data['data'] = $data['data']->result();
+		echo json_encode($data);
+	}
+
+	//
+	public function ajaxPushComment() {
+		$this->load->model('CommentModel','cm');
+		$data = $this->cm->create();
+		$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
 		echo json_encode($data);
 	}
 

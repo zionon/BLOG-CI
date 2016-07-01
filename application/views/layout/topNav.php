@@ -43,8 +43,8 @@
 						<li><a href="<?=site_url('userController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php else: ?>
 						<li><a href="">关于博主</a></li>
-						<li><a href="<?=site_url('userController/register')?>">注册</a></li>
-						<li><a href="<?=site_url('userController/login')?>">登录</a></li>
+						<li><a href="<?=site_url('WelcomeController/register')?>">注册</a></li>
+						<li><a href="<?=site_url('WelcomeController/login')?>">登录</a></li>
 					<?php endif; ?>
 				</ul>
 			</div>

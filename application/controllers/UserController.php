@@ -1,5 +1,5 @@
 <?php
-class UserController extends CI_Controller
+class UserController extends MY_Controller
 {
 	//会员注册
 	public function register(){

@@ -9,7 +9,7 @@
     <div class="site-login">
         <h2>登  录</h2>
 
-        <form id="login-form" class="form-horizontal" action="<?=site_url('UserController/login')?>" method="post">
+        <form id="login-form" class="form-horizontal" action="<?=site_url('WelcomeController/login')?>" method="post">
     <!--         <input type="hidden" name="_csrf" value="R3RlbnIwVW8VWQc8E0M6MHQ/IiQteyM5KD4QXAoAAAAWRC8AEAQsNg=="> -->
             <div class="form-group field-loginform-username required">
                 <label class="col-lg-1 control-label" for="loginform-username">用户名:</label>
@@ -39,7 +39,7 @@
                 <label class="col-lg-1 control-label" for="contactform-verifycode">验证码:</label>
                 <div class="col-lg-3"><input type="text" id="contactform-verifycode" class="form-control" name="LoginForm[code]">
                 </div>
-                <div class="col-lg-3"><img id="contactform-verifycode-image" src="<?=site_url('UserController/getCaptcha')?>" alt="" style="cursor: pointer" onclick="this.src='<?=site_url('UserController/getCaptcha')?>#'+Math.random()" />                        
+                <div class="col-lg-3"><img id="contactform-verifycode-image" src="<?=site_url('WelcomeController/getCaptcha')?>" alt="" style="cursor: pointer" onclick="this.src='<?=site_url('WelcomeController/getCaptcha')?>#'+Math.random()" />                        
                 </div>
                 <div class="col-lg-8">
                     <p class="help-block help-block-error">
