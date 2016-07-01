@@ -144,10 +144,7 @@ class PostModel extends MY_Model
 	public function getPost($ajaxMethod, $perpage = 10) {
 		//标签
 		$tags = $this->input->get('PostSearch[tags]');
-		$id = $this->input->get('PostSearch[id]');
-		if ($tags && $id) {
-			$this->load->model('TagModel', 'tm');
-			$this->tm->addFrequency($id);
+		if ($tags) {
 			$this->db->like('ci_post.tags', $tags);
 		}
 		$this->db->from($this->_tableName);
