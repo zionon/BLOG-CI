@@ -63,13 +63,33 @@
 <?php $this->load->view('layout/foot'); ?>
 
 <script type="text/javascript">
+	//内容的缓存，每页内容的缓存:格式:[[页码，'内容数据','翻页'],[3,'xxxx','xxxxx']]
+	//缓存到客户端浏览器的内容
+	var cache = [];
+	//获取某一页缓存
+	function getCache(page) {
+		for (var i = 0; i < cache.length; i++) {
+			if (cache[i][0] == page) {
+				return cache[i];
+			}
+		}
+		return false;
+	}
 	function ajaxGetPost(page) {
+		var c = getCache(page);
+		console.log(c);
+		if (c !== false) {
+			$('#postList').html(c[1]);
+			$('.pagination').html(c[2]);
+			$(document.body).animate({'scrollTop':0},1000);
+			return;
+		}
 		$.ajax({
 			type : "GET",
 			url : "<?=site_url('welcome/ajaxGetPost')?>?p="+page,
 			dataType : "json",
 			success : function(data){
-				console.log(data);
+				// console.log(data);
 				var html ="";
 				$(data.data).each(function(key,value){
 					//拼标签
@@ -88,7 +108,7 @@
 				$('.pagination').html(pageString);
 
 				//放到缓存中
-				// cache.push([page, html, pageString]);
+				cache.push([page, html, pageString]);
 				$(document.body).animate({'scrollTop':0},1000);
 
 			}
