@@ -58,7 +58,10 @@ class WelcomeController extends CI_Controller {
 		$commentNum = $this->cm->totalCom($data['data']);
 		$data['num'] = $commentNum;
 		$data['data'] = $data['data']->result();
-		// var_dump($data['data']);die;
+		// var_dump($data['page']);		
+		// var_dump($data['page']->create_links());
+		// var_dump($data['page']->cur_page);
+		// var_dump($data['page']);die;
 		echo json_encode($data);
 	}
 

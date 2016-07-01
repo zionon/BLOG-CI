@@ -83,19 +83,9 @@
 				$("#postList").html(html);
 
 				//根据总的页数，拼出翻页字符串
-				var pageString = "";
-				for (var i = 1; i <= data.pageCount; i++)
-				{
-					if (page == i) {
-						var cls = 'class="active"';
-					} else {
-						var cls = '';
-					}
-					pageString += '<li '+cls+'><a onclick="ajaxGetPost('+i+');" href="javascript:void(0);">'+i+'</a></li>';
-				}
-				var pagehtml = '<li><a onclick="ajaxGetPost(1);" href="javascript:void(0);" data-ci-pagination-page="1" rel="start">首页</a></li>'+pageString+'<li><a onclick="ajaxGetPost('+data.pageCount+');" href="javascript:void(0);" data-ci-pagination-page="'+data.pageCount+'">尾页</a></li>';
+				var pageString = data.page;
 
-				$('.pagination').html(pagehtml);
+				$('.pagination').html(pageString);
 
 				//放到缓存中
 				// cache.push([page, html, pageString]);

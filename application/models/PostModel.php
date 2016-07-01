@@ -143,9 +143,6 @@ class PostModel extends MY_Model
 		//标签
 		$tags = $this->input->get('PostSearch[tags]');
 		if ($tags) {
-			// $id = $this->input->get('Tags[id]');
-			// $this->load->model('TagModel', 'tm');
-			// $this->tm->addFrequency($id);
 			$this->db->like('ci_post.tags', $tags);
 		}
 		$this->db->from($this->_tableName);
@@ -156,7 +153,13 @@ class PostModel extends MY_Model
 		$pageCount = ceil($count / $perpage);
 		//当前页
 		$currpage = max(1, (int)$this->input->get('p'));
-		// var_dump($currpage);die;
+		$config['total_rows'] = $count;
+		$config['per_page'] = $perpage;
+		$config['cur_page'] = $currpage;
+		$this->load->library('pagination');
+		$this->load->library('page');
+		$ajaxPage = $this->page->initialize($config);
+		$ajaxPage = $this->page->create_links();
 		//根据当前页计算偏移量
 		$offset = ($currpage - 1) * $perpage;
 		//链表查询
@@ -175,6 +178,7 @@ class PostModel extends MY_Model
 		return array(
 			'data' => $data,
 			'pageCount' => $pageCount,
+			'page' => $ajaxPage,
 		);
 	}
 
@@ -259,9 +263,14 @@ class PostModel extends MY_Model
 		}
 	}
 
-	protected function pageArray($curPage, $totalPage) {
-		
-	}
+	// protected function ajaxPage($count, $perpage, $currpage) {
+	// 	$config['total_rows'] = $count;
+	// 	$config['per_page'] = $perpage;
+	// 	$config['cur_page'] = $currpage;
+	// 	$this->load->library('pagination');
+	// 	$page = $this->load->library('page');
+	// 	return $this->page->initialize($config);
+	// }
 }
 
 

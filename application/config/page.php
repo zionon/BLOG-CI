@@ -1,0 +1,20 @@
+<?php
+	$config = array(
+		'first_link' => '首页',
+		'last_link' => '尾页',
+		'next_link' => '下一页',
+		'prev_link' => '上一页',
+		'cur_tag_open' => '<li class="active"><a>',
+		'cur_tag_close' => '</li></a>',
+		'next_tag_open' => '<li class="next">',
+		'next_tag_close' => '</li>',
+		'prev_tag_open' => '<li class="prev">',
+		'prev_tag_close' => '</li>',
+		'num_tag_open' => '<li>',
+		'num_tag_close' => '</li>',
+		'first_tag_open' => '<li>',
+		'first_tag_close' => '</li>',
+		'last_tag_open' => '<li>',
+		'last_tag_close' => '</li>',
+		'use_page_numbers' => TRUE,
+	);
