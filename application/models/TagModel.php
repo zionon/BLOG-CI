@@ -11,19 +11,24 @@ class TagModel extends MY_Model
 		$count = count($data)/5 + 1;
 		$tagsArray = array_chunk($data, $count);
 		foreach ($tagsArray[0] as $key => $value) {
-			$tagsH2[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name.'&Tags[id]='.$value->id).'"><h2 style="display: inline-block;"><span class="label label-success">'.$value->name.'</span></h2></a>';
+			$tag = "'".$value->name."'";
+			$tagsH2[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.')" href="javascript:void(0)"><h2 style="display: inline-block;"><span class="label label-success">'.$value->name.'</span></h2></a>';
 		}
 		foreach ($tagsArray[1] as $key => $value) {
-			$tagsH3[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name.'&Tags[id]='.$value->id).'"><h3 style="display: inline-block;"><span class="label label-primary">'.$value->name.'</span></h3></a>';
+			$tag = "'".$value->name."'";
+			$tagsH3[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.')" href="javascript:void(0)"><h3 style="display: inline-block;"><span class="label label-primary">'.$value->name.'</span></h3></a>';
 		}
 		foreach ($tagsArray[2] as $key => $value) {
-			$tagsH4[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name.'&Tags[id]='.$value->id).'"><h4 style="display: inline-block;"><span class="label label-warning">'.$value->name.'</span></h4></a>';
+			$tag = "'".$value->name."'";
+			$tagsH4[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.')" href="javascript:void(0)"><h4 style="display: inline-block;"><span class="label label-warning">'.$value->name.'</span></h4></a>';
 		}
 		foreach ($tagsArray[3] as $key => $value) {
-			$tagsH5[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name.'&Tags[id]='.$value->id).'"><h5 style="display: inline-block;"><span class="label label-info">'.$value->name.'</span></h5></a>';
+			$tag = "'".$value->name."'";
+			$tagsH5[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.')" href="javascript:void(0)"><h5 style="display: inline-block;"><span class="label label-info">'.$value->name.'</span></h5></a>';
 		}
 		foreach ($tagsArray[4] as $key => $value) {
-			$tagsH6[$key] = '<a href="'.site_url('Welcome/index?PostSearch[tags]='.$value->name.'&Tags[id]='.$value->id).'"><h6 style="display: inline-block;"><span class="label label-danger">'.$value->name.'</span></h6></a>';
+			$tag = "'".$value->name."'";
+			$tagsH6[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.')" href="javascript:void(0)"><h6 style="display: inline-block;"><span class="label label-danger">'.$value->name.'</span></h6></a>';
 		}
 		$tags = array_merge($tagsH2, $tagsH3, $tagsH4, $tagsH5, $tagsH6);
 		shuffle($tags);

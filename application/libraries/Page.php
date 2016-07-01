@@ -1,6 +1,8 @@
 <?php
 class Page extends CI_Pagination
 {
+	protected $ajax_method = '';
+	protected $ajax_para = '';
 	public function create_links() {
 				// If our item count or per-page total is zero there is no need to continue.
 		// Note: DO NOT change the operator to === here!
@@ -8,7 +10,6 @@ class Page extends CI_Pagination
 		{
 			return '';
 		}
-
 		// Calculate the total number of pages
 		$num_pages = (int) ceil($this->total_rows / $this->per_page);
 
@@ -155,6 +156,10 @@ class Page extends CI_Pagination
 			$this->cur_page = (int) floor(($this->cur_page/$this->per_page) + 1);
 		}
 
+		if ($this->ajax_para) {
+			$this->ajax_para = ",'".$this->ajax_para."'";
+		}
+
 		// Calculate the start and end numbers. These determine
 		// which number to start and end the digit links with.
 		$start	= (($this->cur_page - $this->num_links) > 0) ? $this->cur_page - ($this->num_links - 1) : 1;
@@ -169,7 +174,7 @@ class Page extends CI_Pagination
 			// Take the general parameters, and squeeze this pagination-page attr in for JS frameworks.
 			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, 1);
 
-			$output .= $this->first_tag_open.'<a onclick="ajaxGetPost(1);" href="javascript:void(0);"'.$attributes.$this->_attr_rel('start').'>'
+			$output .= $this->first_tag_open.'<a onclick="'.$this->ajax_method.'(1'.$this->ajax_para.');" href="javascript:void(0);"'.$attributes.$this->_attr_rel('start').'>'
 				.$this->first_link.'</a>'.$this->first_tag_close;
 		}
 
@@ -183,13 +188,13 @@ class Page extends CI_Pagination
 			if ($i === $base_page)
 			{
 				// First page
-				$output .= $this->prev_tag_open.'<a onclick="ajaxGetPost(1);" href="javascript:void(0);"'.$attributes.$this->_attr_rel('prev').'>'
+				$output .= $this->prev_tag_open.'<a onclick="'.$this->ajax_method.'(1'.$this->ajax_para.');" href="javascript:void(0);"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 			else
 			{
 				$append = $this->prefix.$i.$this->suffix;
-				$output .= $this->prev_tag_open.'<a onclick="ajaxGetPost('.$append.');" href="javascript:void(0);"'.$attributes.$this->_attr_rel('prev').'>'
+				$output .= $this->prev_tag_open.'<a onclick="'.$this->ajax_method.'('.$append.$this->ajax_para.');" href="javascript:void(0);"'.$attributes.$this->_attr_rel('prev').'>'
 					.$this->prev_link.'</a>'.$this->prev_tag_close;
 			}
 
@@ -215,13 +220,13 @@ class Page extends CI_Pagination
 					elseif ($i === $base_page)
 					{
 						// First page
-						$output .= $this->num_tag_open.'<a onclick="ajaxGetPost(1);" href="javascript:void(0);"'.$attributes.$this->_attr_rel('start').'>'
+						$output .= $this->num_tag_open.'<a onclick="'.$this->ajax_method.'(1'.$this->ajax_para.');" href="javascript:void(0);"'.$attributes.$this->_attr_rel('start').'>'
 							.$loop.'</a>'.$this->num_tag_close;
 					}
 					else
 					{
 						$append = $this->prefix.$i.$this->suffix;
-						$output .= $this->num_tag_open.'<a onclick="ajaxGetPost('.$append.');" href="javascript:void(0);"'.$attributes.'>'
+						$output .= $this->num_tag_open.'<a onclick="'.$this->ajax_method.'('.$append.$this->ajax_para.');" href="javascript:void(0);"'.$attributes.'>'
 							.$loop.'</a>'.$this->num_tag_close;
 					}
 				}
@@ -234,7 +239,7 @@ class Page extends CI_Pagination
 			$i = ($this->use_page_numbers) ? $this->cur_page + 1 : $this->cur_page * $this->per_page;
 
 			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, $this->cur_page + 1);
-			$output .= $this->next_tag_open.'<a onclick="ajaxGetPost('.$i.');" href="javascript:void(0);"'.$attributes
+			$output .= $this->next_tag_open.'<a onclick="'.$this->ajax_method.'('.$i.$this->ajax_para.');" href="javascript:void(0);"'.$attributes
 				.$this->_attr_rel('next').'>'.$this->next_link.'</a>'.$this->next_tag_close;
 		}
 
@@ -245,7 +250,7 @@ class Page extends CI_Pagination
 
 			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, $num_pages);
 
-			$output .= $this->last_tag_open.'<a onclick="ajaxGetPost('.$i.');" href="javascript:void(0);"'.$attributes.'>'
+			$output .= $this->last_tag_open.'<a onclick="'.$this->ajax_method.'('.$i.$this->ajax_para.');" href="javascript:void(0);"'.$attributes.'>'
 				.$this->last_link.'</a>'.$this->last_tag_close;
 		}
 

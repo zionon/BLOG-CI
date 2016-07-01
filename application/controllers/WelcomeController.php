@@ -51,9 +51,9 @@ class WelcomeController extends CI_Controller {
 		$this->load->view('detail', $data);
 	}
 
-	public function ajaxGetPost() {
+	public function ajaxGetAllPost() {
 		$this->load->model('PostModel', 'pm');
-		$data = $this->pm->getPost();
+		$data = $this->pm->getPost('ajaxGetAllPost');
 		$this->load->model('CommentModel', 'cm');
 		$commentNum = $this->cm->totalCom($data['data']);
 		$data['num'] = $commentNum;
@@ -62,6 +62,16 @@ class WelcomeController extends CI_Controller {
 		// var_dump($data['page']->create_links());
 		// var_dump($data['page']->cur_page);
 		// var_dump($data['page']);die;
+		echo json_encode($data);
+	}
+
+	public function ajaxGetTagPost() {
+		$this->load->model('PostModel', 'pm');
+		$data = $this->pm->getPost('ajaxGetTagPost');
+		$this->load->model('CommentModel', 'cm');
+		$commentNum = $this->cm->totalCom($data['data']);
+		$data['num'] = $commentNum;
+		$data['data'] = $data['data']->result();
 		echo json_encode($data);
 	}
 

@@ -75,7 +75,7 @@
 		}
 		return false;
 	}
-	function ajaxGetPost(page) {
+	function ajaxGetAllPost(page) {
 		var c = getCache(page);
 		console.log(c);
 		if (c !== false) {
@@ -86,7 +86,7 @@
 		}
 		$.ajax({
 			type : "GET",
-			url : "<?=site_url('welcome/ajaxGetPost')?>?p="+page,
+			url : "<?=site_url('welcome/ajaxGetAllPost')?>?p="+page,
 			dataType : "json",
 			success : function(data){
 				// console.log(data);
@@ -114,7 +114,40 @@
 			}
 		});
 	}
-	ajaxGetPost(1);
+	ajaxGetAllPost(1);
+
+	function ajaxGetTagPost(page,tag){
+		$.ajax({
+			type : "GET",
+			url : "<?=site_url('welcome/ajaxGetTagPost')?>?p="+page+"&PostSearch[tags]="+tag,
+			dataType : "json",
+			success : function(data){
+				// console.log(data);
+				var html ="";
+				$(data.data).each(function(key,value){
+					//拼标签
+					var tagshtml = "";
+					$(value.tags).each(function(key1,value1){
+						tagshtml += '<span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="">'+value1+'</a>';
+					});
+                    html += '<div class="post-id" data-key="'+value.id+'"><div class="post"><div class="title"><h2><a href="/index.php/welcome/detail?id='+value.id+'">'+value.title+'</a></h2><div class="author"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'&nbsp;&nbsp;&nbsp;&nbsp;</em><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.username+'</em></div></div><br /><div class="content">'+value.content+'</div><br /><div class="nav">'+tagshtml+'<br/><a href="">评论 ('+data.num[value.id]+')</a> |最后修改于 '+value.update_time+'</div></div><hr /></div>'
+				});
+				//放到页面中覆盖原数据
+				$("#postList").html(html);
+
+				//根据总的页数，拼出翻页字符串
+				var pageString = data.page;
+
+				$('.pagination').html(pageString);
+
+				//放到缓存中
+				cache.push([page, html, pageString]);
+				$(document.body).animate({'scrollTop':0},1000);
+
+			}
+		});
+	}
+	// ajaxGetTagPost(1, 'php');
 </script>
 
 

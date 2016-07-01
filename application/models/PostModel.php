@@ -101,6 +101,7 @@ class PostModel extends MY_Model
 		);
 	}
 
+	//传统方式显示日志文章
 	public function lst($perpage = 10) {
 		//标签
 		$tags = $this->input->get('PostSearch[tags]');
@@ -139,7 +140,8 @@ class PostModel extends MY_Model
 		);		
 	}
 
-	public function getPost($perpage = 10) {
+	//ajax显示日志文章
+	public function getPost($ajaxMethod, $perpage = 10) {
 		//标签
 		$tags = $this->input->get('PostSearch[tags]');
 		if ($tags) {
@@ -156,6 +158,8 @@ class PostModel extends MY_Model
 		$config['total_rows'] = $count;
 		$config['per_page'] = $perpage;
 		$config['cur_page'] = $currpage;
+		$config['ajax_method'] = $ajaxMethod;
+		$config['ajax_para'] = $tags;
 		$this->load->library('pagination');
 		$this->load->library('page');
 		$ajaxPage = $this->page->initialize($config);
