@@ -92,6 +92,14 @@ class WelcomeController extends CI_Controller {
 		$this->captcha->showImg();
 	}
 
+	//会员登出
+	public function logout() {
+		// var_dump($_SESSION);
+		session_destroy();
+		// var_dump($_SESSION);die;
+		redirect(site_url('Welcome'));
+	}
+
 	//检查用户名是否存在
 	public function checkUsername($username) {
 		// var_dump($username);die;
@@ -131,7 +139,7 @@ class WelcomeController extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	//
+	//ajax获取tag标签
 	public function ajaxGetTagPost() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->getPost('ajaxGetTagPost');
@@ -142,7 +150,7 @@ class WelcomeController extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	//
+	//ajax评论
 	public function ajaxPushComment() {
 		$this->load->model('CommentModel','cm');
 		$data = $this->cm->create();

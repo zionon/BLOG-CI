@@ -39,12 +39,6 @@ class CommentModel extends MY_Model
 		//总的记录数
 		$config['total_rows'] = $count;
 		$config['per_page'] = $perpage;
-		//翻页是变量继续传
-		// $config['reuse_query_string'] = TRUE;
-		// $config['first_link'] = '首页';
-		// $config['last_link'] = '尾页';
-		// $config['next_link'] = '下一页';
-		// $config['prev_link'] = '上一页';
 		//根据数组配置翻页类
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
@@ -63,7 +57,7 @@ class CommentModel extends MY_Model
 			$pos = strpos($key, $find);
 			if ($pos === FALSE) {
 				$odbyKey = $key;
-				$odbyWay = 'asc';
+				$odbyWay = 'desc';
 				$odbyArray['odbyString'] = 'class="desc" data-sort="-'.$key.'" href="'.site_url('CommentController/commentList').'?sort=-'.$key.'"';
 				$odbyArray['key'] = $odbyKey;
 			} else {

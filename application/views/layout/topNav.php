@@ -40,7 +40,7 @@
 						<li><a href="">我的收藏</a></li>
 						<li><a href="">我的评论</a></li>
 						<li><a href="">我的提问</a></li>
-						<li><a href="<?=site_url('userController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
+						<li><a href="<?=site_url('WelcomeController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php else: ?>
 						<li><a href="">关于博主</a></li>
 						<li><a href="<?=site_url('WelcomeController/register')?>">注册</a></li>

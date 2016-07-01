@@ -5,6 +5,7 @@
     		<h1>评论管理</h1>
 	    	<div id="w0" class="grid-view">
 		    	<div class="summary"><?php if($count) echo $count; ?></div>
+		    <form id="commentCheck" class="form-horizontal" action="<?=site_url('CommentController/commentCheck')?>" method="post">
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
@@ -54,10 +55,11 @@
 								 	<td><?=$value->author?></td>
 								 	<td><?=$value->title?></td>
 									<td>
-									<a href="<?=site_url('PostController/postDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
-									<a href="<?=site_url('PostController/postUpdate/'.$value->id)?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
-									<a href="<?=site_url('PostController/postDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
-									<a href="<?=site_url('CommentController/commentChk/'.$value->id)?>" title="审核" aria-label="审核" data-pjax="0" data-confirm="确定要审核吗?"><span class="glyphicon glyphicon-check"></span></a>
+										<a href="<?=site_url('PostController/postDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
+										<a href="<?=site_url('PostController/postUpdate/'.$value->id)?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
+										<a href="<?=site_url('PostController/postDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+										<a href="<?=site_url('CommentController/commentChk/'.$value->id)?>" title="审核" aria-label="审核" data-pjax="0" data-confirm="确定要审核吗?"><span class="glyphicon glyphicon-check"></span></a>
+										<input type="checkbox" name="CommentCheck[]" value="<?=$value->id?>" />
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -66,6 +68,11 @@
 						<?php endif; ?>
 					</tbody>
 				</table>
+				<div>
+					<input type="submit" value="确定审核"  class="comment_btn btn btn-success" data-confirm="确定要审核吗?" />
+				</div>
+			</form>
+				<!-- <input type="button" value="提交评论"  class="comment_btn btn btn-success" />	    -->
 				<ul class="pagination">
 					<?=$page?>
 				</ul>
@@ -77,7 +84,7 @@
 <?php $this->load->view('layout/foot'); ?>
 <script type="text/javascript">
 	jQuery(document).ready(function () {
-		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/CommentController\/commentList?","filterSelector":"#w0-filters input, #w0-filters select"});
+		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/comment\/commentList?","filterSelector":"#w0-filters input, #w0-filters select"});
 		
 		jQuery.ajax({
 			type : "GET",

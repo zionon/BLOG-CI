@@ -341,7 +341,8 @@ class CI_Config {
 			{
 				$uri = implode('/', $uri);
 			}
-			return trim(str_replace('Controller', '', $uri), '/');
+			//修改了生成的uri
+			return lcfirst(trim(str_replace('Controller', '', $uri), '/'));
 		}
 		elseif (is_array($uri))
 		{

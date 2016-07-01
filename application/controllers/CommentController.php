@@ -27,4 +27,18 @@ class CommentController extends MY_Controller
 		$num = $this->cm->statusNum();
 		echo json_decode($num);
 	}
+
+	public function commentCheck() {
+		$this->load->model('CommentModel','cm');
+		foreach ($this->input->post('CommentCheck') as $value) {
+			$this->cm->chkCom($value);
+		}
+		redirect(site_url('CommentController/commentList'));
+	}
 }
+
+
+
+
+
+
