@@ -116,10 +116,10 @@
 	}
 	ajaxGetAllPost(1);
 
-	function ajaxGetTagPost(page,tag){
+	function ajaxGetTagPost(page,tag,id){
 		$.ajax({
 			type : "GET",
-			url : "<?=site_url('welcome/ajaxGetTagPost')?>?p="+page+"&PostSearch[tags]="+tag,
+			url : "<?=site_url('welcome/ajaxGetTagPost')?>?p="+page+"&PostSearch[tags]="+tag+"&PostSearch[id]="+id,
 			dataType : "json",
 			success : function(data){
 				// console.log(data);
