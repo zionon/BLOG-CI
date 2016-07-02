@@ -91,15 +91,6 @@
 jQuery(document).ready(function () {
 jQuery('#w0').yiiActiveForm([{"id":"post-title","name":"title","container":".field-post-title","input":"#post-title","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"标题不能为空。"});yii.validation.string(value, messages, {"message":"标题必须是一条字符串。","max":128,"tooLong":"标题只能包含至多128个字符。","skipOnEmpty":1});}},{"id":"post-content","name":"content","container":".field-post-content","input":"#post-content","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"内容不能为空。"});yii.validation.string(value, messages, {"message":"内容必须是一条字符串。","skipOnEmpty":1});}},{"id":"post-tags","name":"tags","container":".field-post-tags","input":"#post-tags","validate":function (attribute, value, messages, deferred, $form) {yii.validation.string(value, messages, {"message":"标签必须是一条字符串。","skipOnEmpty":1});}},{"id":"post-status","name":"status","container":".field-post-status","input":"#post-status","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"状态不能为空。"});yii.validation.number(value, messages, {"pattern":/^\s*[+-]?\d+\s*$/,"message":"状态必须是整数。","skipOnEmpty":1});}}], []);
 
-jQuery.ajax({
-	type : "GET",
-	url : "<?=site_url('CommentController/commentStatus')?>",
-	dataType : "json",
-	success : function(data){
-		jQuery('#status-num').text(data);
-	}
-});
-
 });
 </script>
 

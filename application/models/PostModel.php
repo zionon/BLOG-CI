@@ -172,7 +172,7 @@ class PostModel extends MY_Model
 		$this->db->order_by('create_time','desc');
 		$data = $this->db->get('', $perpage, $offset);
 		for ($i=0; $i < count($data->result()); $i++) { 
-			// $data->result()[$i]->content = $this->getPartStr($data->result()[$i]->content, 100);
+			$data->result()[$i]->content = $this->getPartStr($data->result()[$i]->content, 100);
 			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);
 			$data->result()[$i]->update_time = date('Y-m-d H:i:s', $data->result()[$i]->update_time);
 			$data->result()[$i]->create_time = date('Y-m-d H:i:s', $data->result()[$i]->create_time);

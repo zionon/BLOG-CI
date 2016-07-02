@@ -8,3 +8,18 @@
 
 </body>
 </html>
+
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+		jQuery.ajax({
+			type : "GET",
+			url : "<?=site_url('CommentController/commentStatus')?>",
+			dataType : "json",
+			success : function(data){
+				jQuery('#status-num').text(data);
+			}
+		});
+
+	});
+	//抽时间要理解get上面url乱码	
+</script>
