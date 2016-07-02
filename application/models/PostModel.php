@@ -106,9 +106,6 @@ class PostModel extends MY_Model
 		//标签
 		$tags = $this->input->get('PostSearch[tags]');
 		if ($tags) {
-			// $id = $this->input->get('Tags[id]');
-			// $this->load->model('TagModel', 'tm');
-			// $this->tm->addFrequency($id);
 			$this->db->like('ci_post.tags', $tags);
 		}
 		$this->db->from($this->_tableName);
@@ -175,6 +172,7 @@ class PostModel extends MY_Model
 		$this->db->order_by('create_time','desc');
 		$data = $this->db->get('', $perpage, $offset);
 		for ($i=0; $i < count($data->result()); $i++) { 
+			// $data->result()[$i]->content = $this->getPartStr($data->result()[$i]->content, 100);
 			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);
 			$data->result()[$i]->update_time = date('Y-m-d H:i:s', $data->result()[$i]->update_time);
 			$data->result()[$i]->create_time = date('Y-m-d H:i:s', $data->result()[$i]->create_time);
@@ -275,11 +273,26 @@ class PostModel extends MY_Model
 	// 	$page = $this->load->library('page');
 	// 	return $this->page->initialize($config);
 	// }
+	protected function getPartStr($str, $len) {
+		$one = 0;
+		$partstr = '';
+		for ($i=0; $i < $len; $i++) { 
+			$sstr = substr($str, $one, 3);
+			if (ord($sstr) > 224) {
+				$partstr .= substr($str, $one, 3);
+				$one += 3;
+			} elseif (ord($sstr) > 192) {
+				$partstr .= substr($str, $one, 2);
+				$one += 2;
+			} elseif (ord($sstr) < 192) {
+				$partstr .= substr($str, $one, 1);
+				$one += 1;
+			}
+		}
+		if (strlen($str) < $one) {
+			return $partstr;
+		} else {
+			return $partstr.'....';
+		}
+	}
 }
-
-
-
-
-
-
-
