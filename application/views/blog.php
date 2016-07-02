@@ -102,9 +102,9 @@
 	//ajax获取tag标签日志
 	function ajaxGetTagPost(page,tag,id){
 		// console.log(cache);
-		var c = getCache(page,'tag');
+		var c = getCache(page,tag);
 		console.log(c);
-		if (c !== false && c[1] == 'tag') {
+		if (c !== false && c[1] == tag) {
 			$('#postList').html(c[2]);
 			$('.pagination').html(c[3]);
 			$(document.body).animate({'scrollTop':0},1000);
@@ -115,7 +115,7 @@
 			url : "<?=site_url('welcome/ajaxGetTagPost')?>?p="+page+"&PostSearch[tags]="+tag,
 			dataType : "json",
 			success : function(data){
-				createPost(data,page,'tag');
+				createPost(data,page,tag);
 			}
 		});
 	}
