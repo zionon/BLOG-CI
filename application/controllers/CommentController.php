@@ -16,6 +16,12 @@ class CommentController extends MY_Controller
 		$this->load->view('commentList', $data);
 	}
 
+	public function commentDelete($id) {
+		$this->load->model('CommentModel', 'cm');
+		$this->cm->delete($id);
+		redirect(site_url('CommentController/commentList'));
+	}
+
 	public function commentChk($id) {
 		$this->load->model('CommentModel', 'cm');
 		$this->cm->chkCom($id);
