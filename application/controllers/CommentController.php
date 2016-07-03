@@ -22,6 +22,13 @@ class CommentController extends MY_Controller
 		redirect(site_url('CommentController/commentList'));
 	}
 
+	public function commentDetail($id) {
+		$this->load->model('CommentModel', 'cm');
+		$data = $this->cm->detail($id);
+		// var_dump($data);die;
+		$this->load->view('commentDetail', $data);
+	}
+
 	public function commentChk($id) {
 		$this->load->model('CommentModel', 'cm');
 		$this->cm->chkCom($id);

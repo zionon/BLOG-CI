@@ -135,6 +135,18 @@ class CommentModel extends MY_Model
 		return $data;
 	}
 
+	public function detail($id) {
+		$this->db->from($this->_tableName);
+		$this->db->where('comment.id', $id);
+		$this->db->where('lookup.type', 'CommentStatus');
+		$this->db->join('post', 'post.id=comment.post_id', 'left');
+		$this->db->join('lookup', 'comment.status=lookup.code');
+		$this->db->select('comment.id,comment.content,lookup.name,comment.create_time,comment.author,comment.email,post.title');
+		$data = $this->db->get();
+		$data = $data->result('array');
+		return $data[0];
+	}
+
 	public function chkCom($id) {
 		$this->db->where('id', $id);
 		$data = array(

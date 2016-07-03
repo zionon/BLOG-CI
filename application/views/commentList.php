@@ -55,7 +55,7 @@
 								 	<td><?=$value->author?></td>
 								 	<td><?=$value->title?></td>
 									<td>
-										<a href="<?=site_url('PostController/postDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
+										<a href="<?=site_url('CommentController/commentDetail/'.$value->id)?>" title="查看" aria-label="查看" data-pjax="0"><span class="glyphicon glyphicon-eye-open"></span></a> 
 										<a href="<?=site_url('PostController/postUpdate/'.$value->id)?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
 										<a href="<?=site_url('CommentController/commentDelete/'.$value->id)?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
 										<a href="<?=site_url('CommentController/commentChk/'.$value->id)?>" title="审核" aria-label="审核" data-pjax="0" data-confirm="确定要审核吗?"><span class="glyphicon glyphicon-check"></span></a>
