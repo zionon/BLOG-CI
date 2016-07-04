@@ -152,10 +152,15 @@ class WelcomeController extends CI_Controller {
 
 	//ajax评论
 	public function ajaxPushComment() {
-		$this->load->model('CommentModel','cm');
-		$data = $this->cm->create();
-		$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
-		echo json_encode($data);
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('comment') === FALSE) {
+			echo "";
+		} else {
+			$this->load->model('CommentModel','cm');
+			$data = $this->cm->create();
+			$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
+			echo json_encode($data);
+		}
 	}
 
 }

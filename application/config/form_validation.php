@@ -18,6 +18,24 @@ $config = array(
         ),
     ),
 
+    'comment' => array(
+        array(
+            'field' => 'Comment[author]',
+            'label' => '作者',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'Comment[email]',
+            'label' => '邮箱',
+            'rules' => 'required|valid_email'
+        ),
+        array(
+            'field' => 'Comment[content]',
+            'label' => '内容',
+            'rules' => 'required'
+        ),
+    ),
+
     'register' => array(
         array(
             'field' => 'User[username]',

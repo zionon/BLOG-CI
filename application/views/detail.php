@@ -87,7 +87,8 @@
 								</div>
 							</div>							
 						    <div>
-						        <input type="button" value="提交评论"  class="comment_btn btn btn-success" />	   
+						        <input type="button" value="提交评论"  class="comment_btn btn btn-success" />
+<!-- 						        <button type="submit" class="comment_btn btn btn-success">发 布</button>  -->  
 						    </div>					    
 					    </form>
 					</div>
