@@ -4,7 +4,7 @@ class Page extends CI_Pagination
 	protected $ajax_method = '';
 	protected $ajax_para = '';
 	public function create_links() {
-				// If our item count or per-page total is zero there is no need to continue.
+		// If our item count or per-page total is zero there is no need to continue.
 		// Note: DO NOT change the operator to === here!
 		if ($this->total_rows == 0 OR $this->per_page == 0)
 		{

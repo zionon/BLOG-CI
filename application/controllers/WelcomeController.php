@@ -46,7 +46,7 @@ class WelcomeController extends CI_Controller {
 		$data['tag']['tags'] = $tag;
 		// var_dump($data);die;
 		$this->load->model('CommentModel', 'cm');
-		$comm = $this->cm->find($this->input->get('id'));
+		$comm = $this->cm->getComment($this->input->get('id'), 'ajaxGetComment');
 		$comments = $this->cm->newCom();
 		$data['comment'] = $comm;
 		$data['comments']['comment'] = $comments->result();
@@ -143,6 +143,7 @@ class WelcomeController extends CI_Controller {
 	public function ajaxGetTagPost() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->getPost('ajaxGetTagPost');
+
 		$this->load->model('CommentModel', 'cm');
 		$commentNum = $this->cm->totalCom($data['data']);
 		$data['num'] = $commentNum;
@@ -150,7 +151,7 @@ class WelcomeController extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	//ajax评论
+	//ajax提交评论
 	public function ajaxPushComment() {
 		$this->load->library('form_validation');
 		if ($this->form_validation->run('comment') === FALSE) {
@@ -161,6 +162,14 @@ class WelcomeController extends CI_Controller {
 			$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
 			echo json_encode($data);
 		}
+	}
+
+	//ajax获取评论
+	public function ajaxGetComment() {
+		$this->load->model('CommentModel', 'cm');
+		$post_id = $this->input->get('post_id');
+		$data = $this->cm->getComment($post_id, 'ajaxGetComment');
+		echo json_encode($data);
 	}
 
 }

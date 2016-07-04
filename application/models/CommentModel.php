@@ -125,14 +125,34 @@ class CommentModel extends MY_Model
 		}
 	}
 
-	public function find($post_id) {
+	public function getComment($post_id,$ajaxMethod,$perpage = 10) {
 		$this->db->from($this->_tableName);
 		$this->db->where('post_id',$post_id);
 		$this->db->where('status', '2');
+		//总的记录数
+		$count = $this->db->count_all_results('', FALSE);
+		//计算总的页数
+		$pageCount = ceil($count / $perpage);
+		//当前页
+		$currpage = max(1, (int)$this->input->get('p'));
+		$config['total_rows'] = $count;
+		$config['per_page'] = $perpage;
+		$config['cur_page'] = $currpage;
+		$config['ajax_method'] = $ajaxMethod;
+		$this->load->library('pagination');
+		$this->load->library('page');
+		$ajaxPage = $this->page->initialize($config);
+		$ajaxPage = $this->page->create_links();
+		//根据当前页计算偏移量
+		$offset = ($currpage - 1) * $perpage;
+
 		$this->db->select('content,create_time,author');
-		$data = $this->db->get();
+		$data = $this->db->get('', $perpage, $offset);
 		$data = $data->result('array');
-		return $data;
+		return array(
+			'data' => $data,
+			'page' => $ajaxPage
+		);
 	}
 
 	public function detail($id) {
