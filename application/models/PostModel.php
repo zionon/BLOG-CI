@@ -114,6 +114,10 @@ class PostModel extends MY_Model
 		if ($tags) {
 			$this->db->like('ci_post.tags', $tags);
 		}
+		$cat_id = $this->input->get('PostSearch[cat_id]');
+		if ($cat_id) {
+			$this->db->where('ci_post.cat_id', $cat_id);
+		}
 		$this->db->from($this->_tableName);
 		$this->db->where('status', '2');
 		$count = $this->db->count_all_results('', FALSE);
@@ -150,6 +154,11 @@ class PostModel extends MY_Model
 		if ($tags) {
 			$this->db->like('ci_post.tags', $tags);
 		}
+		//类别
+		$cat_id = $this->input->get('PostSearch[cat_id]');
+		if ($cat_id) {
+			$this->db->where('ci_post.cat_id', $cat_id);
+		}
 		$this->db->from($this->_tableName);
 		$this->db->where('status', '2');
 		//总的记录数
@@ -177,6 +186,7 @@ class PostModel extends MY_Model
 		//取数据
 		$this->db->order_by('create_time','desc');
 		$data = $this->db->get('', $perpage, $offset);
+		// var_dump($this->db->last_query());
 		for ($i=0; $i < count($data->result()); $i++) { 
 			$data->result()[$i]->content = $this->getPartStr($data->result()[$i]->content, 100);
 			$data->result()[$i]->tags = explode(',', $data->result()[$i]->tags);

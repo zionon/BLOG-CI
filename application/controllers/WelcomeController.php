@@ -33,6 +33,9 @@ class WelcomeController extends CI_Controller {
 		$data['num'] = $commentNum;
 		$data['comments']['comment'] = $comment->result();
 		// var_dump($data);die;
+		$this->load->model('CategoryModel', 'ca');
+		$data['categorys']['tree'] = $this->ca->categoryString();
+		// var_dump($data['categorys']['tree']);die;
 		$this->load->view('blog', $data);
 	}
 
@@ -132,18 +135,24 @@ class WelcomeController extends CI_Controller {
 		$commentNum = $this->cm->totalCom($data['data']);
 		$data['num'] = $commentNum;
 		$data['data'] = $data['data']->result();
-		// var_dump($data['page']);		
-		// var_dump($data['page']->create_links());
-		// var_dump($data['page']->cur_page);
-		// var_dump($data['page']);die;
 		echo json_encode($data);
 	}
 
-	//ajax获取tag标签
+	//ajax获取tag标签日志
 	public function ajaxGetTagPost() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->getPost('ajaxGetTagPost');
+		$this->load->model('CommentModel', 'cm');
+		$commentNum = $this->cm->totalCom($data['data']);
+		$data['num'] = $commentNum;
+		$data['data'] = $data['data']->result();
+		echo json_encode($data);
+	}
 
+	//ajax获取归类文档
+	public function ajaxGetCatPost() {
+		$this->load->model('PostModel', 'pm');
+		$data = $this->pm->getPost('ajaxGetCatPost');
 		$this->load->model('CommentModel', 'cm');
 		$commentNum = $this->cm->totalCom($data['data']);
 		$data['num'] = $commentNum;

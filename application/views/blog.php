@@ -52,6 +52,7 @@
 				<div class="col-md-3">
 					<?php $this->load->view('layout/tags', $tags); ?>						
 					<?php $this->load->view('layout/comment', $comments); ?>
+					<?php $this->load->view('layout/category', $categorys); ?>
 				</div>
 			</div>			
 		</div>
@@ -119,6 +120,24 @@
 			}
 		});
 	}
+
+	//ajax获取类别日志
+	function ajaxGetCatPost(page,cat) {
+		var c = getCache(page, cat);
+		if (c !== false && c[1] == cat) {
+			$('#postList').html(c[2]);
+			$('.pagination').html(c[3]);
+			$(document.body).animate({'scrollTop':0},1000);
+			return;
+		}		
+		$.ajax({
+			type : "GET",
+			url : "<?=site_url('welcome/ajaxGetCatPost')?>?p="+page+"&PostSearch[cat_id]="+cat,
+			dataType : "json",
+			success : function(data){
+				createPost(data,page,cat);
+			}
+		});	}
 
 	//接收服务器返回后拼接字符串,并显示
 	function createPost(data,page,mark){

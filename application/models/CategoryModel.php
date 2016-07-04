@@ -5,6 +5,17 @@ class CategoryModel extends MY_Model
 	protected $_tableName = 'category';
 	protected $_insertFields = array('cat_name','parent_id');
 
+	public function categoryString() {
+		$tree = $this->getTree();
+		$caArray = array();
+		foreach ($tree as $value) {
+			$name = str_repeat('-',8*$value['level']).$value['cat_name'];
+			$cat = "'".$value['id']."'";
+			$caArray[] = '<p><a onclick="ajaxGetCatPost(1,'.$cat.')" href="javascript:void(0)">'.$name.'</a></p>';
+		}
+		return $caArray;
+	}
+
 	//找一个分类所有子分类的ID
 	public function getChildren($catId) {
 		$this->db->from($this->_tableName);
