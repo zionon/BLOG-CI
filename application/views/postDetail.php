@@ -30,6 +30,10 @@
 					<td><?=$tags?></td>
 				</tr>
 				<tr>
+					<th>分类</th>
+					<td><?=$cat_name?></td>
+				</tr>
+				<tr>
 					<th>状态</th>
 					<td><?=$name?></td>
 				</tr>

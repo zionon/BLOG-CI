@@ -2,8 +2,8 @@
 class PostModel extends MY_Model
 {
 	protected $_tableName = 'post';
-	protected $_insertFields = array('title','content','status','tags');
-	protected $_updateFields = array('title','content','status','tags');
+	protected $_insertFields = array('title','content','status','tags','cat_id');
+	protected $_updateFields = array('title','content','status','tags','cat_id');
 
 	public function search($perpage = 10) {
 		$this->db->from($this->_tableName);
@@ -188,9 +188,10 @@ class PostModel extends MY_Model
 		$this->db->from($this->_tableName);
 		$this->db->where('ci_post.id', $id);
 		$this->db->where('ci_lookup.type', 'PostStatus');
-		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.status,post.tags,user.username,lookup.name', FALSE);
+		$this->db->select('post.id,post.title,post.content,post.create_time,post.update_time,post.status,post.tags,post.cat_id,user.username,lookup.name,category.cat_name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
 		$this->db->join('lookup','post.status=lookup.code','left');
+		$this->db->join('category','post.cat_id=category.id','left');
 		$data = $this->db->get();
 		$data = $data->result('array');
 		return $data[0];

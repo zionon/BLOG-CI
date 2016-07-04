@@ -8,8 +8,10 @@ class TagModel extends MY_Model
 		$this->db->order_by('frequency','desc');
 		$data = $this->db->get($this->_tableName)->result();
 		// static $oldCount = '';
-		$count = count($data)/5 + 1;
+		// 有问题
+		$count = (int)(count($data)/5 + 1);
 		$tagsArray = array_chunk($data, $count);
+		// var_dump($tagsArray);die;
 		foreach ($tagsArray[0] as $key => $value) {
 			$tag = "'".$value->name."'";
 			$id = "'".$value->id."'";

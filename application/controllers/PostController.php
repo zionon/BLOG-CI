@@ -13,7 +13,9 @@ class PostController extends MY_Controller
 		//验证表单
 		$this->load->library('form_validation');
 		if ($this->form_validation->run('post') === FALSE) {
-			$this->load->view('postCreate');
+			$this->load->model('CategoryModel', 'cm');
+			$data['tree'] = $this->cm->getTree();
+			$this->load->view('postCreate', $data);
 		} else {
 			$this->load->model('PostModel','pm');
 			$this->pm->create();
@@ -23,10 +25,13 @@ class PostController extends MY_Controller
 
 	public function postUpdate($id) {
 		$this->load->model('PostModel','pm');
+		$this->load->model('CategoryModel', 'cm');
 		//验证表单
 		$this->load->library('form_validation');
 		if ($this->form_validation->run('post') === FALSE) {
 			$data = $this->pm->find($id);
+			$data['tree'] = $this->cm->getTree();
+			// var_dump($data);die;
 			$this->load->view('postUpdate', $data);
 		} else {
 			$this->pm->update();

@@ -11,14 +11,24 @@
 		<h1>新增文章</h1>
 		<div class="post-form">
 			<form id="w0" action="<?=site_url('PostController/postCreate')?>" method="post">
-		<!-- 		<input type="hidden" name="_csrf" value="RDB0NmpwNUx1RjFmWxV9Hxx7Hkw6IHc9G14WTg01fykDZx8BHBJmFg==" /> -->
-				<div class="form-group field-post-title required" style="width: 30%">
+				<div class="form-group field-post-title required" style="width: 30%;">
 					<label class="control-label" for="post-title">标题</label>
 					<input type="text" id="post-title" class="form-control" name="Post[title]" maxlength="128" value="<?=set_value('Post[title]')?>" />
 					<?php $error = form_error('Post[title]'); ?>
 			        <span style="color:#F00;font-weight:bold;"><?=$error?></span>
 
 					<div class="help-block"></div>
+				</div>
+
+ 				<div class="form-group fiele-post-category required" style="width: 30%;">
+					<label class="control-label" for="post-category">分类</label>
+					<select name="Post[cat_id]" class="form-control">
+						<option>请选择</option>
+                        <?php foreach ($tree as $value): ?>
+                            <option value="<?=$value['id']?>"><?php echo str_repeat('-', 4*$value['level']) . $value['cat_name']; ?></option>
+                        <?php endforeach; ?>
+					</select>
+					<button class="btn btn-success"><a href="<?=site_url('CategoryController/categoryCreate')?>">增加分类</a></button>
 				</div>
 
 				<div class="form-group field-post-content required">
@@ -36,7 +46,7 @@
 
 				<div class="form-group field-post-tags required">
 					<label class="control-label" for="post-tags">标签</label>
-					<input type="text" id="post-tags" class="form-control" name="Post[tags]" style="color: #F00;" placeholder="多个标签之间用,号隔开" autofocus="" />
+					<input type="text" id="post-tags" class="form-control" name="Post[tags]" style="color: #F00;" placeholder="多个标签之间用,号隔开" />
 					<?php $error = form_error('Post[tags]'); ?>
 					<span style="color: #F00;font-weight: bold;"><?=$error?></span>
 					<div class="help-block"></div>
