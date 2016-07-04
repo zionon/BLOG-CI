@@ -15,8 +15,15 @@
                 <div class="col-lg-3">
                     <select name="Category[parent_id]">
                         <option value="0">顶级分类</option>
-                        <?php foreach ($data as $value): ?>
-                            <option value="<?=$value['id']?>"><?php echo str_repeat('-', 4*$value['level']) . $value['cat_name']; ?></option>
+                        <?php foreach ($tree as $value):
+                            if($value['id'] == $data['id'] || in_array($value['id'], $children))
+                                continue;
+                            if($value['id'] == $data['parent_id'])
+                                $select = 'selected="selected"';
+                            else
+                                $select = '';
+                        ?>
+                        <option <?=$select?> value="<?=$value['id']?>"><?php echo str_repeat('-', 4*$value['level']) . $value['cat_name']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -25,7 +32,7 @@
             <div class="form-group required">
                 <label class="col-lg-1 control-label" for="loginform-username">分类名称:</label>
                 <div class="col-lg-3">
-                    <input type="text" id="loginform-username" class="form-control" name="Category[cat_name]" autofocus>
+                    <input type="text" id="loginform-username" class="form-control" name="Category[cat_name]" value="<?=$data['cat_name']?>" autofocus>
                 </div>
                 <div class="col-lg-8">
                     <p class="help-block help-block-error">

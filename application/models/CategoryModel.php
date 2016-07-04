@@ -20,7 +20,7 @@ class CategoryModel extends MY_Model
 			$_ret = array();
 		}
 		//循环所有的分类找子分类
-		foreach ($data as $k => $v) {
+		foreach ($data->result('array') as $k => $v) {
 			if ($v['parent_id'] == $catId) {
 				$_ret[] = $v['id'];
 				//再找这个$v的子分类
@@ -33,9 +33,7 @@ class CategoryModel extends MY_Model
 	public function getTree() {
 		$this->db->from($this->_tableName);
 		$data = $this->db->get();
-		return array(
-			'data' => $this->_getTree($data)
-		);
+		return $this->_getTree($data);
 	}
 
 	private function _getTree($data, $parent_id=0, $level=0) {
