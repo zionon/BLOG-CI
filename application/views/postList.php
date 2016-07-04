@@ -27,7 +27,8 @@
 							<th>
 							<a <?php if($odby['key'] == 'update_time') echo $odby['odbyString']; else echo 'href="'.site_url('PostController/postList?sort=update_time').'" data-sort="update_time"'; ?> >修改时间</a>
 							</th>
-							<th>标签</th>							
+							<th>标签</th>
+							<th>分类</th>							
 							<th>状态</th>
 							<th>添加时间</th>
 							<!-- <th>作者</th> -->
@@ -40,6 +41,20 @@
 							<td><input type="text" class="form-control" name="PostSearch[content]" value="<?=$this->input->get('PostSearch[author_id]')?>"></td>
 							<td><input type="" name="" class="form-control"></td>
 							<td><input type="text" name="PostSearch[tags]" class="form-control" value="<?=$this->input->get('PostSearch[tags]')?>"></td>
+							<td>
+								<select class="form-control" name="PostSearch[cat_id]">
+									<option value="0">全部</option>
+				                    <?php foreach ($tree as $value): 
+				                    	if ($value['id'] == $this->input->get('PostSearch[cat_id]')) {
+				                    		$select = 'selected="selected"';
+				                    	} else {
+				                    		$select = '';
+				                    	}
+				                    ?>
+				                        <option <?=$select?> value="<?=$value['id']?>"><?php echo str_repeat('-', 4*$value['level']) . $value['cat_name']; ?></option>
+				                    <?php endforeach; ?>
+                    			</select>
+							</td>
 							<td>				
 								<select id="post-status" class="form-control" name="PostSearch[status]">
 								<?php $status=$this->input->get('PostSearch[status]'); ?>
@@ -64,6 +79,7 @@
 								 	<td><?=$value->username?></td>
 								 	<td><?=date('Y-m-d H:i:s',$value->update_time)?></td>
 								 	<td><?=$value->tags?></td>
+								 	<td><?=$value->cat_name?></td>
 								 	<td><?=$value->name?></td>
 									<td><?=date('Y-m-d H:i:s',$value->create_time)?></td>
 									<td>
@@ -74,7 +90,7 @@
 								</tr>
 							<?php endforeach; ?>
 						<?php else : ?>
-							<tr><td colspan="8"><div class="empty">没有找到数据。</div></td></tr>
+							<tr><td colspan="9"><div class="empty">没有找到数据。</div></td></tr>
 						<?php endif; ?>
 					</tbody>
 				</table>
@@ -95,7 +111,7 @@
 
 <script type="text/javascript">
 	jQuery(document).ready(function () {
-		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/PostController\/postList?","filterSelector":"#w0-filters input, #w0-filters select"});
+		jQuery('#w0').yiiGridView({"filterUrl":"\/index.php\/post\/postList?","filterSelector":"#w0-filters input, #w0-filters select"});
 
 	});
 	//抽时间要理解get上面url乱码	

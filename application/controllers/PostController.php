@@ -4,6 +4,9 @@ class PostController extends MY_Controller
 	public function postList(){
 		$this->load->model('PostModel','pm');
 		$data = $this->pm->search();
+
+		$this->load->model('CategoryModel', 'cm');
+		$data['tree'] = $this->cm->getTree();
 		// var_dump($data['data']->result());die;
 		// var_dump($data['page']);die;
 		$this->load->view('postList', $data);

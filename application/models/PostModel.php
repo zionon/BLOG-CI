@@ -27,6 +27,11 @@ class PostModel extends MY_Model
 		if ($tags) {
 			$this->db->like('ci_post.tags', $tags);
 		}
+		//分类
+		$cat_id = $this->input->get('PostSearch[cat_id]');
+		if ($cat_id) {
+			$this->db->where('ci_post.cat_id', $cat_id);
+		}
 		//内容
 		// $content = $this->input->get('PostSearch[content]');
 		// if ($content) {
@@ -74,9 +79,10 @@ class PostModel extends MY_Model
 		}
 		$this->db->order_by($odbyKey,$odbyWay);
 		//连表查询
-		$this->db->select('post.id,post.title,post.create_time,post.update_time,post.tags,user.username,lookup.name', FALSE);
+		$this->db->select('post.id,post.title,post.create_time,post.update_time,post.tags,user.username,lookup.name,category.cat_name', FALSE);
 		$this->db->join('user','post.author_id=user.id','left');
 		$this->db->join('lookup','post.status=lookup.code','left');
+		$this->db->join('category', 'post.cat_id=category.id', 'left');
 		$this->db->where('ci_lookup.type','PostStatus');
 		//取数据
 		$data = $this->db->get('',$perpage,$offset);
