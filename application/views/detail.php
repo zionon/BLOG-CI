@@ -26,10 +26,12 @@
 						<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> 
 						<a href=""><?=$tags?></a>			
 						<br/>
-						<a href="">评论 (<?=count($comment)?>)</a> |
+						<a href="">评论 (<?=$num?>)</a> |
 						最后修改于 <?=date('Y-m-d H:i:s', $update_time)?>	
 					</div>
 				</div>
+					
+				<hr />
 
 				<div id="comments">
 					<div id="comments-list"></div>
@@ -138,7 +140,6 @@ $('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".fie
 	function ajaxGetComment(page) {
 		// console.log(cache);
 		var c = getCache(page,'comment');
-		// console.log(c);
 		if (c !== false && c[1] == 'comment') {
 			$('#postList').html(c[2]);
 			$('.pagination').html(c[3]);

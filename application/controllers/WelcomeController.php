@@ -46,10 +46,10 @@ class WelcomeController extends CI_Controller {
 		$data['tag']['tags'] = $tag;
 		// var_dump($data);die;
 		$this->load->model('CommentModel', 'cm');
-		$comm = $this->cm->getComment($this->input->get('id'), 'ajaxGetComment');
 		$comments = $this->cm->newCom();
-		$data['comment'] = $comm;
 		$data['comments']['comment'] = $comments->result();
+		$data['num'] = $this->cm->commentNum($this->input->get('id'));
+		// var_dump($data);die;
 		$this->load->view('detail', $data);
 	}
 

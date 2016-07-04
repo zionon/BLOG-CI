@@ -36,6 +36,14 @@ $config = array(
         ),
     ),
 
+    'category' => array(
+        array(
+            'field' => 'Category[cat_name]',
+            'label' => '分类名称',
+            'rules' => 'required'
+        )
+    ),
+
     'register' => array(
         array(
             'field' => 'User[username]',

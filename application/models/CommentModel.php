@@ -149,10 +149,20 @@ class CommentModel extends MY_Model
 		$this->db->select('content,create_time,author');
 		$data = $this->db->get('', $perpage, $offset);
 		$data = $data->result('array');
+		for ($i=0; $i < count($data); $i++) { 
+			$data[$i]['create_time'] = date('Y-m-d H:i:s', $data[$i]['create_time']);
+		}
 		return array(
 			'data' => $data,
 			'page' => $ajaxPage
 		);
+	}
+
+	public function commentNum($post_id) {
+		$this->db->from($this->_tableName);
+		$this->db->where('post_id', $post_id);
+		$this->db->where('status', '2');
+		return $this->db->count_all_results();
 	}
 
 	public function detail($id) {
