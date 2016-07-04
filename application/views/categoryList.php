@@ -18,7 +18,7 @@
 							<td><?php echo str_repeat('-',8*$value['level']) . $value['cat_name']; ?></td>
 							<td>
 								<a href="<?=site_url('CategoryController/categoryUpdate/'.$value['id'])?>" title="更新" aria-label="更新" data-pjax="0"><span class="glyphicon glyphicon-pencil"></span></a> 
-								<a href="" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
+								<a href="<?=site_url('CategoryController/categoryDelete/'.$value['id'])?>" title="删除" aria-label="删除" data-confirm="您确定要删除此项吗？" data-method="post" data-pjax="0"><span class="glyphicon glyphicon-trash"></span></a>
 							</td>
 							</tr>
 						<?php endforeach; ?>				

@@ -66,6 +66,7 @@ class MY_Model extends CI_Model
 				return FALSE;
 			}
 		}
+		// var_dump($id);die;
 		return $this->db->delete($this->_tableName,array('id' => $id));
 	}
 }

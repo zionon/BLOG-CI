@@ -48,4 +48,18 @@ class CategoryModel extends MY_Model
 		}
 		return $_ret;
 	}
+
+	protected function _before_delete($id) {
+		$children = $this->getChildren($id);
+		if ($children) {
+			$this->db->where_in('id', $children);
+			if($this->db->delete($this->_tableName)){
+				return TRUE;
+			} else {
+				return FALSE;
+			}
+		} else {
+			return TRUE;
+		}
+	}
 }

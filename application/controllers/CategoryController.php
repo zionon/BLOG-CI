@@ -7,6 +7,7 @@ class CategoryController extends MY_Controller
 		$this->load->model('CategoryModel', 'cm');
 		$data = $this->cm->getTree();
 		if ($this->form_validation->run('category') === FALSE) {
+			$data['data'] = $data;
 			$this->load->view('categoryCreate', $data);
 		} else {
 			$this->cm->create();
@@ -32,5 +33,11 @@ class CategoryController extends MY_Controller
 			$this->cm->update($id);
 			redirect(site_url('CategoryController/categoryList'));
 		}
+	}
+
+	public function categoryDelete($id) {
+		$this->load->model('CategoryModel', 'cm');
+		$this->cm->delete($id);
+		redirect(site_url('CategoryController/categoryList'));
 	}
 }
