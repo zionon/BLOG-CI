@@ -5,9 +5,6 @@
 		</li>
 
 		<li class="list-group-item">
-<!-- 			<?php foreach($tags as $value): ?>
-				<?=$value?>
-			<?php endforeach; ?> -->
 			<?=$tags?>
 		</li>
 	</ul>					

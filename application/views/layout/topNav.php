@@ -30,11 +30,11 @@
 			</div>
 			<div id="w1-collapse" class="collapse navbar-collapse">
 				<ul id="w2" class="navbar-nav navbar-right nav">
-					<li class="active"><a href="<?=site_url('welcome/index')?>">首页</a></li>
+					<li <?php if($this->router->class == 'welcomeController' && $this->router->method == 'index') echo 'class="active"'; ?>><a href="<?=site_url('welcome/index')?>">首页</a></li>
 					<?php if(isset($_SESSION['is_admin'])): ?>
-						<li><a href="<?=site_url('postController/postList')?>">文章管理</a></li>
-						<li><a href="<?=site_url('commentController/commentList')?>">评论管理<span class="badge badge-inverse" id="status-num"></span></a></li>
-						<li><a href="<?=site_url('userController/userList')?>">会员管理</a></li>
+						<li <?php if($this->router->class == 'postController') echo 'class="active"'; ?>><a href="<?=site_url('postController/postList')?>">文章管理</a></li>
+						<li <?php if($this->router->class == 'commentController') echo 'class="active"'; ?>><a href="<?=site_url('commentController/commentList')?>">评论管理<span class="badge badge-inverse" id="status-num"></span></a></li>
+						<li <?php if($this->router->class == 'userController') echo 'class="active"'; ?>><a href="<?=site_url('userController/userList')?>">会员管理</a></li>
 						<li><a href="<?=site_url('userController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php elseif(isset($_SESSION['id'])): ?>
 						<li><a href="">我的收藏</a></li>
@@ -43,8 +43,8 @@
 						<li><a href="<?=site_url('WelcomeController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php else: ?>
 						<li><a href="">关于博主</a></li>
-						<li><a href="<?=site_url('WelcomeController/register')?>">注册</a></li>
-						<li><a href="<?=site_url('WelcomeController/login')?>">登录</a></li>
+						<li <?php if($this->router->class == 'welcomeController' && $this->router->method == 'register') echo 'class="active"'; ?>><a href="<?=site_url('WelcomeController/register')?>">注册</a></li>
+						<li <?php if($this->router->class == 'welcomeController' && $this->router->method == 'login') echo 'class="active"'; ?>><a href="<?=site_url('WelcomeController/login')?>">登录</a></li>
 					<?php endif; ?>
 				</ul>
 			</div>
