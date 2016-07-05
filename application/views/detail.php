@@ -59,7 +59,7 @@
 						</div>
 					<?php endforeach ?> -->
 
-					<ul class="pagination">
+					<ul class="pagination" id="comment-pagination">
 
 					</ul>
 
@@ -99,7 +99,9 @@
 						    </div>					    
 					    </form>
 					</div>
-				</div>				
+				</div>
+				<ul class="pagination" id="post-pagination"></ul>
+						
 			</div>
 
 			<div class="col-md-3">
@@ -171,7 +173,7 @@ $('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".fie
 		//根据总的页数，拼出翻页字符串
 		var pageString = data.page;
 
-		$('.pagination').html(pageString);
+		$('#comment-pagination').html(pageString);
 		//放到缓存中
 		cache.push([page, mark, html, pageString]);
 		$(document.body).animate({'scrollTop':0},1000);
@@ -201,6 +203,54 @@ $(".comment_btn").click(function(){
 		}
 	});
 });
+
+	//ajax获取tag标签日志
+	function ajaxGetTagPost(page,tag,id){
+		// console.log(cache);
+		var c = getCache(page,tag);
+		console.log(c);
+		if (c !== false && c[1] == tag) {
+			$('#postList').html(c[2]);
+			$('.pagination').html(c[3]);
+			$(document.body).animate({'scrollTop':0},1000);
+			return;
+		}		
+		$.ajax({
+			type : "GET",
+			url : "<?=site_url('welcome/ajaxGetTagPost')?>?p="+page+"&PostSearch[tags]="+tag,
+			dataType : "json",
+			success : function(data){
+				// console.log(data);
+				var html ="";
+				var name = tag;
+				$(data.data).each(function(key,value){
+					//拼标签
+					var tagshtml = "";
+					$(value.tags).each(function(key1,value1){
+						tagshtml += '<span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="">'+value1+'</a>';
+					});
+			        html += '<div class="post-id" data-key="'+value.id+'"><div class="post"><div class="title"><h2><a href="/index.php/welcome/detail?id='+value.id+'">'+value.title+'</a></h2><div class="author"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'&nbsp;&nbsp;&nbsp;&nbsp;</em><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.username+'</em></div></div><br /><div class="content">'+value.content+'</div><br /><div class="nav">'+tagshtml+'<br/><a href="/index.php/welcome/detail?id='+value.id+'">评论 ('+data.num[value.id]+')</a> |最后修改于 '+value.update_time+'</div></div><hr /></div>'
+				});
+				//放到页面中覆盖原数据
+				$(".post").html(html);
+
+				$(".breadcrumb li:last").remove();
+				$(".breadcrumb li:last a").remove();
+				$(".breadcrumb li:last").text('文章列表');
+				$(".col-md-9 > hr").remove();
+				$("#comments").remove();
+
+				//根据总的页数，拼出翻页字符串
+				var pageString = data.page;
+
+				$('#post-pagination').html(pageString);
+
+				//放到缓存中
+				cache.push([page, tag, html, pageString]);
+				$(document.body).animate({'scrollTop':0},1000);
+			}
+		});
+	}
 
 </script>
 

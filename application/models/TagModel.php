@@ -59,19 +59,9 @@ class TagModel extends MY_Model
     			$tags[$model->name]['id'] = $model->id;
     			$counter++;
 	    	}
-	    			
+
     		ksort($tags);
     	}
     	return $tags;
 	}
 }
-
-
-
-
-
-
-
-
-
-

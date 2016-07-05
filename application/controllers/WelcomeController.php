@@ -39,7 +39,7 @@ class WelcomeController extends CI_Controller {
 		$this->load->view('blog', $data);
 	}
 
-	//单条页面
+	//日志详情页面
 	public function detail() {
 		$this->load->model('PostModel', 'pm');
 		$data = $this->pm->find($this->input->get('id'));

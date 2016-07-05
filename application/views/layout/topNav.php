@@ -30,7 +30,7 @@
 			</div>
 			<div id="w1-collapse" class="collapse navbar-collapse">
 				<ul id="w2" class="navbar-nav navbar-right nav">
-					<li><a href="<?=site_url('welcome/index')?>">首页</a></li>
+					<li class="active"><a href="<?=site_url('welcome/index')?>">首页</a></li>
 					<?php if(isset($_SESSION['is_admin'])): ?>
 						<li><a href="<?=site_url('postController/postList')?>">文章管理</a></li>
 						<li><a href="<?=site_url('commentController/commentList')?>">评论管理<span class="badge badge-inverse" id="status-num"></span></a></li>
