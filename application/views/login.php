@@ -54,7 +54,7 @@
             </div> -->
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
-                    <button type="submit" class="btn btn-primary">Login</button>            
+                    <button type="submit" class="btn btn-primary">登录</button>            
                 </div>
             </div>
         </form>

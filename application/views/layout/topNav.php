@@ -15,7 +15,7 @@
 	<script src="<?=_PUBLIC?>/js/yii.gridView.js"></script>
 	<script src="<?=_PUBLIC?>/js/bootstrap.js"></script>
 </head>
-<body>
+<body style="overflow-y: scroll">
 
 <div class="wrap">
     <nav id="w1" class="navbar-inverse navbar-fixed-top navbar" role="navigation">
