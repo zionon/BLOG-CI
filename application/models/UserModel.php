@@ -89,12 +89,14 @@ class UserModel extends MY_Model
 					'is_admin' => $userInfo->is_admin,
 				);
 				$this->session->set_userdata($sessionData);
+				// $this->session->set_tempdata($sessionData, NULL, 500);
 			} else {
 				$sessionData = array(
 					'id' => $userInfo->id,
 					'username' => $userInfo->username,
 				);
 				$this->session->set_userdata($sessionData);
+				$this->session->set_tempdata($sessionData, NULL, 50000);
 			}
 			return TRUE;
 		} else {
