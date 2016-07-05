@@ -5,44 +5,16 @@ class TagModel extends MY_Model
 	protected $_insertFiles = array('name','frequency');
 
 	public function search() {
-		$this->db->order_by('frequency','desc');
-		$data = $this->db->get($this->_tableName)->result();
-		// static $oldCount = '';
-		// 有问题
-		$count = (int)(count($data)/5 + 1);
-		$tagsArray = array_chunk($data, $count);
-		// var_dump($tagsArray);die;
-		foreach ($tagsArray[0] as $key => $value) {
-			$tag = "'".$value->name."'";
-			$id = "'".$value->id."'";
-			$tagsH2[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.','.$id.')" href="javascript:void(0)"><h2 style="display: inline-block;"><span class="label label-success">'.$value->name.'</span></h2></a>';
-		}
-		foreach ($tagsArray[1] as $key => $value) {
-			$tag = "'".$value->name."'";
-			$id = "'".$value->id."'";
-			$tagsH3[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.','.$id.')" href="javascript:void(0)"><h3 style="display: inline-block;"><span class="label label-primary">'.$value->name.'</span></h3></a>';
-		}
-		foreach ($tagsArray[2] as $key => $value) {
-			$tag = "'".$value->name."'";
-			$id = "'".$value->id."'";
-			$tagsH4[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.','.$id.')" href="javascript:void(0)"><h4 style="display: inline-block;"><span class="label label-warning">'.$value->name.'</span></h4></a>';
-		}
-		foreach ($tagsArray[3] as $key => $value) {
-			$tag = "'".$value->name."'";
-			$id = "'".$value->id."'";
-			$tagsH5[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.','.$id.')" href="javascript:void(0)"><h5 style="display: inline-block;"><span class="label label-info">'.$value->name.'</span></h5></a>';
-		}
-		foreach ($tagsArray[4] as $key => $value) {
-			$tag = "'".$value->name."'";
-			$id = "'".$value->id."'";
-			$tagsH6[$key] = '<a onclick="ajaxGetTagPost(1,'.$tag.','.$id.')" href="javascript:void(0)"><h6 style="display: inline-block;"><span class="label label-danger">'.$value->name.'</span></h6></a>';
-		}
-		$tags = array_merge($tagsH2, $tagsH3, $tagsH4, $tagsH5, $tagsH6);
-		shuffle($tags);
-		// var_dump($tags);
-		// echo "<br />";
-		// var_dump($data);die;
-		return $tags;
+		$tags = $this->tagArray();
+		$tagString='';
+    	//fontstyle 用来显示不同Tag的颜色，比如<h6>用"danger"的底色
+    	$fontStyle=array("6"=>"danger","5"=>"info","4"=>"warning","3"=>"primary","2"=>"success");
+     	foreach($tags as $tag => $value) {
+     		$ajaxTag = "'".$tag."'";
+     		$id = "'".$value['id']."'";
+     		$tagString.='<a href="javascript:void(0)" onclick="ajaxGetTagPost(1,'.$ajaxTag.','.$id.')">  <h'.$value['style'].' style="display: inline-block;"><span class="label label-'.$fontStyle[$value['style']].'">'.$tag.'</span></h'.$value['style'].'></a>';
+     	}		
+		return $tagString;
 	}
 
 	public function add() {
@@ -68,4 +40,38 @@ class TagModel extends MY_Model
 		$this->db->where('id', $id);
 		$this->db->update($this->_tableName ,$data);
 	}
+
+	private function tagArray() {
+		$this->db->limit(20);
+		$this->db->order_by('frequency','desc');
+		$data = $this->db->get($this->_tableName)->result();
+		$total = count($data);
+
+    	$stepper=ceil($total/5); //把标签按个数，平均分组
+    
+    	$tags=array();
+    	$counter=1;
+    	
+    	if($total>0) {
+    		foreach($data as $model) {
+    			$weight=ceil($counter/$stepper)+1;
+    			$tags[$model->name]['style']=$weight;
+    			$tags[$model->name]['id'] = $model->id;
+    			$counter++;
+	    	}
+	    			
+    		ksort($tags);
+    	}
+    	return $tags;
+	}
 }
+
+
+
+
+
+
+
+
+
+
