@@ -96,6 +96,18 @@ class ReplyModel extends MY_Model
 		);
 	}
 
+	public function detail($id) {
+		$this->db->from($this->_tableName);
+		$this->db->where('reply.id', $id);
+		$this->db->where('lookup.type', 'CommentStatus');
+		$this->db->join('comment', 'comment.id=reply.comment_id', 'left');
+		$this->db->join('lookup', 'comment.status=lookup.code');
+		$this->db->select('reply.id,reply.contents,lookup.name,reply.create_time,reply.author,reply.email,comment.content');
+		$data = $this->db->get();
+		$data = $data->result('array');
+		return $data[0];
+	}
+
 	protected function _before_insert(&$data)
 	{
 		$data['create_time'] = time();
