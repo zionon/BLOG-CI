@@ -20,6 +20,15 @@
 			}
 		});
 
+		jQuery.ajax({
+			type : "GET",
+			url : "<?=site_url('ReplyController/replyStatus')?>",
+			dataType : "json",
+			success : function(data){
+				jQuery('#reply-status-num').text(data);
+			}
+		});
+
 	});
 	//抽时间要理解get上面url乱码	
 </script>
