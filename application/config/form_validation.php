@@ -38,22 +38,22 @@ $config = array(
 
     'reply' => array(
         array(
-            'field' => 'Comment_reply[author]',
+            'field' => 'Reply[author]',
             'label' => '作者',
             'rules' => 'required'
         ),
         array(
-            'field' => 'Comment_reply[email]',
+            'field' => 'Reply[email]',
             'label' => '邮箱',
             'rules' => 'required|valid_email'
         ),
         array(
-            'field' => 'Comment_reply[content]',
+            'field' => 'Reply[contents]',
             'label' => '内容',
             'rules' => 'required'
         ),
         array(
-            'field' => 'Comment_reply[comment_id]',
+            'field' => 'Reply[comment_id]',
             'label' => '评论id',
             'rules' => 'required'
         ),

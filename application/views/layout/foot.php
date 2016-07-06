@@ -16,7 +16,7 @@
 			url : "<?=site_url('CommentController/commentStatus')?>",
 			dataType : "json",
 			success : function(data){
-				jQuery('#status-num').text(data);
+				jQuery('#comment-status-num').text(data);
 			}
 		});
 

@@ -33,8 +33,13 @@
 					<li <?php if($this->router->class == 'welcomeController' && $this->router->method == 'index') echo 'class="active"'; ?>><a href="<?=site_url('welcome/index')?>">首页</a></li>
 					<?php if(isset($_SESSION['is_admin'])): ?>
 						<li <?php if($this->router->class == 'postController') echo 'class="active"'; ?>><a href="<?=site_url('postController/postList')?>">文章管理</a></li>
-						<li <?php if($this->router->class == 'commentController') echo 'class="active"'; ?>><a href="<?=site_url('commentController/commentList')?>">评论管理<span class="badge badge-inverse" id="status-num"></span></a></li>
+
+						<li <?php if($this->router->class == 'commentController') echo 'class="active"'; ?>><a href="<?=site_url('commentController/commentList')?>">评论管理<span class="badge badge-inverse" id="comment-status-num"></span></a></li>
+
+						<li <?php if($this->router->class == 'replyController') echo 'class="active"'; ?>><a href="<?=site_url('replyController/replyList')?>">回复管理<span class="badge badge-inverse" id="reply-status-num"></span></a></li>
+
 						<li <?php if($this->router->class == 'userController') echo 'class="active"'; ?>><a href="<?=site_url('userController/userList')?>">会员管理</a></li>
+
 						<li><a href="<?=site_url('userController/logout')?>">退出(<?=$_SESSION['username'];?>)</a></li>
 					<?php elseif(isset($_SESSION['id'])): ?>
 						<li><a href="">我的收藏</a></li>

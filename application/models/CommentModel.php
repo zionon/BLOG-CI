@@ -153,8 +153,9 @@ class CommentModel extends MY_Model
 		$reply = [];
 		for ($i=0; $i < count($data); $i++) { 
 			$data[$i]['create_time'] = date('Y-m-d H:i:s', $data[$i]['create_time']);
-			$this->db->from('comment_reply');
+			$this->db->from('reply');
 			$this->db->where('comment_id', $data[$i]['id']);
+			$this->db->where('status', '2');
 			// $this->db->select('')
 			$result = $this->db->get();
 			$reply[] = $result->result('array');
