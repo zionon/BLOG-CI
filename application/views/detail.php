@@ -134,7 +134,7 @@
 					<h5>发表评论</h5>						
 					<div class="comment-form">
 					    <form id="w0">
-							<input type="hidden" name="Comment[post_id]" value=<?=$id?> />    
+							<input type="hidden" name="Comment[post_id]" value="<?=$id?>" />    
 							<div class="row"> 
 								<div class="col-md-4">
 									<div class="form-group field-comment-author required">
@@ -241,7 +241,7 @@ $('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".fie
 					})
 				}
 			}
-            html += '<div class="comment" id="comment-id-'+value.id+'"><div class="row"><div class="col-md-12"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.author+':</em><br>'+value.content+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'</em><a href="">回复</a></p></div></div></div></div>'+replyHtml;
+            html += '<div class="comment" id="comment-id-'+value.id+'"><div class="row"><div class="col-md-12"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.author+':</em><br>'+value.content+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'</em><a onclick="reply('+value.id+')" href="javascript:void(0)">回复</a></p></div></div></div></div>'+replyHtml;
             replyHtml = "";
 		});
 		//放到页面中覆盖原数据
@@ -283,61 +283,116 @@ $(".comment_btn").click(function(){
 	});
 });
 
-	//ajax获取tag标签日志
-	function ajaxGetTagPost(page,tag,id){
-		// console.log(cache);
-		var c = getCache(page,tag);
-		console.log(c);
-		if (c !== false && c[1] == tag) {
-			$('#postList').html(c[2]);
-			$('.pagination').html(c[3]);
-			$(document.body).animate({'scrollTop':0},1000);
-			return;
-		}		
-		$.ajax({
-			type : "GET",
-			url : "<?=site_url('welcome/ajaxGetTagPost')?>?p="+page+"&PostSearch[tags]="+tag,
-			dataType : "json",
-			success : function(data){
-				// console.log(data);
-				var html ="";
-				var name = tag;
-				$(data.data).each(function(key,value){
-					//拼标签
-					var tagshtml = "";
-					$(value.tags).each(function(key1,value1){
-						tagshtml += '<span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="">'+value1+'</a>';
-					});
-			        html += '<div class="post-id" data-key="'+value.id+'"><div class="post"><div class="title"><h2><a href="/index.php/welcome/detail?id='+value.id+'">'+value.title+'</a></h2><div class="author"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'&nbsp;&nbsp;&nbsp;&nbsp;</em><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.username+'</em></div></div><br /><div class="content">'+value.content+'</div><br /><div class="nav">'+tagshtml+'<br/><a href="/index.php/welcome/detail?id='+value.id+'">评论 ('+data.num[value.id]+')</a> |最后修改于 '+value.update_time+'</div></div><hr /></div>'
+//ajax获取tag标签日志
+function ajaxGetTagPost(page,tag,id){
+	// console.log(cache);
+	var c = getCache(page,tag);
+	console.log(c);
+	if (c !== false && c[1] == tag) {
+		$('#postList').html(c[2]);
+		$('.pagination').html(c[3]);
+		$(document.body).animate({'scrollTop':0},1000);
+		return;
+	}		
+	$.ajax({
+		type : "GET",
+		url : "<?=site_url('welcome/ajaxGetTagPost')?>?p="+page+"&PostSearch[tags]="+tag,
+		dataType : "json",
+		success : function(data){
+			// console.log(data);
+			var html ="";
+			var name = tag;
+			$(data.data).each(function(key,value){
+				//拼标签
+				var tagshtml = "";
+				$(value.tags).each(function(key1,value1){
+					tagshtml += '<span class="glyphicon glyphicon-tag" aria-hidden="true"></span><a href="">'+value1+'</a>';
 				});
-				//放到页面中覆盖原数据
-				$(".post").html(html);
+		        html += '<div class="post-id" data-key="'+value.id+'"><div class="post"><div class="title"><h2><a href="/index.php/welcome/detail?id='+value.id+'">'+value.title+'</a></h2><div class="author"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'&nbsp;&nbsp;&nbsp;&nbsp;</em><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.username+'</em></div></div><br /><div class="content">'+value.content+'</div><br /><div class="nav">'+tagshtml+'<br/><a href="/index.php/welcome/detail?id='+value.id+'">评论 ('+data.num[value.id]+')</a> |最后修改于 '+value.update_time+'</div></div><hr /></div>'
+			});
+			//放到页面中覆盖原数据
+			$(".post").html(html);
 
-				$(".breadcrumb li:last").remove();
-				$(".breadcrumb li:last a").remove();
-				$(".breadcrumb li:last").text('文章列表');
-				$(".col-md-9 > hr").remove();
-				$("#comments").remove();
+			$(".breadcrumb li:last").remove();
+			$(".breadcrumb li:last a").remove();
+			$(".breadcrumb li:last").text('文章列表');
+			$(".col-md-9 > hr").remove();
+			$("#comments").remove();
 
-				//根据总的页数，拼出翻页字符串
-				var pageString = data.page;
+			//根据总的页数，拼出翻页字符串
+			var pageString = data.page;
 
-				$('#post-pagination').html(pageString);
+			$('#post-pagination').html(pageString);
 
-				//放到缓存中
-				cache.push([page, tag, html, pageString]);
-				$(document.body).animate({'scrollTop':0},1000);
-			}
-		});
-	}
+			//放到缓存中
+			cache.push([page, tag, html, pageString]);
+			$(document.body).animate({'scrollTop':0},1000);
+		}
+	});
+}
 
-function replay(id) {
+function reply(id) {
 	$(".comment-form").hide();
 	$("h5").hide();
 	var comId = "#comment-id-"+id;
-	var html = '<div class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" onclick="closeReplay()">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来！</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>hj:</em><p>u 很健康很健康</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>2016-06-28 23:37:32</em></div> ';
+	var html = '<h5>发表回复</h5>	<div class="comment-form"><form id="w0"><input type="hidden" name="Comment_reply[comment_id]" value="'+id+'" /><div class="row"><div class="col-md-4"><div class="form-group field-comment-author required"><label class="control-label" for="comment-author">作者</label><input type="text" id="comment-author" class="form-control" name="Comment_reply[author]" maxlength="128"><div class="help-block"></div></div></div><div class="col-md-4"><div class="form-group field-comment-email required"><label class="control-label" for="comment-email">邮箱</label><input type="text" id="comment-email" class="form-control" name="Comment_reply[email]" maxlength="128"><div class="help-block"></div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group field-comment-content required"><label class="control-label" for="comment-content">内容</label><textarea id="comment-content" class="form-control" name="Comment_reply[content]" rows="6"></textarea><div class="help-block"></div></div></div></div><div><input type="button" value="提交评论"  class="btn btn-success" onclick="pushReply()" /></div></form></div><hr />';
 	$(comId).after(html);
 }
+
+function pushReply() {
+		//先接收表单中的数据，并拼成这样格式的字符串:name=tom&age=231
+	var form = $("#w0");
+	var formData = form.serialize();
+	$.ajax({
+		type : "POST",
+		url : "<?=site_url('WelcomeController/ajaxPushReply');?>",
+		data : formData,	//表单中要提交的数据
+		dataType : "json",	//服务器返回的数据格式
+		success : function(data){
+			$("#comments-list h5 + div").remove();
+			$("#comments-list h5").remove();
+			$("#comments-list hr:first").remove();
+			//清空表单
+			form.trigger("reset");	//触发表单的reset事件
+			var html = '<div id="alert-comment" class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeReplay"><span aria-hidden="true">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+data.author+':</em><p>'+data.content+'</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+data.create_time+'</em></div>';
+			//把整个评论的字符串转化成jq的对象
+			html = $(html);
+			//把拼好的评论放到页面中
+			$("#comments").prepend(html);
+
+			//动画滚动
+			$('html, body').animate({scrollTop: $("#comments").offset().top-$("#alert-comment").height()}, 500);
+
+			$(".comment-form").show();
+			$("h5").show();
+		}
+	});
+}
+
+$(".reply_btn").click(function(){
+	//先接收表单中的数据，并拼成这样格式的字符串:name=tom&age=231
+	var form = $("#w0");
+	var formData = form.serialize();
+	$.ajax({
+		type : "POST",
+		url : "<?=site_url('WelcomeController/ajaxPushReply');?>",
+		data : formData,	//表单中要提交的数据
+		dataType : "json",	//服务器返回的数据格式
+		success : function(data){
+			//清空表单
+			console.log(data);
+			form.trigger("reset");	//触发表单的reset事件
+			var html = '<div id="alert-comment" class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeReplay"><span aria-hidden="true">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+data.author+':</em><p>'+data.content+'</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+data.create_time+'</em></div>';
+			//把整个评论的字符串转化成jq的对象
+			html = $(html);
+			//把拼好的评论放到页面中
+			$("#comments").prepend(html);
+
+			//动画滚动
+			$('html, body').animate({scrollTop: $("#comments").offset().top-$("#alert-comment").height()}, 500); 
+		}
+	});
+});
 
 function closeReplay() {
 	$(".comment-form").show();

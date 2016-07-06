@@ -36,6 +36,29 @@ $config = array(
         ),
     ),
 
+    'reply' => array(
+        array(
+            'field' => 'Comment_reply[author]',
+            'label' => '作者',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'Comment_reply[email]',
+            'label' => '邮箱',
+            'rules' => 'required|valid_email'
+        ),
+        array(
+            'field' => 'Comment_reply[content]',
+            'label' => '内容',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'Comment_reply[comment_id]',
+            'label' => '评论id',
+            'rules' => 'required'
+        ),
+    ),
+
     'category' => array(
         array(
             'field' => 'Category[cat_name]',

@@ -173,6 +173,20 @@ class WelcomeController extends CI_Controller {
 		}
 	}
 
+	//ajax提交回复
+	public function ajaxPushReply()
+	{
+		$this->load->library('form_validation');
+		if ($this->form_validation->run('reply') === false) {
+			echo "";
+		} else {
+			$this->load->model('ReplyModel', 'rm');
+			$data = $this->rm->create();
+			$data['create_time'] = date('Y-m-d H:i:s', $data['create_time']);
+			echo json_encode($data);
+		}
+	}
+
 	//ajax获取评论
 	public function ajaxGetComment() {
 		$this->load->model('CommentModel', 'cm');
