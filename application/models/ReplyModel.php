@@ -108,6 +108,14 @@ class ReplyModel extends MY_Model
 		return $data[0];
 	}
 
+	public function chkRpy($id) {
+		$this->db->where('id', $id);
+		$data = array(
+			'status' => '2',
+		);
+		$this->db->update($this->_tableName, $data);
+	}
+
 	protected function _before_insert(&$data)
 	{
 		$data['create_time'] = time();

@@ -31,7 +31,7 @@ class ReplyController extends MY_Controller
 
 	public function replyChk($id) {
 		$this->load->model('ReplyModel', 'cm');
-		$this->cm->chkCom($id);
+		$this->cm->chkRpy($id);
 		redirect(site_url('replyController/replyList'));
 	}
 
@@ -44,7 +44,7 @@ class ReplyController extends MY_Controller
 	public function replyCheck() {
 		$this->load->model('ReplyModel','cm');
 		foreach ($this->input->post('ReplyCheck') as $value) {
-			$this->cm->chkCom($value);
+			$this->cm->chkRpy($value);
 		}
 		redirect(site_url('replyController/replyList'));
 	}
