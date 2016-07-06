@@ -1,7 +1,7 @@
 <div class="comments">
 	<ul class="list-group">
 		<li class="list-group-item">
-			<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 最新回复
+			<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> 最新评论
 		</li>
 		
 		<li class="list-group-item">

@@ -34,7 +34,74 @@
 				<hr />
 
 				<div id="comments">
-					<div id="comments-list"></div>
+					<div id="comments-list">
+						<div class="comment" id="comment-id-1">
+							<div class="row">
+							    <div class="col-md-12"> 
+								  	<div class="comment_detail">
+								  	<p class="bg-info">	  
+								  		<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>kiki:</em>		
+								    	<br>			
+								  		如需使用表达式的值做为索引，那么只需要传递一个匿名函数给 yii\db\Query::indexBy() 方法即可	  
+								  		<br>	  
+								  	<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>2015-09-24 07:07:53</em>
+								  	<a href="javascript:void(0)" onclick="replay(1)">回复</a>		
+								  	</p>
+								  	</div>
+							    </div>
+							</div>
+						</div>
+<!-- 											<h5>发表评论</h5>						
+					<div class="comment-form">
+					    <form id="w0">
+							<input type="hidden" name="Comment[post_id]" value=<?=$id?> />    
+							<div class="row"> 
+								<div class="col-md-4">
+									<div class="form-group field-comment-author required">
+										<label class="control-label" for="comment-author">作者</label>
+										<input type="text" id="comment-author" class="form-control" name="Comment[author]" maxlength="128">
+										<div class="help-block"></div>
+									</div>			
+								</div>
+								<div class="col-md-4">
+									<div class="form-group field-comment-email required">
+										<label class="control-label" for="comment-email">邮箱</label>
+										<input type="text" id="comment-email" class="form-control" name="Comment[email]" maxlength="128">
+										<div class="help-block"></div>
+									</div>			
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group field-comment-content required">
+										<label class="control-label" for="comment-content">内容</label>
+										<textarea id="comment-content" class="form-control" name="Comment[content]" rows="6"></textarea>
+										<div class="help-block"></div>
+									</div>			
+								</div>
+							</div>							
+						    <div>
+						        <input type="button" value="提交评论"  class="comment_btn btn btn-success" />
+						    </div>					    
+					    </form>
+					</div>
+					<hr /> -->
+						<div class="comment">
+							<div class="row">
+							    <div class="col-md-11" style="float: right"> 
+								  	<div class="comment_detail">
+								  	<p class="bg-info">	  
+								  		<span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>回复:</em>		
+								    	<br>			
+								  		回复的内容  
+								  		<br>	  
+								  	<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>2015-09-24 07:07:53</em>	
+								  	</p>
+								  	</div>
+							    </div>
+							</div>
+						</div>
+					</div>
 <!-- 					<div class="alert alert-danger alert-dismissible fade in" role="alert">
 				      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 				      <h4>谢谢您的回复，我会尽快审核后将其展现出来！</h4>
@@ -140,12 +207,13 @@ $('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".fie
 
 	//ajax获取所有评论
 	function ajaxGetComment(page) {
-		// console.log(cache);
 		var c = getCache(page,'comment');
+		console.log(c);
 		if (c !== false && c[1] == 'comment') {
-			$('#postList').html(c[2]);
+			$('#comments-list').html(c[2]);
 			$('.pagination').html(c[3]);
 			$(document.body).animate({'scrollTop':0},1000);
+			// console.log(c);
 			return;
 		}
 		$.ajax({
@@ -164,8 +232,17 @@ $('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".fie
 		// console.log(data);
 		var html ="";
 		var name = mark;
+		var replyHtml = "";
 		$(data.data).each(function(key,value){
-            html += '<div class="comment"><div class="row"><div class="col-md-12"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.author+':</em><br>'+value.content+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'</em></p></div></div></div></div>';
+			if (!$.isEmptyObject(data.reply[key])) {
+				if (data.reply[key][0].comment_id == value.id) {
+					$(data.reply[key]).each(function(key1,value1){
+						replyHtml += '<div class="comment"><div class="row"><div class="col-md-11" style="float: right"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value1.author+':</em><br>'+value1.content+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value1.create_time+'</em></p></div></div></div></div>';
+					})
+				}
+			}
+            html += '<div class="comment" id="comment-id-'+value.id+'"><div class="row"><div class="col-md-12"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.author+':</em><br>'+value.content+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'</em><a href="">回复</a></p></div></div></div></div>'+replyHtml;
+            replyHtml = "";
 		});
 		//放到页面中覆盖原数据
 		$("#comments-list").html(html);
@@ -175,7 +252,9 @@ $('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".fie
 
 		$('#comment-pagination').html(pageString);
 		//放到缓存中
+		// console.log(html);
 		cache.push([page, mark, html, pageString]);
+		console.log(cache);
 		$(document.body).animate({'scrollTop':0},1000);
 	}
 
@@ -251,6 +330,19 @@ $(".comment_btn").click(function(){
 			}
 		});
 	}
+
+function replay(id) {
+	$(".comment-form").hide();
+	$("h5").hide();
+	var comId = "#comment-id-"+id;
+	var html = '<div class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" onclick="closeReplay()">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来！</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>hj:</em><p>u 很健康很健康</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>2016-06-28 23:37:32</em></div> ';
+	$(comId).after(html);
+}
+
+function closeReplay() {
+	$(".comment-form").show();
+	$("h5").show();
+}
 
 </script>
 

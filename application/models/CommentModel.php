@@ -146,14 +146,30 @@ class CommentModel extends MY_Model
 		//根据当前页计算偏移量
 		$offset = ($currpage - 1) * $perpage;
 
-		$this->db->select('content,create_time,author');
+		$this->db->select('id,content,create_time,author');
 		$data = $this->db->get('', $perpage, $offset);
 		$data = $data->result('array');
+		$this->load->model('ReplyModel', 'rm');
+		$reply = [];
 		for ($i=0; $i < count($data); $i++) { 
 			$data[$i]['create_time'] = date('Y-m-d H:i:s', $data[$i]['create_time']);
+			$this->db->from('comment_reply');
+			$this->db->where('comment_id', $data[$i]['id']);
+			// $this->db->select('')
+			$result = $this->db->get();
+			$reply[] = $result->result('array');
 		}
+		// $reply = array_filter($reply);
+
+		foreach ($reply as $key => $value) {
+			foreach ($value as $key1 => $value1) {
+				$reply[$key][$key1]['create_time'] = date('Y-m-d H:i:s', $value1['create_time']);
+			}
+		}
+
 		return array(
 			'data' => $data,
+			'reply' => $reply,
 			'page' => $ajaxPage
 		);
 	}

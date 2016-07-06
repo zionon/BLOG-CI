@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group field-contactform-password required">
                     <label class="control-label" for="contactform-password">密 码:</label>
-                    <input type="password" id="contactform-password" class="form-control" name="User[password]" autofocus />
+                    <input type="password" id="contactform-password" class="form-control" name="User[password]" />
                     <p class="help-block help-block-error">
                         <?php $error = form_error('User[password]'); ?>
                         <span style="color: #F00;font-weight:bold;"><?=$error?></span>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group field-contactform-passconf required">
                     <label class="control-label" for="contactform-passconf">确认密码:</label>
-                    <input type="password" id="contactform-passconf" class="form-control" name="User[passconf]" autofocus />
+                    <input type="password" id="contactform-passconf" class="form-control" name="User[passconf]" />
                     <p class="help-block help-block-error">
                         <?php $error = form_error('User[passconf]'); ?>
                         <span style="color: #F00;font-weight:bold;"><?=$error?></span>
