@@ -268,7 +268,7 @@ function reply(id) {
 	$(".comment-form").hide();
 	$("h5").hide();
 	var comId = "#comment-id-"+id;
-	var html = '<h5>发表回复</h5>	<div class="comment-form"><form id="w0"><input type="hidden" name="Reply[comment_id]" value="'+id+'" /><div class="row"><div class="col-md-4"><div class="form-group field-comment-author required"><label class="control-label" for="comment-author">作者</label><input type="text" id="comment-author" class="form-control" name="Reply[author]" maxlength="128"><div class="help-block"></div></div></div><div class="col-md-4"><div class="form-group field-comment-email required"><label class="control-label" for="comment-email">邮箱</label><input type="text" id="comment-email" class="form-control" name="Reply[email]" maxlength="128"><div class="help-block"></div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group field-comment-content required"><label class="control-label" for="comment-content">内容</label><textarea id="comment-content" class="form-control" name="Reply[contents]" rows="6"></textarea><div class="help-block"></div></div></div></div><div><input type="button" value="提交回复"  class="btn btn-success" onclick="pushReply()" /></div></form></div><hr />';
+	var html = '<h5>发表回复</h5><button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeReplay()"><span aria-hidden="true">×</span></button>	<div class="comment-form"><form id="w0"><input type="hidden" name="Reply[comment_id]" value="'+id+'" /><div class="row"><div class="col-md-4"><div class="form-group field-comment-author required"><label class="control-label" for="comment-author">作者</label><input type="text" id="comment-author" class="form-control" name="Reply[author]" maxlength="128"><div class="help-block"></div></div></div><div class="col-md-4"><div class="form-group field-comment-email required"><label class="control-label" for="comment-email">邮箱</label><input type="text" id="comment-email" class="form-control" name="Reply[email]" maxlength="128"><div class="help-block"></div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group field-comment-content required"><label class="control-label" for="comment-content">内容</label><textarea id="comment-content" class="form-control" name="Reply[contents]" rows="6"></textarea><div class="help-block"></div></div></div></div><div><input type="button" value="提交回复"  class="btn btn-success" onclick="pushReply()" /></div></form></div><hr />';
 	$(comId).after(html);
 }
 
@@ -282,12 +282,13 @@ function pushReply() {
 		data : formData,	//表单中要提交的数据
 		dataType : "json",	//服务器返回的数据格式
 		success : function(data){
-			$("#comments-list h5 + div").remove();
+			$("#comments-list button + div").remove();
+			$("#comments-list button").remove();
 			$("#comments-list h5").remove();
 			$("#comments-list hr:first").remove();
 			//清空表单
 			form.trigger("reset");	//触发表单的reset事件
-			var html = '<div id="alert-comment" class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeReplay"><span aria-hidden="true">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+data.author+':</em><p>'+data.contents+'</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+data.create_time+'</em></div>';
+			var html = '<div id="alert-comment" class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+data.author+':</em><p>'+data.contents+'</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+data.create_time+'</em></div>';
 			//把整个评论的字符串转化成jq的对象
 			html = $(html);
 			//把拼好的评论放到页面中
@@ -315,7 +316,7 @@ $(".reply_btn").click(function(){
 			//清空表单
 			console.log(data);
 			form.trigger("reset");	//触发表单的reset事件
-			var html = '<div id="alert-comment" class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="closeReplay"><span aria-hidden="true">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+data.author+':</em><p>'+data.content+'</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+data.create_time+'</em></div>';
+			var html = '<div id="alert-comment" class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><h4>谢谢您的回复，我会尽快审核后将其展现出来</h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+data.author+':</em><p>'+data.content+'</p><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+data.create_time+'</em></div>';
 			//把整个评论的字符串转化成jq的对象
 			html = $(html);
 			//把拼好的评论放到页面中
@@ -328,6 +329,10 @@ $(".reply_btn").click(function(){
 });
 
 function closeReplay() {
+	$("#comments-list button + div").remove();
+	$("#comments-list button").remove();
+	$("#comments-list h5").remove();
+	$("#comments-list hr:first").remove();
 	$(".comment-form").show();
 	$("h5").show();
 }
