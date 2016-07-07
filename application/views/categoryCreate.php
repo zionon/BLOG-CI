@@ -2,7 +2,7 @@
 
 <div class="container">
     <ul class="breadcrumb">
-        <li><a href="<?=site_url('PostController/postList')?>">首页</a></li>
+        <li><a href="<?=site_url('WelcomeController')?>">首页</a></li>
         <li class="active">分类</li>
     </ul>
 

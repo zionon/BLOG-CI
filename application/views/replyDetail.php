@@ -1,8 +1,8 @@
 <?php $this->load->view('layout/topNav'); ?>
     <div class="container">
 		<ul class="breadcrumb">
-			<li><a href="">首页</a></li>
-			<li><a href="">回复管理</a></li>
+			<li><a href="<?=site_url('WelcomeController')?>">首页</a></li>
+			<li><a href="<?=site_url('ReplyController/replyList')?>">回复管理</a></li>
 			<li>回复详情</li>
 		</ul>        
 		<div class="post-view">

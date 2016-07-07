@@ -170,11 +170,11 @@ $('#w0').yiiActiveForm([{"id":"comment-author","name":"author","container":".fie
 			if (!$.isEmptyObject(data.reply[key])) {
 				if (data.reply[key][0].comment_id == value.id) {
 					$(data.reply[key]).each(function(key1,value1){
-						replyHtml += '<div class="comment"><div class="row"><div class="col-md-11" style="float: right"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value1.author+':</em><br>'+value1.contents+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value1.create_time+'</em></p></div></div></div></div>';
+						replyHtml += '<div><div class="row"><div class="col-md-11" style="float: right"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value1.author+':</em><br>'+value1.contents+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value1.create_time+'</em></p></div></div></div></div>';
 					})
 				}
 			}
-            html += '<div class="comment" id="comment-id-'+value.id+'"><div class="row"><div class="col-md-12"><div class="comment_detail"><p class="bg-info"><span>#'+key+'</span><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.author+':</em><br>'+value.content+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'</em><a onclick="reply('+value.id+')" href="javascript:void(0)">回复</a></p></div></div></div></div>'+replyHtml;
+            html += '<div class="comment" id="comment-id-'+value.id+'"><div class="row"><div class="col-md-12"><div class="comment_detail"><p class="bg-info"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <em>'+value.author+':</em><br>'+value.content+'<br><span class="glyphicon glyphicon-time" aria-hidden="true"></span> <em>'+value.create_time+'</em><a onclick="reply('+value.id+')" href="javascript:void(0)">回复</a></p></div></div></div></div>'+replyHtml;
             replyHtml = "";
 		});
 		//放到页面中覆盖原数据

@@ -2,9 +2,9 @@
 
 <div class="container">
     <ul class="breadcrumb">
-    	<li><a href="">首页</a></li>
-		<li><a href="">文章管理</a></li>
-		<li class="active">新增文章</li>
+    	<li><a href="<?=site_url('welcomeController')?>">首页</a></li>
+		<li><a href="<?=site_url('PostController/postList')?>">文章管理</a></li>
+		<li class="active">文章修改-<?=$id?></li>
 	</ul>        
 
 	<div class="post-create">

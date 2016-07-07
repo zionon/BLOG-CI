@@ -2,9 +2,8 @@
 
 <div class="container">
     <ul class="breadcrumb">
-    	<li><a href="">首页</a></li>
-		<li><a href="">文章管理</a></li>
-		<li class="active">新增文章</li>
+    	<li><a href="<?=site_url('WelcomeController')?>">首页</a></li>
+		<li>新增用户</li>
 	</ul>        
 
 	<div class="site-contact">

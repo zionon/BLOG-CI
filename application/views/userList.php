@@ -1,6 +1,10 @@
 <?php $this->load->view('layout/topNav'); ?>
 
     <div class="container">
+        <ul class="breadcrumb">
+			<li><a href="<?=site_url('WelcomeController')?>">首页</a></li>
+			<li class="active">用户管理</li>
+		</ul> 
     	<div class="post-index">
     		<h1>文章管理</h1>
     

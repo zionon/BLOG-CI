@@ -1,8 +1,8 @@
 <?php $this->load->view('layout/topNav'); ?>
     <div class="container">
 		<ul class="breadcrumb">
-			<li><a href="">首页</a></li>
-			<li><a href="">用户管理</a></li>
+			<li><a href="<?=site_url('WelcomeController')?>">首页</a></li>
+			<li><a href="<?=site_url('UserController/userList')?>">用户管理</a></li>
 			<li class="active"><?=$username?></li>
 		</ul>        
 		<div class="post-view">

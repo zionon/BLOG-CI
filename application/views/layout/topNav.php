@@ -30,9 +30,11 @@
 			</div>
 			<div id="w1-collapse" class="collapse navbar-collapse">
 				<ul id="w2" class="navbar-nav navbar-right nav">
-					<li <?php if($this->router->class == 'welcomeController' && $this->router->method == 'index') echo 'class="active"'; ?>><a href="<?=site_url('welcome/index')?>">首页</a></li>
+					<li <?php if($this->router->class == 'welcomeController' && $this->router->method == 'index') echo 'class="active"'; ?>><a href="<?=site_url('welcomeController/index')?>">首页</a></li>
 					<?php if(isset($_SESSION['is_admin'])): ?>
 						<li <?php if($this->router->class == 'postController') echo 'class="active"'; ?>><a href="<?=site_url('postController/postList')?>">文章管理</a></li>
+
+						<li <?php if($this->router->class == 'categoryController') echo 'class="active"'; ?>><a href="<?=site_url('categoryController/categoryList')?>">分类管理</a></li>
 
 						<li <?php if($this->router->class == 'commentController') echo 'class="active"'; ?>><a href="<?=site_url('commentController/commentList')?>">评论管理<span class="badge badge-inverse" id="comment-status-num"></span></a></li>
 
