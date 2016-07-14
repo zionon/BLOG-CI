@@ -3,7 +3,7 @@
 		<ul class="breadcrumb">
 			<li><a href="<?=site_url('WelcomeController')?>">首页</a></li>
 			<li><a href="<?=site_url('UserController/userList')?>">用户管理</a></li>
-			<li class="active"><?=$username?></li>
+			<li class="active">用户详情-<?=$username?></li>
 		</ul>        
 		<div class="post-view">
 			<h1><?=$username?></h1>

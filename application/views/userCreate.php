@@ -3,7 +3,8 @@
 <div class="container">
     <ul class="breadcrumb">
     	<li><a href="<?=site_url('WelcomeController')?>">首页</a></li>
-		<li>新增用户</li>
+    	<li><a href="<?=site_url('UserController/userList')?>">用户管理</a></li>
+		<li class="active">新增用户</li>
 	</ul>        
 
 	<div class="site-contact">
